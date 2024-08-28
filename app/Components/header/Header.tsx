@@ -75,6 +75,7 @@ function Header() {
               >
                 {usuarios.map((u) => (
                   <div
+                    key={u.usuarioId}
                     style={{
                       display: "flex",
                       alignItems: "center",
