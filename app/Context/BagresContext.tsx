@@ -117,7 +117,6 @@ export function ProvedorBagres({ children }: ContextoBagresProps) {
         `${process.env.NEXT_PUBLIC_API_BAGRES}${path}`
       );
       const data = await response.json();
-      console.log(data);
       setfetch(data);
     } catch (error) {
       console.error("Erro na requisição:", error);
@@ -166,7 +165,6 @@ export function ProvedorBagres({ children }: ContextoBagresProps) {
       if (UserCookie) {
         const teste = JSON.parse(UserCookie);
         setUsuarioSecao(teste);
-        console.log(teste);
       }
     };
     setUsuarioSalvoNoCookie();

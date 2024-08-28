@@ -23,7 +23,7 @@
   font-size: 20px;
 }
 .icon:hover {
-  color: var(--corazul);
+  color: black;
 }
 .Footer h1 {
   font-size: 20px;
@@ -34,7 +34,6 @@
 .TitleContainerFooter h1 {
   font-size: 45px;
   font-weight: 200;
-  color: var(--CorAzulPrincipal);
 }
 .NavegacaoItensF {
   gap: 20px;
@@ -46,6 +45,9 @@
   cursor: pointer;
   font-size: 12px;
   transition: all 0.3s;
+}
+.NavegacaoItensF a:hover {
+  color: black;
 }
 .ContatoItensF {
   display: flex;
@@ -61,11 +63,9 @@
   text-decoration: none;
 }
 .ContatoItensF a:hover {
-  color: var(--corazul);
+  color: black;
 }
-.NavegacaoItensF a:hover {
-  color: var(--CorAzulPrincipal);
-}
+
 .FooterCopyright {
   align-items: center;
   justify-content: center;

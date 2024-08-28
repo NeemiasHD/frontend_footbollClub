@@ -145,11 +145,11 @@ const AdmEditarCardPlayer: React.FC<CardProp> = ({
           >
             <option value={posicaoEDIT}>{posicaoEDIT}</option>
             <option value="">Posição</option>
+            <option value="X">LESÃO</option>
             <option value="PIV">PIV</option>
             <option value="ALA">ALA</option>
             <option value="FIX">FIX</option>
             <option value="GOL">GOL</option>
-            <option value="LESIONADO">LESIONADO</option>
           </select>
           <input
             type="text"

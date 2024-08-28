@@ -166,7 +166,8 @@ const PartidaFinalizada: React.FC<ResultadoPartidaProps> = ({
     }
   };
 
-  const { SetAtualizarPartidas, AtualizarPartidas } = UseBagresContext();
+  const { SetAtualizarPartidas, AtualizarPartidas, usuarioSecao } =
+    UseBagresContext();
 
   const RetornarPartidaFinalizada = async () => {
     //PATCH para mudar o status da partida para não finalizada
@@ -237,20 +238,22 @@ const PartidaFinalizada: React.FC<ResultadoPartidaProps> = ({
           <p className="DataPartidaFinalizada">{data}</p>
         </div>
       </div>
-      <div
-        style={{
-          width: "100%",
-          alignItems: "center",
-          display: "flex",
-          justifyContent: "center",
-        }}
-      >
-        <GrReturn
-          onClick={() => {
-            RetornarPartidaFinalizada();
+      {usuarioSecao?.tipoConta === 1 && ( //Apenas ADM tem Acesso a criar
+        <div
+          style={{
+            width: "100%",
+            alignItems: "center",
+            display: "flex",
+            justifyContent: "center",
           }}
-        />
-      </div>
+        >
+          <GrReturn
+            onClick={() => {
+              RetornarPartidaFinalizada();
+            }}
+          />
+        </div>
+      )}
     </div>
   );
 };

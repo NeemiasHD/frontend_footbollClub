@@ -18,8 +18,8 @@ function Footer() {
           <div className="Footer NavegacaoContainer">
             <h1>Navegation</h1>
             <div className="NavegacaoItensF">
-              <Link href={"/"}>Home</Link>
-              <Link href={"/"}>Movies</Link>
+              <a>Home</a>
+              <a>Movies</a>
             </div>
           </div>
           <div className="Footer ContatoContainer">

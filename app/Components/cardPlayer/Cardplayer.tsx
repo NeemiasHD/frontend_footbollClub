@@ -1,13 +1,13 @@
 "use client";
 import html2canvas from "html2canvas";
 import React, { useEffect, useState } from "react";
-import { BiEdit } from "react-icons/bi";
+import { BiDownload, BiEdit } from "react-icons/bi";
 import AdmEditarCardPlayer from "./AdmEditarCardPlayer";
 import { RenderLogo, UseBagresContext } from "@/app/Context/BagresContext";
 interface CardProp {
   jogadorId: number;
   cardBanner: string;
-  tipoCarta?: number;
+  isBagredeOuro?: number;
   foto: string;
   posicao: string;
   nome: string;
@@ -24,8 +24,7 @@ interface CardProp {
 }
 const Cardplayer: React.FC<CardProp> = ({
   jogadorId,
-  cardBanner,
-  tipoCarta,
+  isBagredeOuro,
   posicao,
   foto,
   nome,
@@ -95,11 +94,11 @@ const Cardplayer: React.FC<CardProp> = ({
     <div
       className="MainCard"
       id={`MainCard${jogadorId}`}
-      onClick={handleSaveCard}
+      title={posicao === "X" ? "Lesionado" : `Camisa Nº ${numCamisa}`}
     >
       <div
         style={
-          tipoCarta
+          isBagredeOuro
             ? {
                 position: "absolute",
                 width: "240px",
@@ -122,14 +121,40 @@ const Cardplayer: React.FC<CardProp> = ({
               }
         }
       ></div>
-      <img className="cardImg" src={cardBanner} />
+      <img
+        className="cardImg"
+        src={
+          //modelos de cards: ouro lesionado, ouro, prata lesionado ou prata
+          //(posicao === X) é estar lesionado
+          posicao === "X" && !isBagredeOuro
+            ? "https://res.cloudinary.com/dtpsqmz73/image/upload/v1724867061/glq9batynfd41nzsw3kf.png"
+            : posicao === "X" && isBagredeOuro
+            ? "./img/bagredeourolesionado.png"
+            : !isBagredeOuro
+            ? "./img/cardcinza.png"
+            : "./img/carddourado.png"
+        }
+      />
       <div className="atributo picContainer">
         <img className="playerpic" src={Foto} />
       </div>
       <p className="atributo overall">
         {Math.round((pac + sho + pas + dri + def + phy) / 6)}
       </p>
-      <p className="atributo posicao">{posicao}</p>
+      <p className="atributo posicao">
+        {posicao == "X" ? (
+          <span
+            style={{
+              color: "red",
+              textShadow: "0px 0px 20px red,0px 0px 20px red,0px 0px 20px red",
+            }}
+          >
+            {posicao}
+          </span>
+        ) : (
+          posicao
+        )}
+      </p>
       <p className="atributo nomeJogador">{nome}</p>
       <p className="atributo pac">{pac}</p>
       <p className="atributo sho">{sho}</p>
@@ -139,7 +164,12 @@ const Cardplayer: React.FC<CardProp> = ({
       <p className="atributo phy">{phy}</p>
       {usuarioSecao?.tipoConta === 1 && ( //Apenas ADM tem Acesso a Editar
         <div
-          style={{ position: "absolute", bottom: "-25px", fontSize: "20px" }}
+          style={{
+            position: "absolute",
+            bottom: "-25px",
+            marginLeft: "50px",
+            fontSize: "20px",
+          }}
           onClick={() => {
             setAlterarPlayerIsOn(!alterarPlayerIsOn);
           }}
@@ -147,6 +177,12 @@ const Cardplayer: React.FC<CardProp> = ({
           <BiEdit />
         </div>
       )}
+      <div
+        style={{ position: "absolute", bottom: "-25px", fontSize: "20px" }}
+        onClick={handleSaveCard}
+      >
+        <BiDownload />
+      </div>
     </div>
   );
 };

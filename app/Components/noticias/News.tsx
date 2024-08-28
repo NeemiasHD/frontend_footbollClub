@@ -163,7 +163,7 @@ function News() {
                   gols={JogadorSelecionado.gols}
                   assistencias={JogadorSelecionado.assistencias}
                   bagreDaPartida={JogadorSelecionado.bagreDaPartida}
-                  tipoCarta={1}
+                  isBagredeOuro={1}
                   jogadorId={JogadorSelecionado.jogadorId}
                   cardBanner="./img/carddourado.png"
                 />

@@ -101,7 +101,7 @@ function AdmCriarCardPlayer() {
             onChange={(e) => setposicao(e.target.value)}
           >
             <option value="">Posição</option>
-            <option value="LESIONADO">LESIONADO</option>
+            <option value="X">LESÃO</option>
             <option value="PIV">PIV</option>
             <option value="ALA">ALA</option>
             <option value="FIX">FIX</option>

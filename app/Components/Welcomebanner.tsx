@@ -7,9 +7,7 @@ function Welcomebanner() {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY < 500) {
-        setScrollY(window.scrollY / 50);
-      }
+      setScrollY(window.scrollY / 50);
     };
 
     // Adiciona o listener de scroll quando o componente é montado
@@ -27,10 +25,16 @@ function Welcomebanner() {
         <img
           className="imgWelcome"
           src="./img/imgbanner.png"
-          style={{
-            filter: `blur(${scrollY}px) brightness(${100 - scrollY * 3}%)`,
-            top: `-${scrollY * 3}px`,
-          }}
+          style={
+            scrollY < 11
+              ? {
+                  filter: `blur(${scrollY}px) brightness(${
+                    100 - scrollY * 3
+                  }%)`,
+                  top: `-${scrollY * 3}px`,
+                }
+              : { display: "none" }
+          }
         />
         <div className="msgcontainer">
           <img className="mensageWelcome" src="./img/bemvindo.png" />
