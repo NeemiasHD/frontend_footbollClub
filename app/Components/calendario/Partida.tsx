@@ -130,6 +130,7 @@ const Partida: React.FC<PartidaProps> = ({
         ? {
             path: "/empates",
             op: "replace",
+            
             value: (T2_empates += 1),
           }
         : placartime2 > placartime1
@@ -155,6 +156,7 @@ const Partida: React.FC<PartidaProps> = ({
         value: (T2_golsSofridos += placartime1),
       },
     ];
+
     //finaliza a partida retirando a mesma do calendario e enviado para o resultados
 
     try {
@@ -228,7 +230,7 @@ const Partida: React.FC<PartidaProps> = ({
     }
     SetAtualizarPartidas(AtualizarPartidas + 1);
   };
-
+ 
   const handlefinalizarPartida = () => {
     setBannerFimPartida(!BannerFimdePartida);
   };
@@ -417,7 +419,6 @@ const Partida: React.FC<PartidaProps> = ({
               alignItems: "center",
               justifyContent: "center",
               transform: "scale(1)",
-              zoom: "0.4" /*BUGANDO PRA GERAR BANNER */,
             }}
           >
             <BannerFimPartida
@@ -443,7 +444,7 @@ const Partida: React.FC<PartidaProps> = ({
               textAlign: "center",
               borderRadius: "5px",
               position: "absolute",
-              marginTop: "820px",
+              marginTop: "500px",
               cursor: "pointer",
             }}
             onClick={handleSaveBanner}

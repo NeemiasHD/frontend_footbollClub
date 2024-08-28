@@ -51,6 +51,7 @@ function News() {
   );
 
   useEffect(() => {
+    //buscar noticias
     const fetchNoticias = async () => {
       try {
         const response = await fetch(
@@ -67,11 +68,19 @@ function News() {
   }, [atualizarNoticias]);
 
   useEffect(() => {
+    //encontrar os dados do bagre de ouro atual
+
     const teste = jogadores.find((j) => j.jogadorId === bagreouroatual);
     if (teste) SetJogadorSelecionado(teste);
-  }, [bagreouroatual]);
+
+    if (ultimobagreouro === 0 && bagreouroatual) {
+      //definindo o ultimo bagre de ouro inicial se não tiver antes algum
+      setultimobagreouro(bagreouroatual);
+    }
+  }, [bagreouroatual, jogadores]);
 
   const HandleNovobagreDeOuro = async () => {
+    //setar novo bagre de ouro
     if (ultimobagreouro == bagreouroatual) {
       alert("ja e o bagre atual");
       return;
@@ -103,12 +112,6 @@ function News() {
       console.error("Erro na requisição:", error);
     }
   };
-
-  useEffect(() => {
-    if (ultimobagreouro === 0 && bagreouroatual) {
-      setultimobagreouro(bagreouroatual);
-    }
-  }, [bagreouroatual]);
 
   return (
     <div className="NewsContainer" style={{ padding: "40px" }}>

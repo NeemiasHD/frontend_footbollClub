@@ -187,7 +187,6 @@
 
 .MainCalendario {
   background-color: rgb(245, 245, 245);
-  height: 500px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -200,6 +199,7 @@
   align-items: center;
   justify-content: center;
   gap: 25px;
+  flex-wrap: wrap;
 }
 
 /*Confronto*/

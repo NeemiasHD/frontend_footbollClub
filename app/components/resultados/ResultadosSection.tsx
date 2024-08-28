@@ -29,6 +29,20 @@ function ResultadosSection() {
                 logoT2={p.time2.escudo}
                 PlacarT1={p.time1Placar}
                 PlacarT2={p.time2Placar}
+                //dados para voltar a partida para não finalizada:
+
+                T1_empates={p.time1.empates}
+                T2_empates={p.time2.empates}
+                T1_vitorias={p.time1.vitorias}
+                T2_vitorias={p.time2.vitorias}
+                T1_derrotas={p.time1.derrotas}
+                T2_derrotas={p.time2.derrotas}
+                T1_golsFeitos={p.time1.golsFeitos}
+                T2_golsFeitos={p.time2.golsFeitos}
+                T1_golsSofridos={p.time1.golsSofridos}
+                T2_golsSofridos={p.time2.golsSofridos}
+                T1_id={p.time1.timeId}
+                T2_id={p.time2.timeId}
               />
             ) : null
           )}
