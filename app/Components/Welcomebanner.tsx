@@ -36,8 +36,12 @@ function Welcomebanner() {
               : { display: "none" }
           }
         />
-        <div className="msgcontainer">
-          <img className="mensageWelcome" src="./img/bemvindo.png" />
+        <div className="msgcontainer" style={{ maxWidth:"1500px"}}>
+          <img
+            className="mensageWelcome"
+            src="./img/bemvindo.png"
+            style={{ width: "100%" }}
+          />
         </div>
       </div>
     </div>

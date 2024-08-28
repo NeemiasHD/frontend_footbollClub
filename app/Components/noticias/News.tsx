@@ -120,6 +120,8 @@ function News() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
+          flexWrap: "wrap",
+          gap: "20px",
         }}
       >
         <div
@@ -128,7 +130,6 @@ function News() {
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
-            marginRight: "100px",
           }}
         >
           <div
@@ -184,7 +185,6 @@ function News() {
                   backgroundColor: "transparent",
                   border: "2px dotted var(--cinza)",
                   marginTop: "40px",
-                  marginRight: "20px",
                 }}
                 onChange={(e) => {
                   const idBagreDeOuro = e.target.value;
@@ -203,7 +203,7 @@ function News() {
           )}
         </div>
         {usuarioSecao?.tipoConta === 1 && ( //Apenas ADM tem Acesso a Criar
-          <div style={{ marginRight: "80px" }}>
+          <div>
             <AdmCriarNoticia />
           </div>
         )}
