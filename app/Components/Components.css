@@ -83,9 +83,9 @@
   height: 100%;
 }
 .NoticiaMensagem {
-  font-size: 20px;
+  font-size: 14px;
   margin-left: 10px;
-  font-weight: 200;
+  font-weight: 400;
   display: "flex";
   word-wrap: break-word;
 }
@@ -433,16 +433,34 @@
   max-width: 1000px;
   gap: 50px;
 }
+.glowBagreDeOuro {
+  width: 1200px;
+}
 
 @media (max-width: 1000px) {
-  .glowBagreDeOuro {
-    display: none;
+  .NoticiaMensagem {
+    font-size: 10px;
   }
   .Estatisticas {
     pointer-events: none;
   }
 }
+@media (max-width: 800px) {
+  .glowBagreDeOuro {
+    width: 700px;
+  }
+}
+
+@media (max-width: 700px) {
+  .glowBagreDeOuro {
+    display: none;
+  }
+}
+
 @media (max-width: 650px) {
+  .glowBagreDeOuro {
+    display: none;
+  }
   .imgNews {
     background-color: black;
     width: 60%;

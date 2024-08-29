@@ -145,7 +145,7 @@ function News() {
               src="./img/bagresdeouroglow.png"
               className="glowBagreDeOuro"
               style={{
-                width: "700px",
+               
                 position: "absolute",
                 pointerEvents: "none",
               }}
