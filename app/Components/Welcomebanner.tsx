@@ -31,12 +31,11 @@ function Welcomebanner() {
                   filter: `blur(${scrollY}px) brightness(${
                     100 - scrollY * 3
                   }%)`,
-                  top: `-${scrollY * 3}px`,
                 }
               : { display: "none" }
           }
         />
-        <div className="msgcontainer" style={{ maxWidth:"1500px"}}>
+        <div className="msgcontainer" style={{ maxWidth: "1500px" }}>
           <img
             className="mensageWelcome"
             src="./img/bemvindo.png"
