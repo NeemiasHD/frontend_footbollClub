@@ -34,6 +34,8 @@ interface BagresContextType {
   setUsuarioSecao: React.Dispatch<React.SetStateAction<usuario | null>>;
   fotos: foto[];
   setFotos: React.Dispatch<React.SetStateAction<foto[]>>;
+  setAtualizarFotos: React.Dispatch<React.SetStateAction<number>>;
+  AtualizarFotos: number;
 }
 type jogador = {
   jogadorId: number;
@@ -107,6 +109,7 @@ export function ProvedorBagres({ children }: ContextoBagresProps) {
   const [bagreouroatual, setBagreOuroAtual] = useState(0);
   const [usuarioSecao, setUsuarioSecao] = useState<usuario | null>(null); //usuario logado na secao
   const [fotos, setFotos] = useState<foto[]>([]); //usuario logado na secao
+  const [AtualizarFotos, setAtualizarFotos] = useState(0);
 
   const getItens = async (
     path: string,
@@ -141,7 +144,7 @@ export function ProvedorBagres({ children }: ContextoBagresProps) {
     //buscar as partidas
 
     getItens("foto", setFotos);
-  }, []);
+  }, [AtualizarFotos]);
   useEffect(() => {
     const fetchBagreAtual = async () => {
       try {
@@ -194,6 +197,8 @@ export function ProvedorBagres({ children }: ContextoBagresProps) {
         setUsuarioSecao,
         fotos, //fotos da seção fotos
         setFotos,
+        AtualizarFotos,
+        setAtualizarFotos,
       }}
     >
       {children}

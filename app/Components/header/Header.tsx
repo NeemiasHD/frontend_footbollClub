@@ -3,12 +3,13 @@ import { UseBagresContext } from "@/app/Context/BagresContext";
 import { deleteCookie } from "cookies-next";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { BiCrown } from "react-icons/bi";
+import { BiCrown, BiMenu } from "react-icons/bi";
 
 function Header() {
   const { usuarioSecao, setUsuarioSecao } = UseBagresContext();
   const [menuUsuarioAtivado, setMenuUsuarioAtivado] = useState(false);
   const [showUsuarios, setShowUsuarios] = useState(false);
+
   type usuario = {
     tipoConta: number;
     usuarioId: number;
@@ -198,7 +199,8 @@ function Header() {
         <Link href={"/"} style={{ textDecoration: "none" }}>
           <img className="logoBagresHeader" src="./img/logobagres.png" />
         </Link>
-        <div className="HeaderNav">
+
+        <div className="HeaderNav" id="HeaderNav">
           <p className="NavBtn">Notícias</p>
           <p className="NavBtn">Calendário</p>
           <p className="NavBtn">Estatísticas</p>
@@ -206,6 +208,7 @@ function Header() {
           <p className="NavBtn">Fotos</p>
           <p className="NavBtn">Bagres CUP</p>
           <p className="NavBtn">Loja</p>
+
           {usuarioSecao?.foto ? (
             <>
               <div

@@ -11,7 +11,7 @@ function AdmSalvarFotos() {
   const [data, setData] = useState<string | null>(null);
 
   const [descricao, setDescricao] = useState<string | null>(null);
-  const { setAtualizarNoticias, atualizarNoticias, ImagemUpload } =
+  const { setAtualizarFotos, AtualizarFotos, ImagemUpload } =
     UseBagresContext();
   const [IsLoading, setIsLoading] = useState(false);
 
@@ -41,7 +41,7 @@ function AdmSalvarFotos() {
       if (response.ok) {
         // Notícia criada com sucesso
         console.log(response);
-        setAtualizarNoticias(atualizarNoticias + 1);
+        setAtualizarFotos(AtualizarFotos + 1);
       } else {
         // Erro ao criar notícia
         alert("Erro ao criar foto");
@@ -79,14 +79,13 @@ function AdmSalvarFotos() {
         type="text"
         className="InputNoticia"
         id="inputMensagem"
-        placeholder="Descrição"
+        placeholder="Descrição da foto"
         onChange={(e) => setDescricao(e.target.value)}
       />
       <div className="BtnEdit">
         <p className="Btn Salvar" onClick={handleCreateNoticias}>
           Salvar
         </p>
-        <p className="Btn Limpar">Limpar</p>
       </div>
     </div>
   );

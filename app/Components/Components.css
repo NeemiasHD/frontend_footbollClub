@@ -80,11 +80,14 @@
 .imgNews {
   background-color: black;
   width: 100%;
+  height: 100%;
 }
 .NoticiaMensagem {
   font-size: 20px;
   margin-left: 10px;
   font-weight: 200;
+  display: "flex";
+  word-wrap: break-word;
 }
 
 /*PlayerCard*/
@@ -428,5 +431,29 @@
   justify-content: center;
   align-items: center;
   max-width: 1000px;
-  gap: 20px;
+  gap: 50px;
+}
+
+@media (max-width: 1000px) {
+  .glowBagreDeOuro {
+    display: none;
+  }
+  .Estatisticas {
+    pointer-events: none;
+  }
+}
+@media (max-width: 650px) {
+  .imgNews {
+    background-color: black;
+    width: 60%;
+    height: 60%;
+  }
+  .NoticiaMensagem {
+    font-size: 10px;
+  }
+  .barraPesquisa {
+    width: 300px;
+    padding: 10px;
+    height: 50px;
+  }
 }

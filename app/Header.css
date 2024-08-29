@@ -21,23 +21,31 @@
   display: flex;
   align-items: center;
   cursor: pointer;
-  font-size: 12px;
+  font-size: 14px;
 }
-.NavBtn::after {
-  position: absolute;
-  content: "";
-  height: 1px;
-  width: 100%;
-  background-color: var(--corazul);
-  bottom: -3px;
-  transform-origin: center;
-  transform: scaleX(0);
-  transition: 0.5s all;
-}
-.NavBtn:hover::after {
-  transform: scaleX(1);
+
+.NavBtn:hover {
+  color: var(--corazul);
 }
 .logoBagresHeader {
   width: 35px;
   margin-left: 20px;
+}
+
+.botao_menuDropdown {
+  display: none;
+  margin-right: 45px;
+}
+
+@media (max-width: 700px) {
+  /*responsividade*/
+  .HeaderNav {
+    gap: 8px;
+  }
+  .NavBtn {
+    font-size: 8px;
+  }
+  .botao_menuDropdown {
+    display: flex;
+  }
 }

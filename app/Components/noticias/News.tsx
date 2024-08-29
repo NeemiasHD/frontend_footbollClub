@@ -120,8 +120,9 @@ function News() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
+          gap: "50px",
           flexWrap: "wrap",
-          gap: "20px",
+          margin: "50px",
         }}
       >
         <div
@@ -142,6 +143,7 @@ function News() {
           >
             <img
               src="./img/bagresdeouroglow.png"
+              className="glowBagreDeOuro"
               style={{
                 width: "700px",
                 position: "absolute",
@@ -174,7 +176,14 @@ function News() {
             </div>
           </div>
           {usuarioSecao?.tipoConta === 1 && ( //Apenas ADM tem Acesso a criar
-            <div>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "10px",
+                marginTop: "50px",
+              }}
+            >
               <select
                 className="input"
                 style={{
@@ -184,7 +193,6 @@ function News() {
                   zIndex: 200,
                   backgroundColor: "transparent",
                   border: "2px dotted var(--cinza)",
-                  marginTop: "40px",
                 }}
                 onChange={(e) => {
                   const idBagreDeOuro = e.target.value;
@@ -198,24 +206,25 @@ function News() {
                   </option>
                 ))}
               </select>
-              <BiSave onClick={HandleNovobagreDeOuro} />
+              <div style={{ cursor: "pointer" }}>
+                <BiSave onClick={HandleNovobagreDeOuro} />
+              </div>
             </div>
           )}
         </div>
         {usuarioSecao?.tipoConta === 1 && ( //Apenas ADM tem Acesso a Criar
-          <div>
-            <AdmCriarNoticia />
-          </div>
+          <AdmCriarNoticia />
         )}
 
         <div
           style={{
-            width: "700px",
-            height: "400px",
+            maxWidth: "500px",
+            height: "350px",
           }}
         >
           <Swiper
             spaceBetween={20}
+            style={{ maxWidth: "700px" }}
             modules={[Autoplay]}
             slidesPerView={1}
             loop={true}

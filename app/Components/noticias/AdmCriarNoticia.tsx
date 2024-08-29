@@ -74,10 +74,17 @@ function AdmCriarNoticia() {
         onChange={(e) => setmensagem(e.target.value)}
       />
       <div className="BtnEdit">
-        <p className="Btn Salvar" onClick={handleCreateNoticias}>
-          Salvar
+        <p
+          className="Btn Salvar"
+          style={{
+            backgroundColor: "var(--corazul)",
+            color: "black",
+            border: "none",
+          }}
+          onClick={handleCreateNoticias}
+        >
+          Criar Noticia
         </p>
-        <p className="Btn Limpar">Limpar</p>
       </div>
     </div>
   );

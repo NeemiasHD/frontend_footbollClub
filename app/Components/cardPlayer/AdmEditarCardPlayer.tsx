@@ -7,6 +7,7 @@ import {
   UploadImagemToClound,
   UseBagresContext,
 } from "@/app/Context/BagresContext";
+import { GridLoader } from "react-spinners";
 
 interface CardProp {
   jogadorId: number;
@@ -56,8 +57,10 @@ const AdmEditarCardPlayer: React.FC<CardProp> = ({
 
   const [posicao, setposicao] = useState<string | null>(posicaoEDIT);
   const { Atualizarjogadores, SetAtualizarJogadores } = UseBagresContext();
+  const [IsLoading, setIsLoading] = useState(false);
 
   const handleEditCard = async () => {
+    setIsLoading(!IsLoading);
     //let r;
     //if (ImagemUpload) r = await UploadImagemToClound(ImagemUpload);
 
@@ -102,6 +105,7 @@ const AdmEditarCardPlayer: React.FC<CardProp> = ({
     }
     SetAtualizarJogadores(Atualizarjogadores + 1);
     setAlterarPlayerIsOn(false);
+    setIsLoading(!IsLoading);
   };
   return (
     <div
@@ -118,167 +122,175 @@ const AdmEditarCardPlayer: React.FC<CardProp> = ({
         position: "relative",
       }}
     >
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          width: "250px",
-          justifyContent: "space-between",
-        }}
-      >
-        <div
-          style={{
-            width: "100px",
-            display: "flex",
-            flexDirection: "column",
-            gap: "10px",
-          }}
-        >
-          <select
-            className="filtroporposicao"
+      {IsLoading ? (
+        <GridLoader color="#00d2ff" size={50} />
+      ) : (
+        <>
+          <div
             style={{
-              width: "100px",
-              border: "2px solid var(--cinza)",
-              backgroundColor: "white",
+              display: "flex",
+              alignItems: "center",
+              width: "250px",
+              justifyContent: "space-between",
             }}
-            onChange={(e) => setposicao(e.target.value)}
           >
-            <option value={posicaoEDIT}>{posicaoEDIT}</option>
-            <option value="">Posição</option>
-            <option value="X">LESÃO</option>
-            <option value="PIV">PIV</option>
-            <option value="ALA">ALA</option>
-            <option value="FIX">FIX</option>
-            <option value="GOL">GOL</option>
-          </select>
+            <div
+              style={{
+                width: "100px",
+                display: "flex",
+                flexDirection: "column",
+                gap: "10px",
+              }}
+            >
+              <select
+                className="filtroporposicao"
+                style={{
+                  width: "100px",
+                  border: "2px solid var(--cinza)",
+                  backgroundColor: "white",
+                }}
+                onChange={(e) => setposicao(e.target.value)}
+              >
+                <option value={posicaoEDIT}>{posicaoEDIT}</option>
+                <option value="">Posição</option>
+                <option value="X">LESÃO</option>
+                <option value="PIV">PIV</option>
+                <option value="ALA">ALA</option>
+                <option value="FIX">FIX</option>
+                <option value="GOL">GOL</option>
+              </select>
+              <input
+                type="text"
+                className="filtroporposicao"
+                id="NumeroJogador"
+                maxLength={2}
+                style={{
+                  width: "100px",
+                  textAlign: "center",
+                  fontSize: "17px",
+                  border: "2px solid var(--cinza)",
+                }}
+                defaultValue={numCamisa}
+                onChange={(e) => setNumeroCamisa(parseInt(e.target.value))}
+                placeholder="Nº"
+              />
+            </div>
+            <div
+              style={{
+                height: "150px",
+                width: "150px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <img src={fotoEDIT} style={{ height: "100%" }} />
+            </div>
+          </div>
           <input
             type="text"
-            className="filtroporposicao"
-            id="NumeroJogador"
-            maxLength={2}
-            style={{
-              width: "100px",
-              textAlign: "center",
-              fontSize: "17px",
-              border: "2px solid var(--cinza)",
-            }}
-            defaultValue={numCamisa}
-            onChange={(e) => setNumeroCamisa(parseInt(e.target.value))}
-            placeholder="Nº"
+            className="input"
+            placeholder="Nome Jogador"
+            style={{ textAlign: "center", height: "30px", width: "250px" }}
+            onChange={(e) => setNome(e.target.value)}
+            defaultValue={nomeEDIT}
           />
-        </div>
-        <div
-          style={{
-            height: "150px",
-            width: "150px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <img src={fotoEDIT} style={{ height: "100%" }} />
-        </div>
-      </div>
-      <input
-        type="text"
-        className="input"
-        placeholder="Nome Jogador"
-        style={{ textAlign: "center", height: "30px", width: "250px" }}
-        onChange={(e) => setNome(e.target.value)}
-        defaultValue={nomeEDIT}
-      />
-      <div
-        style={{
-          display: "flex",
-          flexWrap: "wrap",
-          gap: "5px",
-          maxWidth: `250px`,
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <AtributoPlayer
-          AtributeName="PAC"
-          SetAtributeNumber={setpac}
-          defaultvalue={pacEDIT}
-        />
-        <AtributoPlayer
-          AtributeName="SHO"
-          SetAtributeNumber={setsho}
-          defaultvalue={shoEDIT}
-        />
-        <AtributoPlayer
-          AtributeName="PAS"
-          SetAtributeNumber={setpas}
-          defaultvalue={pasEDIT}
-        />
-        <AtributoPlayer
-          AtributeName="DRI"
-          SetAtributeNumber={setdri}
-          defaultvalue={driEDIT}
-        />
-        <AtributoPlayer
-          AtributeName="DEF"
-          SetAtributeNumber={setdef}
-          defaultvalue={defEDIT}
-        />
-        <AtributoPlayer
-          AtributeName="PHY"
-          SetAtributeNumber={setphy}
-          defaultvalue={phyEDIT}
-        />
-        <AtributoPlayer
-          AtributeName="Gols"
-          SetAtributeNumber={setGols}
-          defaultvalue={golsEDIT}
-        />
-        <AtributoPlayer
-          AtributeName="Assists"
-          SetAtributeNumber={setAssistencias}
-          defaultvalue={assistenciasEDIT}
-        />
-      </div>
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              gap: "5px",
+              maxWidth: `250px`,
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <AtributoPlayer
+              AtributeName="PAC"
+              SetAtributeNumber={setpac}
+              defaultvalue={pacEDIT}
+            />
+            <AtributoPlayer
+              AtributeName="SHO"
+              SetAtributeNumber={setsho}
+              defaultvalue={shoEDIT}
+            />
+            <AtributoPlayer
+              AtributeName="PAS"
+              SetAtributeNumber={setpas}
+              defaultvalue={pasEDIT}
+            />
+            <AtributoPlayer
+              AtributeName="DRI"
+              SetAtributeNumber={setdri}
+              defaultvalue={driEDIT}
+            />
+            <AtributoPlayer
+              AtributeName="DEF"
+              SetAtributeNumber={setdef}
+              defaultvalue={defEDIT}
+            />
+            <AtributoPlayer
+              AtributeName="PHY"
+              SetAtributeNumber={setphy}
+              defaultvalue={phyEDIT}
+            />
+            <AtributoPlayer
+              AtributeName="Gols"
+              SetAtributeNumber={setGols}
+              defaultvalue={golsEDIT}
+            />
+            <AtributoPlayer
+              AtributeName="Assists"
+              SetAtributeNumber={setAssistencias}
+              defaultvalue={assistenciasEDIT}
+            />
+          </div>
 
-      <div
-        style={{
-          display: "flex",
-          gap: "10px",
-          position: "absolute",
-          bottom: "-40px",
-        }}
-      >
-        <div
-          style={{
-            backgroundColor: "var(--cinza)",
-            padding: "5px",
-            borderRadius: "5px",
-            cursor: "pointer",
-            color: "white",
-          }}
-          onClick={handleEditCard}
-        >
-          Editar
-        </div>
-        <div
-          style={{
-            backgroundColor: "red",
-            padding: "5px",
-            borderRadius: "5px",
-            cursor: "pointer",
-            color: "white",
-          }}
-          onClick={(e) => {
-            HandleFetchDelete(
-              "jogador",
-              jogadorId,
-              SetAtualizarJogadores,
-              Atualizarjogadores
-            );
-          }}
-        >
-          excluir
-        </div>
-      </div>
+          <div
+            style={{
+              display: "flex",
+              gap: "10px",
+              position: "absolute",
+              bottom: "-40px",
+            }}
+          >
+            <div
+              style={{
+                backgroundColor: "var(--corazul)",
+                padding: "5px",
+                borderRadius: "5px",
+                cursor: "pointer",
+                color: "white",
+              }}
+              onClick={handleEditCard}
+            >
+              Editar
+            </div>
+            <div
+              style={{
+                backgroundColor: "red",
+                padding: "5px",
+                borderRadius: "5px",
+                cursor: "pointer",
+                color: "white",
+              }}
+              onClick={(e) => {
+                setIsLoading(!IsLoading);
+                HandleFetchDelete(
+                  "jogador",
+                  jogadorId,
+                  SetAtualizarJogadores,
+                  Atualizarjogadores
+                );
+                setIsLoading(!IsLoading);
+              }}
+            >
+              excluir
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 };
