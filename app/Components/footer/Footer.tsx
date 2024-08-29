@@ -19,7 +19,6 @@ function Footer() {
             <h1>Navegation</h1>
             <div className="NavegacaoItensF">
               <a>Home</a>
-              <a>Movies</a>
             </div>
           </div>
           <div className="Footer ContatoContainer">
@@ -37,22 +36,16 @@ function Footer() {
               >
                 Repository
               </a>
-              <a
-                href="mailto:neemiasclaudio5@gmail.com?subject=Trabalho"
-                target="blank"
-              >
+              <a href="" target="blank">
                 contact
               </a>
-              <a>neemiasclaudio5@gmail.com</a>
+              <a>bagresgoianos@gmail.com</a>
             </div>
           </div>
           <div className="Footer SocialMediaContainer">
             <h1>Social Media</h1>
             <div className="iconsSocial">
-              <a
-                href="https://www.instagram.com/neemias_claudio/"
-                target="blank"
-              >
+              <a href="https://www.instagram.com/bagresfc_go/" target="blank">
                 <BsInstagram className="icon instagram" />
               </a>
               <a href="https://x.com/neemiasclaudio5" target="blank">
