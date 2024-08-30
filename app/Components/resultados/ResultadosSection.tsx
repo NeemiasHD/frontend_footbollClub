@@ -47,7 +47,7 @@ function ResultadosSection() {
             ) : null
           )}
         </div>
-        <div className="Estatisticas" >
+        <div className="Estatisticas">
           {Times[1] && (
             <BarChart
               xAxis={[
@@ -66,8 +66,9 @@ function ResultadosSection() {
                   color: "red",
                 },
               ]}
-              width={400}
-              height={400}
+              width={600}
+              height={600}
+              className="grafico"
             />
           )}
         </div>
