@@ -252,7 +252,7 @@ function News() {
                   cardBanner="./img/carddourado.png"
                 />
               ) : (
-                <GridLoader color="#00d2ff" />
+                <GridLoader color="#ff9d00" />
               )}
             </div>
           </div>

@@ -73,6 +73,7 @@ function Footer() {
             position: "absolute",
             right: "10px",
             bottom: "0",
+            fontSize: "10px",
           }}
         >
           v1.1.0

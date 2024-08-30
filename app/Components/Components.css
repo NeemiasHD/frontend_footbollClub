@@ -78,7 +78,7 @@
 /*NewsComponente*/
 
 .imgNews {
-  background-color: black;
+  background-color: rgb(255, 0, 0);
   width: 100%;
   height: 100%;
 }
@@ -447,8 +447,9 @@
   align-items: center;
 }
 .swipeee {
-  height: 500px;
+  height: 440px;
   position: relative;
+  background-color: rgb(0, 0, 0);
 }
 .noticiaSombra {
   height: 400px;
@@ -466,7 +467,6 @@
   gap: 50px;
   margin: 20px;
 }
-
 
 @media (max-width: 1149px) {
   .NewsContainer {
@@ -491,7 +491,7 @@
     height: 100%;
   }
   .swipeee {
-    height: 350px;
+    height: 280px;
   }
   .noticiaSombra {
     opacity: 80%;
