@@ -1,23 +1,29 @@
 import React from "react";
 interface Props {
-  mensagem: string;
   imagem: string;
 }
-const NewsComponent: React.FC<Props> = ({ mensagem, imagem }) => {
+const NewsComponent: React.FC<Props> = ({ imagem }) => {
   return (
     <div
       style={{
-        width: "100%",
-        height: "394px",
-        overflow: "hidden",
-        justifyContent: "center",
         display: "flex",
         alignItems: "center",
+        justifyContent: "center",
         flexDirection: "column",
+        position: "relative",
+        textAlign: "center",
       }}
     >
-      <img className="imgNews" src={imagem} />
-      <p className="NoticiaMensagem">{mensagem}</p>
+      <div
+        style={{
+          justifyContent: "center",
+          display: "flex",
+          alignItems: "center",
+          flexDirection: "column",
+        }}
+      >
+        <img className="imgNews" style={{ width: "100%" }} src={imagem} />
+      </div>
     </div>
   );
 };

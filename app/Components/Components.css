@@ -83,9 +83,9 @@
   height: 100%;
 }
 .NoticiaMensagem {
-  font-size: 14px;
-  margin-left: 10px;
+  font-size: 17px;
   font-weight: 400;
+  margin: 5px;
   display: "flex";
   word-wrap: break-word;
 }
@@ -101,6 +101,7 @@
   transition: all 0.3s;
   cursor: pointer;
   background-color: transparent;
+  zoom: 1;
 }
 
 .cardImg {
@@ -431,29 +432,54 @@
   justify-content: center;
   align-items: center;
   max-width: 1000px;
-  gap: 50px;
+  gap: 20px;
 }
 .glowBagreDeOuro {
   width: 1200px;
 }
 
+.newsSwipe {
+  width: 700px;
+  height: 500px;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}
+.swipeee {
+  height: 500px;
+  position: relative;
+}
+.noticiaSombra {
+  height: 400px;
+}
+.fotosDaSecaoDeFotos {
+  height: 500px;
+}
+
 @media (max-width: 1000px) {
-  .NoticiaMensagem {
-    font-size: 10px;
-  }
   .Estatisticas {
     pointer-events: none;
   }
 }
-@media (max-width: 800px) {
+@media (max-width: 850px) {
   .glowBagreDeOuro {
-    width: 700px;
+    width: 600px;
   }
-}
-
-@media (max-width: 700px) {
-  .glowBagreDeOuro {
-    display: none;
+  .NoticiaMensagem {
+    font-size: 12px;
+  }
+  .newsSwipe {
+    width: 500px;
+    height: 300px;
+  }
+  .swipeee {
+    height: 350px;
+  }
+  .noticiaSombra {
+    opacity: 80%;
+  }
+  .fotosDaSecaoDeFotos {
+    height: 400px;
   }
 }
 
@@ -461,17 +487,38 @@
   .glowBagreDeOuro {
     display: none;
   }
-  .imgNews {
-    background-color: black;
-    width: 60%;
-    height: 60%;
-  }
-  .NoticiaMensagem {
-    font-size: 10px;
-  }
+
   .barraPesquisa {
     width: 300px;
     padding: 10px;
     height: 50px;
+  }
+  .MainCard {
+    zoom: 0.6;
+  }
+  .fotosDaSecaoDeFotos {
+    height: 300px;
+  }
+}
+@media (max-width: 520px) {
+  .NoticiaMensagem {
+    font-size: 10px;
+  }
+  .MainCard {
+    zoom: 0.4;
+  }
+
+  .newsSwipe {
+    width: 300px;
+    height: 200px;
+  }
+  .swipeee {
+    height: 210px;
+  }
+  .noticiaSombra {
+    opacity: 50%;
+  }
+  .fotosDaSecaoDeFotos {
+    height: 200px;
   }
 }

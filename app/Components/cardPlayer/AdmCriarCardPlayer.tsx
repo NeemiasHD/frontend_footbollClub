@@ -24,7 +24,7 @@ function AdmCriarCardPlayer() {
     UseBagresContext();
 
   const handleCreateCard = async () => {
-    setIsLoading(!IsLoading);
+    setIsLoading(true);
     let r;
     if (ImagemUpload) r = await UploadImagemToClound(ImagemUpload);
 
@@ -59,8 +59,9 @@ function AdmCriarCardPlayer() {
     } catch (error) {
       console.error("Erro na requisição:", error);
     }
+    setIsLoading(false);
+
     SetAtualizarJogadores(Atualizarjogadores + 1);
-    setIsLoading(!IsLoading);
   };
   return (
     <div
@@ -161,7 +162,7 @@ function AdmCriarCardPlayer() {
                 padding: "10px",
                 borderRadius: "5px",
                 cursor: "pointer",
-                color: "black",
+                color: "white",
                 width: "250px",
                 textAlign: "center",
               }}

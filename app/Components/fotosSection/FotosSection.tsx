@@ -42,8 +42,8 @@ function FotosSection() {
           {fotos.map((foto) => (
             <div
               key={foto.id}
+              className="fotosDaSecaoDeFotos"
               style={{
-                height: "300px",
                 display: "flex",
                 flexDirection: "column",
                 position: "relative",

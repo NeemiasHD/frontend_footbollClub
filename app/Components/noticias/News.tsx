@@ -145,7 +145,6 @@ function News() {
               src="./img/bagresdeouroglow.png"
               className="glowBagreDeOuro"
               style={{
-               
                 position: "absolute",
                 pointerEvents: "none",
               }}
@@ -216,28 +215,61 @@ function News() {
           <AdmCriarNoticia />
         )}
 
-        <div
-          style={{
-            maxWidth: "500px",
-            height: "350px",
-          }}
-        >
+        <div className="newsSwipe">
           <Swiper
             spaceBetween={20}
-            style={{ maxWidth: "700px" }}
             modules={[Autoplay]}
+            style={{ width: "100%" }}
             slidesPerView={1}
             loop={true}
             autoplay={{ delay: 3000, disableOnInteraction: false }}
           >
             {noticias.map((noticia) => (
-              <SwiperSlide key={noticia.noticiaId}>
-                <NewsComponent
-                  mensagem={noticia.mensagem}
-                  imagem={noticia.imagem}
-                />
+              <SwiperSlide key={noticia.noticiaId} className="swipeee">
+                <div
+                  className="noticiaSombra"
+                  style={{
+                    position: "absolute",
+                    width: "100%",
+                    height: "400px",
+                    bottom: "0px",
+                    zIndex: 20,
+                    backgroundImage:
+                      "linear-gradient(to top, black, transparent)",
+                  }}
+                ></div>
+                <p
+                  className="NoticiaMensagem"
+                  style={{
+                    position: "absolute",
+                    width: "100%",
+                    bottom: "10px",
+                    fontWeight: "500",
+                    color: "white",
+
+                    zIndex: 20,
+                  }}
+                >
+                  {noticia.mensagem}
+                </p>
+                <NewsComponent imagem={noticia.imagem} />
                 {usuarioSecao?.tipoConta === 1 && ( //Apenas ADM tem Acesso a criar
                   <div
+                    style={{
+                      position: "absolute",
+                      top: "0",
+                      right: "0px",
+                      cursor: "pointer",
+                      color: "white",
+                      width: "40px",
+                      height: "40px",
+                      backgroundColor: "red",
+                      alignItems: "center",
+
+                      zIndex: 50,
+                      display: "flex",
+                      justifyContent: "center",
+                    }}
                     onClick={() => {
                       HandleFetchDelete(
                         "noticia",
@@ -247,7 +279,7 @@ function News() {
                       );
                     }}
                   >
-                    <BiTrash />
+                    <BiTrash size={25} />
                   </div>
                 )}
               </SwiperSlide>

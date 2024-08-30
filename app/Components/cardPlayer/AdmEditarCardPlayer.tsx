@@ -253,6 +253,10 @@ const AdmEditarCardPlayer: React.FC<CardProp> = ({
               gap: "10px",
               position: "absolute",
               bottom: "-40px",
+              zIndex: "20",
+              width: "100%",
+              alignItems: "center",
+              justifyContent: "center",
             }}
           >
             <div
@@ -262,6 +266,8 @@ const AdmEditarCardPlayer: React.FC<CardProp> = ({
                 borderRadius: "5px",
                 cursor: "pointer",
                 color: "white",
+                width: "100%",
+                textAlign: "center",
               }}
               onClick={handleEditCard}
             >
@@ -274,6 +280,8 @@ const AdmEditarCardPlayer: React.FC<CardProp> = ({
                 borderRadius: "5px",
                 cursor: "pointer",
                 color: "white",
+                width: "100%",
+                textAlign: "center",
               }}
               onClick={(e) => {
                 setIsLoading(!IsLoading);
@@ -286,7 +294,7 @@ const AdmEditarCardPlayer: React.FC<CardProp> = ({
                 setIsLoading(!IsLoading);
               }}
             >
-              excluir
+              Excluir
             </div>
           </div>
         </>
