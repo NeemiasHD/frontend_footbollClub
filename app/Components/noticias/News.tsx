@@ -13,6 +13,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { Autoplay } from "swiper/modules";
 import { BiSave, BiTrash } from "react-icons/bi";
+import { GridLoader } from "react-spinners";
 type Noticia = {
   mensagem: string;
   imagem: string;
@@ -114,17 +115,97 @@ function News() {
   };
 
   return (
-    <div className="NewsContainer" style={{ padding: "40px" }}>
+    <div className="NewsContainer">
       <div
+        className="NewsComponents"
         style={{
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          gap: "50px",
           flexWrap: "wrap",
-          margin: "50px",
         }}
       >
+        <div className="newsSwipe">
+          {noticias.length ? (
+            <Swiper
+              spaceBetween={20}
+              modules={[Autoplay]}
+              style={{ width: "100%" }}
+              slidesPerView={1}
+              loop={true}
+              autoplay={{ delay: 3000, disableOnInteraction: false }}
+            >
+              {noticias.map((noticia) => (
+                <SwiperSlide key={noticia.noticiaId} className="swipeee">
+                  <div
+                    className="noticiaSombra"
+                    style={{
+                      position: "absolute",
+                      width: "100%",
+                      height: "400px",
+                      bottom: "0px",
+                      zIndex: 20,
+                      backgroundImage:
+                        "linear-gradient(to top, black, transparent)",
+                    }}
+                  ></div>
+                  <p
+                    className="NoticiaMensagem"
+                    style={{
+                      position: "absolute",
+                      width: "100%",
+                      bottom: "10px",
+                      fontWeight: "500",
+                      color: "white",
+
+                      zIndex: 20,
+                    }}
+                  >
+                    {noticia.mensagem}
+                  </p>
+                  <NewsComponent imagem={noticia.imagem} />
+                  {usuarioSecao?.tipoConta === 1 && ( //Apenas ADM tem Acesso a criar
+                    <div
+                      style={{
+                        position: "absolute",
+                        top: "0",
+                        right: "0px",
+                        cursor: "pointer",
+                        color: "white",
+                        width: "40px",
+                        height: "40px",
+                        backgroundColor: "red",
+                        alignItems: "center",
+
+                        zIndex: 50,
+                        display: "flex",
+                        justifyContent: "center",
+                      }}
+                      onClick={() => {
+                        HandleFetchDelete(
+                          "noticia",
+                          noticia.noticiaId,
+                          setAtualizarNoticias,
+                          atualizarNoticias
+                        );
+                      }}
+                    >
+                      <BiTrash size={30} />
+                    </div>
+                  )}
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          ) : (
+            <div
+              style={{
+                backgroundColor: "var(--cinza)",
+                width: "100%",
+                height: "100%",
+              }}
+            ></div>
+          )}
+        </div>
         <div
           style={{
             display: "flex",
@@ -149,17 +230,8 @@ function News() {
                 pointerEvents: "none",
               }}
             />
-            <img
-              src="./img/bagredor.png"
-              style={{
-                position: "absolute",
-                pointerEvents: "none",
-                width: "200px",
-                top: "-60px",
-              }}
-            />
 
-            <div>
+            <div className="bagredeourocard">
               {JogadorSelecionado ? (
                 <Cardplayer
                   nome={JogadorSelecionado.nome}
@@ -180,7 +252,7 @@ function News() {
                   cardBanner="./img/carddourado.png"
                 />
               ) : (
-                <></>
+                <GridLoader color="#00d2ff" />
               )}
             </div>
           </div>
@@ -224,78 +296,6 @@ function News() {
         {usuarioSecao?.tipoConta === 1 && ( //Apenas ADM tem Acesso a Criar
           <AdmCriarNoticia />
         )}
-
-        <div className="newsSwipe">
-          <Swiper
-            spaceBetween={20}
-            modules={[Autoplay]}
-            style={{ width: "100%" }}
-            slidesPerView={1}
-            loop={true}
-            autoplay={{ delay: 3000, disableOnInteraction: false }}
-          >
-            {noticias.map((noticia) => (
-              <SwiperSlide key={noticia.noticiaId} className="swipeee">
-                <div
-                  className="noticiaSombra"
-                  style={{
-                    position: "absolute",
-                    width: "100%",
-                    height: "400px",
-                    bottom: "0px",
-                    zIndex: 20,
-                    backgroundImage:
-                      "linear-gradient(to top, black, transparent)",
-                  }}
-                ></div>
-                <p
-                  className="NoticiaMensagem"
-                  style={{
-                    position: "absolute",
-                    width: "100%",
-                    bottom: "10px",
-                    fontWeight: "500",
-                    color: "white",
-
-                    zIndex: 20,
-                  }}
-                >
-                  {noticia.mensagem}
-                </p>
-                <NewsComponent imagem={noticia.imagem} />
-                {usuarioSecao?.tipoConta === 1 && ( //Apenas ADM tem Acesso a criar
-                  <div
-                    style={{
-                      position: "absolute",
-                      top: "0",
-                      right: "0px",
-                      cursor: "pointer",
-                      color: "white",
-                      width: "40px",
-                      height: "40px",
-                      backgroundColor: "red",
-                      alignItems: "center",
-
-                      zIndex: 50,
-                      display: "flex",
-                      justifyContent: "center",
-                    }}
-                    onClick={() => {
-                      HandleFetchDelete(
-                        "noticia",
-                        noticia.noticiaId,
-                        setAtualizarNoticias,
-                        atualizarNoticias
-                      );
-                    }}
-                  >
-                    <BiTrash size={25} />
-                  </div>
-                )}
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </div>
       </div>
     </div>
   );

@@ -5,7 +5,7 @@ import { UseBagresContext } from "../Context/BagresContext";
 import { useRouter } from "next/navigation";
 import { setCookie } from "cookies-next";
 import { CgProfile } from "react-icons/cg";
-
+import "./Login.css";
 export default function Page() {
   const [email, setEmail] = useState<string | null>(null);
   const [senha, setSenha] = useState<string | null>(null);
@@ -54,7 +54,7 @@ export default function Page() {
         backgroundSize: "cover",
         justifyContent: "center",
         flexDirection: "column",
-        margin: "50px",
+        height: "100vh",
         backgroundImage:
           "url(https://res.cloudinary.com/dtpsqmz73/image/upload/v1724177531/eybmqr04rvhd6dwzjvx2.png)",
       }}
@@ -63,12 +63,12 @@ export default function Page() {
         style={{
           display: "flex",
           height: "400px",
-          borderRadius: "20px",
           overflow: "hidden",
-          boxShadow: "0px 0px 15px gray",
+          boxShadow: "0px 0px 40px var(--cinza)",
         }}
       >
         <div
+          className="loginArea"
           style={{
             //login area
             display: "flex",
@@ -79,7 +79,6 @@ export default function Page() {
             justifyContent: "center",
             backdropFilter: "blur(5px)",
             padding: "40px",
-            width: "200px",
           }}
         >
           <h1
@@ -167,10 +166,10 @@ export default function Page() {
           </p>
         </div>
         <div
+          className="LoginImg"
           style={{
             backgroundColor: "var(--corazul)",
             width: "200px",
-            display: "flex",
             alignItems: "center",
             justifyContent: "center",
             overflow: "hidden",

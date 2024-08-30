@@ -4,6 +4,7 @@ import { deleteCookie } from "cookies-next";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { BiCrown, BiMenu } from "react-icons/bi";
+import { BsInstagram, BsTwitter } from "react-icons/bs";
 
 function Header() {
   const { usuarioSecao, setUsuarioSecao } = UseBagresContext();
@@ -53,7 +54,7 @@ function Header() {
               flexDirection: "column",
               zIndex: 100,
               padding: "10px",
-              backgroundColor: "white",
+              backgroundColor: "var(--brancotransparente)",
               gap: "20px",
               maxWidth: "300px",
               width: "50%",
@@ -61,9 +62,10 @@ function Header() {
               marginTop: "90px",
               justifyContent: "center",
               alignItems: "center",
-              boxShadow: "0px 0px 30px gray",
+              boxShadow: "0px 0px 10px var(--cinza)",
               paddingTop: "50px",
               paddingBottom: "50px",
+              backdropFilter: "blur(5px)",
             }}
           >
             {showUsuarios ? (
@@ -74,30 +76,30 @@ function Header() {
                   gap: "20px",
                 }}
               >
+                <p
+                  onClick={() => {
+                    setShowUsuarios(!showUsuarios);
+                  }}
+                  style={{
+                    color: "gray",
+                    position: "absolute",
+                    right: 5,
+                    top: -3,
+                    cursor: "pointer",
+                  }}
+                >
+                  x
+                </p>
                 {usuarios.map((u) => (
                   <div
                     key={u.usuarioId}
                     style={{
                       display: "flex",
+                      flexDirection: "column",
                       alignItems: "center",
                       gap: "10px",
                     }}
                   >
-                    <p
-                      onClick={() => {
-                        setShowUsuarios(!showUsuarios);
-                      }}
-                      style={{
-                        color: "gray",
-                        position: "absolute",
-                        right: 5,
-                        top: -3,
-                        cursor: "pointer",
-                        fontWeight: "300",
-                      }}
-                    >
-                      x
-                    </p>
                     <div
                       style={{
                         width: "30px",
@@ -133,7 +135,7 @@ function Header() {
                 {usuarioSecao.tipoConta === 1 && (
                   <p
                     style={{
-                      color: "var(--corazul)",
+                      color: "black",
                       textShadow: "1px 1px 1px",
                       position: "absolute",
                       top: 30,
@@ -144,12 +146,69 @@ function Header() {
                 )}
                 <img
                   src={usuarioSecao.foto}
-                  style={{ width: "150px", alignSelf: "center" }}
+                  style={{
+                    width: "150px",
+                    alignSelf: "center",
+                    borderRadius: "10px",
+                  }}
                 />
                 <div>
                   {/*info usuario */}
                   <p style={{ fontSize: "12px" }}>{usuarioSecao.nome}</p>
                   <p style={{ fontSize: "12px" }}>{usuarioSecao.email}</p>
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    gap: "10px",
+                    flexDirection: "column",
+                  }}
+                >
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      gap: "10px",
+                    }}
+                  >
+                    <BsInstagram />
+                    <input
+                      type="text"
+                      className="input"
+                      placeholder="link do seu instagram"
+                      style={{
+                        border: "1px solid black",
+                        fontSize: "9px",
+                        padding: "4px",
+                        width: "200px",
+                        pointerEvents: "none",
+                      }}
+                    />
+                  </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      gap: "10px",
+                      pointerEvents: "none",
+                    }}
+                  >
+                    <BsTwitter />
+
+                    <input
+                      type="text"
+                      className="input"
+                      placeholder="link do seu instagram"
+                      style={{
+                        border: "1px solid black",
+                        fontSize: "9px",
+                        padding: "4px",
+                        width: "200px",
+                      }}
+                    />
+                  </div>
                 </div>
                 <div
                   style={{ display: "flex", alignItems: "center", gap: "20PX" }}
@@ -206,7 +265,9 @@ function Header() {
           <p className="NavBtn">Estatísticas</p>
           <p className="NavBtn">Jogadores</p>
           <p className="NavBtn">Fotos</p>
-          <p className="NavBtn">Bagres CUP</p>
+          <Link href={"/Bagrescup"} className="NavBtn">
+            Bagres CUP
+          </Link>
           <p className="NavBtn">Loja</p>
 
           {usuarioSecao?.foto ? (

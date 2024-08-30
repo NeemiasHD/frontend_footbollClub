@@ -1,0 +1,14 @@
+.LoginImg {
+  display: flex;
+}
+.loginArea {
+  width: 200px;
+}
+@media (max-width: 420px) {
+  .LoginImg {
+    display: none;
+  }
+  .loginArea {
+    width: 100vw;
+  }
+}

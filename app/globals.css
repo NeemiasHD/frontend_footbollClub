@@ -6,6 +6,7 @@
   --cinzacarta: rgb(182, 182, 182);
   --douradocarta: rgb(255, 233, 107);
   --cinzaEscuro: rgba(0, 0, 0, 0.448);
+  --brancotransparente: rgba(255, 255, 255, 0.701);
 }
 
 * {
@@ -20,3 +21,5 @@
 .input:focus {
   outline: none;
 }
+
+

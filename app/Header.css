@@ -22,6 +22,7 @@
   align-items: center;
   cursor: pointer;
   font-size: 14px;
+  text-decoration: none;
 }
 
 .NavBtn:hover {

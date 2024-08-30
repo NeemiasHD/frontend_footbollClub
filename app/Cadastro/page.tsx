@@ -90,7 +90,14 @@ export default function Page() {
       style={{
         display: "flex",
         alignItems: "center",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
+        backgroundSize: "cover",
         justifyContent: "center",
+        flexDirection: "column",
+        height: "100vh",
+        backgroundImage:
+          "url(https://res.cloudinary.com/dtpsqmz73/image/upload/v1724177531/eybmqr04rvhd6dwzjvx2.png)",
       }}
     >
       <div
