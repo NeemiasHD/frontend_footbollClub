@@ -149,7 +149,17 @@ function News() {
                 pointerEvents: "none",
               }}
             />
-            <div style={{ transform: "scale(1.1)" }}>
+            <img
+              src="./img/bagredor.png"
+              style={{
+                position: "absolute",
+                pointerEvents: "none",
+                width: "200px",
+                top: "-60px",
+              }}
+            />
+
+            <div>
               {JogadorSelecionado ? (
                 <Cardplayer
                   nome={JogadorSelecionado.nome}

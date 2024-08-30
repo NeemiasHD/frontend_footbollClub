@@ -127,7 +127,7 @@ const Cardplayer: React.FC<CardProp> = ({
           //modelos de cards: ouro lesionado, ouro, prata lesionado ou prata
           //(posicao === X) é estar lesionado
           posicao === "X" && !isBagredeOuro
-            ? "https://res.cloudinary.com/dtpsqmz73/image/upload/v1724867061/glq9batynfd41nzsw3kf.png"
+            ? "./img/cardcinzalesao.png"
             : posicao === "X" && isBagredeOuro
             ? "./img/bagredeourolesionado.png"
             : !isBagredeOuro
