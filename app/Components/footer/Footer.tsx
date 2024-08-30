@@ -7,7 +7,7 @@ import { BsInstagram, BsTwitter, BsGithub, BsLinkedin } from "react-icons/bs";
 function Footer() {
   return (
     <>
-      <div style={{ backgroundColor: "var(--corazul)" }}>
+      <div style={{ backgroundColor: "var(--corazul)", position: "relative" }}>
         <div className="footerMain">
           <div className="TitleContainerFooter">
             <img
@@ -66,6 +66,17 @@ function Footer() {
         <div className="FooterCopyright">
           <p>&copy; 2024 Bagres F.C. All rights reserved.</p>
         </div>
+        <p
+          className="WebsiteVersion"
+          style={{
+            color: "white",
+            position: "absolute",
+            right: "10px",
+            bottom: "0",
+          }}
+        >
+          v1.1.0
+        </p>
       </div>
     </>
   );
