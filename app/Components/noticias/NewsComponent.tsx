@@ -22,7 +22,7 @@ const NewsComponent: React.FC<Props> = ({ imagem }) => {
           flexDirection: "column",
         }}
       >
-        <img className="imgNews" style={{ width: "100%" }} src={imagem} />
+        <img className="imgNews" src={imagem} />
       </div>
     </div>
   );

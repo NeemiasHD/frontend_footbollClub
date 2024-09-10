@@ -26,7 +26,7 @@ function JogadoresSecao() {
         </p>
       </div>
       <div className="ListarJogadores">
-        {usuarioSecao?.tipoConta === 1 && ( //Apenas ADM tem Acesso a Criar
+        {usuarioSecao?.user?.role == "admin" && ( //Apenas ADM tem Acesso a Criar
           <AdmCriarCardPlayer />
         )}
         {jogadores.map((jogador) => (

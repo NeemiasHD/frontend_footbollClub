@@ -20,8 +20,12 @@ function AdmCriarCardPlayer() {
   const [IsLoading, setIsLoading] = useState(false);
 
   const [posicao, setposicao] = useState<string | null>(null);
-  const { ImagemUpload, Atualizarjogadores, SetAtualizarJogadores } =
-    UseBagresContext();
+  const {
+    ImagemUpload,
+    Atualizarjogadores,
+    SetAtualizarJogadores,
+    usuarioSecao,
+  } = UseBagresContext();
 
   const handleCreateCard = async () => {
     setIsLoading(true);
@@ -48,6 +52,7 @@ function AdmCriarCardPlayer() {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${usuarioSecao?.token}`,
           },
           body: JSON.stringify(jogador),
         }

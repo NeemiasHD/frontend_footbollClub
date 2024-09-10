@@ -4,6 +4,8 @@ import React, { useEffect, useState } from "react";
 import { BiDownload, BiEdit } from "react-icons/bi";
 import AdmEditarCardPlayer from "./AdmEditarCardPlayer";
 import { RenderLogo, UseBagresContext } from "@/app/Context/BagresContext";
+import { PiArrowUpFill } from "react-icons/pi";
+import { BsArrowDown, BsArrowUp } from "react-icons/bs";
 interface CardProp {
   jogadorId: number;
   cardBanner: string;
@@ -140,6 +142,16 @@ const Cardplayer: React.FC<CardProp> = ({
       </div>
       <p className="atributo overall">
         {Math.round((pac + sho + pas + dri + def + phy) / 6)}
+        <div
+          style={{
+            position: "absolute",
+            color: "red",
+            left: "-15px",
+            fontSize: "15px",
+          }}
+        >
+          <BsArrowDown />
+        </div>
       </p>
       <p className="atributo posicao">
         {posicao == "X" ? (
@@ -162,7 +174,7 @@ const Cardplayer: React.FC<CardProp> = ({
       <p className="atributo dri">{dri}</p>
       <p className="atributo def">{def}</p>
       <p className="atributo phy">{phy}</p>
-      {usuarioSecao?.tipoConta === 1 && ( //Apenas ADM tem Acesso a Editar
+      {usuarioSecao?.user?.role == "admin" && (  //Apenas ADM tem Acesso a Editar
         <div
           style={{
             position: "absolute",

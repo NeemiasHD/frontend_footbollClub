@@ -10,7 +10,8 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "BAGRES FC",
-  description: "Site oficial do BagresFC",
+  description:
+    "Site oficial do Bagres Goianos. Acesso seguro e confiável para notícias, história e comunidade do time.",
 };
 
 export default function RootLayout({

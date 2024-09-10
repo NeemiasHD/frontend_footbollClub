@@ -5,7 +5,8 @@ import { UseBagresContext } from "@/app/Context/BagresContext";
 import { GridLoader } from "react-spinners";
 
 function AdmCriarPartidas() {
-  const { Times, AtualizarPartidas, SetAtualizarPartidas } = UseBagresContext();
+  const { Times, AtualizarPartidas, SetAtualizarPartidas, usuarioSecao } =
+    UseBagresContext();
   const [IsLoading, SetIsLoading] = useState(false);
 
   const [tipo, setTipo] = useState<string | null>(null); //tipo de confronto
@@ -36,6 +37,7 @@ function AdmCriarPartidas() {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${usuarioSecao?.token}`,
           },
           body: JSON.stringify(partida),
         }

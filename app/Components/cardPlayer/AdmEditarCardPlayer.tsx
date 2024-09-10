@@ -56,7 +56,8 @@ const AdmEditarCardPlayer: React.FC<CardProp> = ({
   const [NumeroCamisa, setNumeroCamisa] = useState(numCamisa);
 
   const [posicao, setposicao] = useState<string | null>(posicaoEDIT);
-  const { Atualizarjogadores, SetAtualizarJogadores } = UseBagresContext();
+  const { Atualizarjogadores, SetAtualizarJogadores, usuarioSecao } =
+    UseBagresContext();
   const [IsLoading, setIsLoading] = useState(false);
 
   const handleEditCard = async () => {
@@ -89,6 +90,7 @@ const AdmEditarCardPlayer: React.FC<CardProp> = ({
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${usuarioSecao?.token}`,
           },
           body: JSON.stringify(jogador),
         }
@@ -283,14 +285,16 @@ const AdmEditarCardPlayer: React.FC<CardProp> = ({
                 width: "100%",
                 textAlign: "center",
               }}
-              onClick={(e) => {
+              onClick={() => {
                 setIsLoading(!IsLoading);
-                HandleFetchDelete(
-                  "jogador",
-                  jogadorId,
-                  SetAtualizarJogadores,
-                  Atualizarjogadores
-                );
+                usuarioSecao?.token &&
+                  HandleFetchDelete(
+                    "jogador",
+                    jogadorId,
+                    SetAtualizarJogadores,
+                    Atualizarjogadores,
+                    usuarioSecao?.token
+                  );
                 setIsLoading(!IsLoading);
               }}
             >

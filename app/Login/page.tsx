@@ -16,7 +16,9 @@ export default function Page() {
     //cookies
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_BAGRES}Usuario/login?email=${email}&senha=${senha}`,
+        `${
+          process.env.NEXT_PUBLIC_API_BAGRES
+        }Usuario/login?email=${email?.toLowerCase()}&senha=${senha}`,
         {
           method: "POST",
           headers: {
@@ -54,7 +56,7 @@ export default function Page() {
         backgroundSize: "cover",
         justifyContent: "center",
         flexDirection: "column",
-        height: "100vh",
+        height: "90vh",
         backgroundImage:
           "url(https://res.cloudinary.com/dtpsqmz73/image/upload/v1724177531/eybmqr04rvhd6dwzjvx2.png)",
       }}

@@ -8,7 +8,7 @@ import {
 import { GridLoader } from "react-spinners";
 
 function AdmCriarTime() {
-  const { ImagemUpload, SetAtualizarTimes, AtualizarTimes } =
+  const { ImagemUpload, SetAtualizarTimes, AtualizarTimes, usuarioSecao } =
     UseBagresContext();
   const [NomeTime, SetNomeTime] = useState("");
   const [IsLoading, SetIsLoading] = useState(false);
@@ -31,6 +31,7 @@ function AdmCriarTime() {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${usuarioSecao?.token}`,
           },
           body: JSON.stringify(time),
         }

@@ -107,6 +107,7 @@ const Partida: React.FC<PartidaProps> = ({
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${usuarioSecao?.token}`,
           },
           body: JSON.stringify(updateData),
         }
@@ -130,7 +131,7 @@ const Partida: React.FC<PartidaProps> = ({
         ? {
             path: "/empates",
             op: "replace",
-            
+
             value: (T2_empates += 1),
           }
         : placartime2 > placartime1
@@ -166,6 +167,7 @@ const Partida: React.FC<PartidaProps> = ({
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${usuarioSecao?.token}`,
           },
           body: JSON.stringify(updateData),
         }
@@ -211,6 +213,7 @@ const Partida: React.FC<PartidaProps> = ({
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${usuarioSecao?.token}`,
           },
           body: JSON.stringify(updateData),
         }
@@ -230,7 +233,7 @@ const Partida: React.FC<PartidaProps> = ({
     }
     SetAtualizarPartidas(AtualizarPartidas + 1);
   };
- 
+
   const handlefinalizarPartida = () => {
     setBannerFimPartida(!BannerFimdePartida);
   };
@@ -352,19 +355,7 @@ const Partida: React.FC<PartidaProps> = ({
             />
             {/*banner criado antes da partida comecar*/}
           </div>
-          <div
-            style={{
-              position: "absolute",
-              backgroundColor: "white",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              flexDirection: "column",
-              marginLeft: "500px",
-              padding: "30px",
-              gap: "10px",
-            }}
-          >
+          <div className="BannerSave">
             <p
               style={{
                 color: "white",
@@ -665,7 +656,7 @@ const Partida: React.FC<PartidaProps> = ({
             </div>
           </div>
         )}
-        {usuarioSecao?.tipoConta === 1 && ( //Apenas ADM tem Acesso a Editar
+        {usuarioSecao?.user.role === "admin" && ( //Apenas ADM tem Acesso a Editar
           <div
             style={{
               display: "flex",
@@ -689,7 +680,8 @@ const Partida: React.FC<PartidaProps> = ({
                   "partida",
                   id,
                   SetAtualizarPartidas,
-                  AtualizarPartidas
+                  AtualizarPartidas,
+                  usuarioSecao?.token
                 );
               }}
             >

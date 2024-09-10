@@ -30,8 +30,10 @@ interface BagresContextType {
   SetAtualizarJogadores: React.Dispatch<React.SetStateAction<number>>;
   bagreouroatual: number;
   setBagreOuroAtual: React.Dispatch<React.SetStateAction<number>>;
-  usuarioSecao: usuario | null;
-  setUsuarioSecao: React.Dispatch<React.SetStateAction<usuario | null>>;
+  usuarioSecao: usuarioMaisToken | null;
+  setUsuarioSecao: React.Dispatch<
+    React.SetStateAction<usuarioMaisToken | null>
+  >;
   fotos: foto[];
   setFotos: React.Dispatch<React.SetStateAction<foto[]>>;
   setAtualizarFotos: React.Dispatch<React.SetStateAction<number>>;
@@ -63,8 +65,12 @@ type time = {
   golsFeitos: number;
   golsSofridos: number;
 };
-type usuario = {
-  tipoConta: number;
+type usuarioMaisToken = {
+  user: user;
+  token: string;
+};
+type user = {
+  role: string;
   usuarioId: number;
   nome: string;
   email: string;
@@ -107,7 +113,9 @@ export function ProvedorBagres({ children }: ContextoBagresProps) {
   const [jogadores, setjogadores] = useState<jogador[]>([]);
   const [Atualizarjogadores, SetAtualizarJogadores] = useState(0);
   const [bagreouroatual, setBagreOuroAtual] = useState(0);
-  const [usuarioSecao, setUsuarioSecao] = useState<usuario | null>(null); //usuario logado na secao
+  const [usuarioSecao, setUsuarioSecao] = useState<usuarioMaisToken | null>(
+    null
+  ); //usuario logado na secao
   const [fotos, setFotos] = useState<foto[]>([]); //usuario logado na secao
   const [AtualizarFotos, setAtualizarFotos] = useState(0);
 
@@ -225,6 +233,7 @@ export async function UploadImagemToClound(Imagem: File) {
     "https://api.cloudinary.com/v1_1/dtpsqmz73/image/upload",
     {
       method: "POST",
+
       body: formData,
     }
   );
@@ -252,13 +261,18 @@ export async function HandleFetchDelete( //deleta qualquer componente do backend
   path: string,
   id: number,
   setAtualizarComponentes: React.Dispatch<React.SetStateAction<number>>,
-  AtualizarComponentes: number
+  AtualizarComponentes: number,
+  token: string
 ) {
   //excluir uma partida
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_BAGRES}${path}/${id}`,
     {
       method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
     }
   );
 

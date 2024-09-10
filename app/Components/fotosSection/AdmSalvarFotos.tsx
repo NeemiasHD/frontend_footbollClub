@@ -11,7 +11,7 @@ function AdmSalvarFotos() {
   const [data, setData] = useState<string | null>(null);
 
   const [descricao, setDescricao] = useState<string | null>(null);
-  const { setAtualizarFotos, AtualizarFotos, ImagemUpload } =
+  const { setAtualizarFotos, AtualizarFotos, ImagemUpload, usuarioSecao } =
     UseBagresContext();
   const [IsLoading, setIsLoading] = useState(false);
 
@@ -33,6 +33,7 @@ function AdmSalvarFotos() {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${usuarioSecao?.token}`,
           },
           body: JSON.stringify(foto),
         }

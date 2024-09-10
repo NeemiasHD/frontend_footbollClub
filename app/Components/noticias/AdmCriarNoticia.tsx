@@ -9,8 +9,12 @@ import { GridLoader } from "react-spinners";
 
 function AdmCriarNoticia() {
   const [mensagem, setmensagem] = useState("");
-  const { setAtualizarNoticias, atualizarNoticias, ImagemUpload } =
-    UseBagresContext();
+  const {
+    setAtualizarNoticias,
+    atualizarNoticias,
+    ImagemUpload,
+    usuarioSecao,
+  } = UseBagresContext();
   const [IsLoading, setIsLoading] = useState(false);
 
   const handleCreateNoticias = async () => {
@@ -30,6 +34,7 @@ function AdmCriarNoticia() {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${usuarioSecao?.token}`,
           },
           body: JSON.stringify(noticia),
         }

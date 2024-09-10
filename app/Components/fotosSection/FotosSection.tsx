@@ -36,7 +36,7 @@ function FotosSection() {
             marginTop: "40px",
           }}
         >
-          {usuarioSecao?.tipoConta === 1 && ( //Apenas ADM tem Acesso a Editar
+         {usuarioSecao?.user?.role == "admin" && (  //Apenas ADM tem Acesso a Editar
             <AdmSalvarFotos />
           )}
           {fotos.map((foto) => (
@@ -51,7 +51,7 @@ function FotosSection() {
               title={foto.descricao + " " + foto.data}
             >
               <img src={foto.fotoUrl} style={{ height: "100%" }} />
-              {usuarioSecao?.tipoConta === 1 && ( //Apenas ADM tem Acesso a Editar
+              {usuarioSecao?.user?.role == "admin" && (  //Apenas ADM tem Acesso a Editar
                 <div
                   style={{
                     position: "absolute",
@@ -65,7 +65,8 @@ function FotosSection() {
                       "foto",
                       foto.id,
                       setAtualizarFotos,
-                      AtualizarFotos
+                      AtualizarFotos,
+                      usuarioSecao.token
                     );
                   }}
                 >
