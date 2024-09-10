@@ -238,7 +238,7 @@ const PartidaFinalizada: React.FC<ResultadoPartidaProps> = ({
           <p className="DataPartidaFinalizada">{data}</p>
         </div>
       </div>
-      {usuarioSecao?.tipoConta === 1 && ( //Apenas ADM tem Acesso a criar
+      {usuarioSecao?.token === "admin" && ( //Apenas ADM tem Acesso a criar
         <div
           style={{
             width: "100%",
