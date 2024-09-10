@@ -82,6 +82,7 @@
   height: 100%;
   display: flex;
   transition: all 0.5s;
+
 }
 
 .NoticiaMensagem {
@@ -545,6 +546,9 @@
   .grafico {
     zoom: 0.7;
   }
+  .imgNews {
+    transform: scale(1);
+  }
 }
 
 @media (max-width: 650px) {
@@ -592,6 +596,9 @@
     font-size: 12px;
     border-radius: 5px;
   }
+  .imgcontainer {
+    height: 300px;
+  }
 }
 @media (max-width: 520px) {
   .glowBagreDeOuro {
@@ -611,12 +618,16 @@
     width: 100vw;
     height: 100%;
   }
+  .NewsComponents {
+    gap: 10px;
+    margin: 0;
+  }
   .swipeee {
     width: 100vw;
     height: 100%;
   }
   .noticiaSombra {
-    opacity: 50%;
+    height: 100%;
   }
   .fotosDaSecaoDeFotos {
     height: 200px;
@@ -627,15 +638,14 @@
   .grafico {
     zoom: 0.5;
   }
-  .NewsComponents {
-    gap: 10px;
-    margin: 0;
-  }
 }
 
 @media (max-width: 450px) {
   .glowBagreDeOuro {
     width: 380px;
+  }
+  .imgcontainer {
+    height: 200px;
   }
 }
 @media (max-width: 380px) {

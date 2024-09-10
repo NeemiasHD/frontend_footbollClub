@@ -12,6 +12,7 @@ const NewsComponent: React.FC<Props> = ({ imagem }) => {
         flexDirection: "column",
         position: "relative",
         textAlign: "center",
+
       }}
     >
       <div
@@ -20,6 +21,7 @@ const NewsComponent: React.FC<Props> = ({ imagem }) => {
           display: "flex",
           alignItems: "center",
           flexDirection: "column",
+          width: "100%",
         }}
       >
         <img className="imgNews" src={imagem} />
