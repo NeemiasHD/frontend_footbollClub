@@ -14,19 +14,16 @@ const MenuUsuario: React.FC<MenuUsuarioProps> = ({ setMenuUsuarioAtivado }) => {
   const [showUsuarios, setShowUsuarios] = useState(false);
   const { usuarioSecao, setUsuarioSecao } = UseBagresContext();
   type usuario = {
-    tipoConta: number;
-    usuarioId: number;
     nome: string;
     email: string;
     foto: string;
-    senha: string;
   };
   const [usuarios, setusuarios] = useState<usuario[]>([]);
   useEffect(() => {
     const getUsuarios = async () => {
       try {
         const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_BAGRES}usuario`,
+          `${process.env.NEXT_PUBLIC_API_BAGRES}Usuario/get-users-info`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -121,7 +118,7 @@ const MenuUsuario: React.FC<MenuUsuarioProps> = ({ setMenuUsuarioAtivado }) => {
                 >
                   {usuarios.map((u) => (
                     <div
-                      key={u.usuarioId}
+                      key={u.email}
                       style={{
                         display: "flex",
                         flexDirection: "column",
