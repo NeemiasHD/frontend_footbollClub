@@ -9,6 +9,7 @@ import {
 } from "../Context/BagresContext";
 import { GridLoader } from "react-spinners";
 import { useRouter } from "next/navigation";
+import { setCookie } from "cookies-next";
 
 export default function Page() {
   const [IsLoading, SetIsLoading] = useState(false);
@@ -23,17 +24,6 @@ export default function Page() {
     //criando conta
     SetIsLoading(true);
     let r;
-
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BAGRES}usuario/check-account-exists?Email=${email}`
-    );
-    console.log(response);
-    const data = await response.json();
-    if (data) {
-      SetIsLoading(false);
-
-      return alert("email cadastrado já existe");
-    }
 
     if (nome && email && senha) {
       //tratamento de erro:
@@ -55,6 +45,7 @@ export default function Page() {
       nome: nome,
       email: email,
       senha: senha,
+      Role: "",
       foto: r,
     };
 
@@ -71,10 +62,9 @@ export default function Page() {
       );
 
       if (response.ok) {
-        const data = await response.json();
-        setUsuarioSecao(data);
-        router.push("/");
-        // usuario criada com sucesso]
+        HandleEntrarNaConta();
+
+        // usuario criada com sucesso
       } else {
         // Erro ao criar notícia
         console.log(response);
@@ -85,6 +75,44 @@ export default function Page() {
     }
     SetIsLoading(false);
   };
+
+  /*LOGAR */
+
+  const HandleEntrarNaConta = async () => {
+    //cookies
+    try {
+      const response = await fetch(
+        `${
+          process.env.NEXT_PUBLIC_API_BAGRES
+        }Usuario/login?email=${email?.toLowerCase()}&senha=${senha}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (response.ok) {
+        // usuario criada com sucesso
+        const data = await response.json();
+        console.log(data);
+        setUsuarioSecao(data);
+        setCookie("Usuario", JSON.stringify(data), {
+          path: "/",
+          maxAge: 10 * 365 * 24 * 60 * 60,
+        });
+
+        router.push("/");
+      } else {
+        // Erro ao criar notícia
+        alert("usuario nao encontrado");
+      }
+    } catch (error) {
+      console.error("Erro na requisição:", error);
+    }
+  };
+
   return (
     <div
       style={{
