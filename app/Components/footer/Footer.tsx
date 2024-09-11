@@ -76,7 +76,7 @@ function Footer() {
             fontSize: "10px",
           }}
         >
-          v1.1.2
+          v1.2.0
         </p>
       </div>
     </>
