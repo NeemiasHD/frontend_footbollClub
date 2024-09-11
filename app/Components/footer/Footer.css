@@ -1,5 +1,5 @@
 .footerMain {
-  z-index: 1000;
+  z-index: 100;
   position: relative;
   justify-content: center;
   display: flex;

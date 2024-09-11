@@ -70,7 +70,7 @@ const BannerFimPartida: React.FC<PartidaProps> = ({
           }}
         />
         <img
-          src="./img/modelobannersite.png"
+          src="./img/FundoFimPartida.png"
           style={{
             height: "2560px",
             zIndex: "21",

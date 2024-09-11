@@ -9,11 +9,17 @@ function Footer() {
     <>
       <div style={{ backgroundColor: "var(--corazul)", position: "relative" }}>
         <div className="footerMain">
-          <div className="TitleContainerFooter">
+          <div
+            className="TitleContainerFooter"
+            style={{ flexDirection: "column", display: "flex" }}
+          >
             <img
               src="https://res.cloudinary.com/dtpsqmz73/image/upload/v1723651231/tdmqry1ecgxvl68jkzaj.png"
               width={100}
             />
+            <p style={{ color: "white" }}>Patrocínios:</p>
+            <img src="./img/patrocinio1.png" width={100} />
+            <img src="./img/patrocinio2.png" width={100} />
           </div>
           <div className="Footer NavegacaoContainer">
             <h1>Navegation</h1>
@@ -76,7 +82,7 @@ function Footer() {
             fontSize: "10px",
           }}
         >
-          v1.2.0
+          v1.2.3
         </p>
       </div>
     </>

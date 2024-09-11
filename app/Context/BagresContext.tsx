@@ -1,5 +1,5 @@
 "use client";
-import { getCookie, getCookies, setCookie } from "cookies-next";
+import { deleteCookie, getCookie, getCookies, setCookie } from "cookies-next";
 import React, {
   createContext,
   useContext,
@@ -174,8 +174,9 @@ export function ProvedorBagres({ children }: ContextoBagresProps) {
     const setUsuarioSalvoNoCookie = () => {
       const UserCookie = getCookie("Usuario");
       if (UserCookie) {
-        const teste = JSON.parse(UserCookie);
-        setUsuarioSecao(teste);
+        const cookie = JSON.parse(UserCookie);
+        /*deletar os cookies da glr:  deleteCookie("Usuario");*/
+        setUsuarioSecao(cookie);
       }
     };
     setUsuarioSalvoNoCookie();
