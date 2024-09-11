@@ -54,7 +54,7 @@ function LojaSection() {
             }}
           >
             {/*produto*/}
-            {usuarioSecao?.user?.role == "admin" && <CriarProduto />}
+            {/*usuarioSecao?.user?.role == "admin" && <CriarProduto />*/}
             {/*<Produto />*/}
           </div>
         </div>
