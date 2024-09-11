@@ -6,14 +6,17 @@ import { useRouter } from "next/navigation";
 import { setCookie } from "cookies-next";
 import { CgProfile } from "react-icons/cg";
 import "./Login.css";
+import { GridLoader } from "react-spinners";
 export default function Page() {
   const [email, setEmail] = useState<string | null>(null);
+  const [IsLoading, setIsLoading] = useState(false);
   const [senha, setSenha] = useState<string | null>(null);
   const { setUsuarioSecao } = UseBagresContext();
   const router = useRouter();
 
   const HandleEntrarNaConta = async () => {
     //cookies
+    setIsLoading(true);
     try {
       const response = await fetch(
         `${
@@ -166,6 +169,9 @@ export default function Page() {
               cadastre
             </Link>
           </p>
+          <div style={{ position: "absolute", bottom: 10 }}>
+            {IsLoading ? <GridLoader color="#00d2ff" size={10} /> : <></>}
+          </div>
         </div>
         <div
           className="LoginImg"
