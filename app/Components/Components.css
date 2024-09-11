@@ -82,13 +82,13 @@
   height: 100%;
   display: flex;
   transition: all 0.5s;
-
+  transform: scale(1.01);
 }
 
 .NoticiaMensagem {
   font-size: 17px;
   font-weight: 400;
-  margin: 5px;
+
   display: "flex";
   word-wrap: break-word;
 }
@@ -211,14 +211,14 @@
 /*Banner*/
 .BannerSave {
   position: absolute;
-  background-color: white;
+  background-color: rgba(0, 0, 0, 0.241);
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
-  margin-left: 500px;
-  padding: 30px;
-  gap: 10px;
+  top: 5px;
+  right: 5px;
+  width: 70px;
+  border-radius: 5px;
 }
 
 /*Confronto*/
@@ -476,6 +476,11 @@
 .swipeee {
   position: relative;
   height: 400px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
 }
 
 .fotosDaSecaoDeFotos {
@@ -552,18 +557,6 @@
 }
 
 @media (max-width: 650px) {
-  .BannerSave {
-    position: absolute;
-    background-color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    margin-left: 0px;
-    margin-top: 700px;
-    padding: 30px;
-    gap: 10px;
-  }
   .glowBagreDeOuro {
     width: 500px;
   }

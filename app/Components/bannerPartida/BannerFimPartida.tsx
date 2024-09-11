@@ -1,5 +1,5 @@
 "use client";
-import { RenderLogo } from "@/app/Context/BagresContext";
+import { RenderImagemParaCanvas } from "@/app/Context/BagresContext";
 import React, { useEffect, useState } from "react";
 
 interface PartidaProps {
@@ -31,8 +31,8 @@ const BannerFimPartida: React.FC<PartidaProps> = ({
 
   useEffect(() => {
     const fetchImage = async () => {
-      const logo = await RenderLogo(logoT1);
-      const logo2 = await RenderLogo(logoT2);
+      const logo = await RenderImagemParaCanvas(logoT1);
+      const logo2 = await RenderImagemParaCanvas(logoT2);
       if (logo) {
         setImgt1(logo);
       }
@@ -51,7 +51,7 @@ const BannerFimPartida: React.FC<PartidaProps> = ({
         alignItems: "center",
         justifyContent: "center",
         backgroundColor: "var(--corazul)",
-        height: "1920px",
+        height: "2560px",
       }}
     >
       <div
@@ -63,7 +63,7 @@ const BannerFimPartida: React.FC<PartidaProps> = ({
         <img
           src={imagemfimPartida}
           style={{
-            width: "1280px",
+            width: "1700px",
             position: "absolute",
             right: "-100px",
             zIndex: "20",
@@ -72,7 +72,7 @@ const BannerFimPartida: React.FC<PartidaProps> = ({
         <img
           src="./img/modelobannersite.png"
           style={{
-            height: "1940px",
+            height: "2560px",
             zIndex: "21",
             position: "relative",
             top: "1px",
@@ -83,7 +83,7 @@ const BannerFimPartida: React.FC<PartidaProps> = ({
         style={{
           position: "absolute",
           zIndex: 21,
-          bottom: 110,
+          bottom: 320,
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -108,20 +108,20 @@ const BannerFimPartida: React.FC<PartidaProps> = ({
           </h1>
           <div
             style={{
-              height: "230px",
+              height: "350px",
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
             }}
           >
-            <img src={imgt1} width={230} style={{}} />
+            <img src={imgt1} width={350} style={{}} />
           </div>
           <p
             style={{
-              fontSize: "40px",
+              fontSize: "60px",
               fontWeight: "800",
               color: "white",
-              width: "300px",
+              width: "400px",
               height: "100px",
               textAlign: "center",
               textShadow: "5px 5px 1px var(--cinza)",
@@ -151,21 +151,23 @@ const BannerFimPartida: React.FC<PartidaProps> = ({
           </h1>
           <div
             style={{
-              height: "230px",
+              height: "350px",
+
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
             }}
           >
-            <img src={imgt2} width={230} />
+            <img src={imgt2} width={350} />
           </div>
 
           <p
             style={{
-              fontSize: "40px",
+              fontSize: "60px",
+
               fontWeight: "800",
               color: "white",
-              width: "300px",
+              width: "400px",
               textAlign: "center",
               textShadow: "5px 5px 1px var(--cinza)",
               height: "100px",
@@ -178,7 +180,7 @@ const BannerFimPartida: React.FC<PartidaProps> = ({
         <div
           style={{
             position: "absolute",
-            top: "-1314px",
+            top: "-1600px",
             display: "flex",
             flexDirection: "column",
             alignItems: "center",

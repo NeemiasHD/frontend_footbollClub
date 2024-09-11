@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { BiCheck, BiTrash } from "react-icons/bi";
+import { BiCheck, BiDownload, BiTrash, BiXCircle } from "react-icons/bi";
 import { BsDownload } from "react-icons/bs";
 import InputImagem from "../inputimage/InputImagem";
 import { Tooltip } from "@mui/material";
@@ -252,8 +252,9 @@ const Partida: React.FC<PartidaProps> = ({
     return `${dia}/${mes}/${ano}`;
   };
 
-  const handleSaveBanner = async () => {
+  const handleSaveBannerFimPartida = async () => {
     //faz a renderizacao da imagem
+    setZoomForView(1);
     const bannerElement = document.getElementById(
       `BannerPartidaFinalizada${id}`
     );
@@ -263,6 +264,7 @@ const Partida: React.FC<PartidaProps> = ({
         const imgData = canvas.toDataURL("image/png");
         const link = document.createElement("a");
         link.href = imgData;
+        setZoomForView(0.22);
         link.download = `BannerPartidaFinalizada${id}.png`;
         link.click();
       });
@@ -270,7 +272,7 @@ const Partida: React.FC<PartidaProps> = ({
     handleSetFinalizarPartida();
   };
   const handleImagemBannerPrePartida = () => {
-    //mostrando ou nao banner pre partida
+    //mostrando ou nao banner fim partida
     setBannerPrePartida(!BannerdePrePartidaIsOn);
   };
   const handleSaveBannerPrePartida = async () => {
@@ -301,7 +303,8 @@ const Partida: React.FC<PartidaProps> = ({
             position: "fixed",
             display: "flex",
             height: "100%",
-            backgroundColor: "var(--cinza)",
+            backgroundColor: "var(--cinzaEscuro)",
+            backdropFilter: "blur(5px)",
             width: "100%",
             alignItems: "center",
             justifyContent: "center",
@@ -356,34 +359,32 @@ const Partida: React.FC<PartidaProps> = ({
             {/*banner criado antes da partida comecar*/}
           </div>
           <div className="BannerSave">
-            <p
+            <div
               style={{
                 color: "white",
-                fontSize: "15px",
-                backgroundColor: "var(--corazul)",
-                width: "100px",
+                fontSize: "25px",
+                height: "30px",
+                width: "30px",
                 textAlign: "center",
-                borderRadius: "5px",
                 cursor: "pointer",
               }}
               onClick={handleSaveBannerPrePartida}
             >
-              Salvar
-            </p>
-            <p
+              <BiDownload />
+            </div>
+            <div
               style={{
                 color: "white",
-                fontSize: "15px",
-                backgroundColor: "red",
-                width: "100px",
+                fontSize: "25px",
+                height: "30px",
+                width: "30px",
                 textAlign: "center",
-                borderRadius: "5px",
                 cursor: "pointer",
               }}
               onClick={handleImagemBannerPrePartida}
             >
-              Fechar
-            </p>
+              <BiXCircle />
+            </div>
           </div>
         </div>
       ) : (
@@ -395,7 +396,8 @@ const Partida: React.FC<PartidaProps> = ({
             position: "fixed",
             display: "flex",
             height: "100%",
-            backgroundColor: "var(--cinza)",
+            backgroundColor: "var(--cinzaEscuro)",
+            backdropFilter: "blur(5px)",
             width: "100%",
             alignItems: "center",
             justifyContent: "center",
@@ -403,13 +405,36 @@ const Partida: React.FC<PartidaProps> = ({
             zIndex: "100",
           }}
         >
+          {zoomForView === 0.22 ? (
+            <></>
+          ) : (
+            <div
+              style={{
+                position: "fixed",
+                display: "flex",
+                height: "100%",
+                backgroundColor: "white",
+
+                width: "100%",
+                alignItems: "center",
+                justifyContent: "center",
+                flexDirection: "column",
+                gap: "40px",
+                top: 0,
+                zIndex: "102",
+              }}
+            >
+              Salvando imagem...
+              <GridLoader color="var(--corazul)" size={50} />
+            </div>
+          )}
           <div
             style={{
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
               justifyContent: "center",
-              transform: "scale(1)",
+              transform: `scale(${zoomForView})`,
             }}
           >
             <BannerFimPartida
@@ -426,37 +451,34 @@ const Partida: React.FC<PartidaProps> = ({
             />
             {/*banner*/}
           </div>
-          <p
-            style={{
-              color: "white",
-              fontSize: "20px",
-              backgroundColor: "var(--corazul)",
-              width: "150px",
-              textAlign: "center",
-              borderRadius: "5px",
-              position: "absolute",
-              marginTop: "500px",
-              cursor: "pointer",
-            }}
-            onClick={handleSaveBanner}
-          >
-            Salvar
-          </p>
-          <p
-            style={{
-              color: "red",
-              fontSize: "25px",
-              textAlign: "center",
-              borderRadius: "5px",
-              position: "absolute",
-              marginBottom: "800px",
-              marginLeft: "460px",
-              cursor: "pointer",
-            }}
-            onClick={handlefinalizarPartida}
-          >
-            x
-          </p>
+          <div className="BannerSave">
+            <div
+              style={{
+                color: "white",
+                fontSize: "25px",
+                height: "30px",
+                width: "30px",
+                textAlign: "center",
+                cursor: "pointer",
+              }}
+              onClick={handleSaveBannerFimPartida}
+            >
+              <BiDownload />
+            </div>
+            <div
+              style={{
+                color: "white",
+                fontSize: "25px",
+                height: "30px",
+                width: "30px",
+                textAlign: "center",
+                cursor: "pointer",
+              }}
+              onClick={handlefinalizarPartida}
+            >
+              <BiXCircle />
+            </div>
+          </div>
         </div>
       ) : (
         <></>
@@ -498,7 +520,7 @@ const Partida: React.FC<PartidaProps> = ({
                 </div>
                 <p
                   style={{
-                    fontSize: "15px",
+                    fontSize: "12px",
                     width: "100px",
                     textAlign: "center",
                   }}
@@ -519,7 +541,7 @@ const Partida: React.FC<PartidaProps> = ({
                 </div>
                 <p
                   style={{
-                    fontSize: "15px",
+                    fontSize: "12px",
                     width: "100px",
                     textAlign: "center",
                   }}
@@ -589,8 +611,8 @@ const Partida: React.FC<PartidaProps> = ({
                 <div
                   style={{ display: "flex", gap: "20px", marginBottom: "10px" }}
                 >
-                  <img src={time1Logo} style={{ width: "50px" }} />
-                  <img src={time2Logo} style={{ width: "50px" }} />
+                  <img src={time1Logo} style={{ height: "50px" }} />
+                  <img src={time2Logo} style={{ height: "50px" }} />
                 </div>
                 <div
                   style={{

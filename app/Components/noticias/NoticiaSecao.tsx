@@ -145,10 +145,8 @@ function NoticiaSecao() {
                       width: "100%",
                       height: "400px",
                       bottom: "0px",
-                     
 
                       zIndex: 20,
-                     
                     }}
                   ></div>
                   <p
@@ -159,6 +157,7 @@ function NoticiaSecao() {
                       bottom: "10px",
                       fontWeight: "500",
                       color: "white",
+                      marginLeft: "10px",
 
                       zIndex: 20,
                     }}
@@ -167,7 +166,7 @@ function NoticiaSecao() {
                   </p>
                   <NewsComponent imagem={noticia.imagem} />
                   {usuarioSecao?.user?.role == "admin" && ( //Apenas ADM tem Acesso a criar
-                    <div 
+                    <div
                       style={{
                         position: "absolute",
                         top: "0",

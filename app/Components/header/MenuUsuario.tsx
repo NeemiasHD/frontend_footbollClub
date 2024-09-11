@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { BiCart, BiGroup, BiUser } from "react-icons/bi";
 import { deleteCookie } from "cookies-next";
 import { BsHeart } from "react-icons/bs";
+import "./MenuUsuario.css";
 
 interface MenuUsuarioProps {
   setMenuUsuarioAtivado: (ativo: boolean) => void;
@@ -25,8 +26,15 @@ const MenuUsuario: React.FC<MenuUsuarioProps> = ({ setMenuUsuarioAtivado }) => {
     const getUsuarios = async () => {
       try {
         const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_BAGRES}usuario`
+          `${process.env.NEXT_PUBLIC_API_BAGRES}usuario`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${usuarioSecao?.token}`,
+            },
+          }
         );
+
         const data = await response.json();
         setusuarios(data);
       } catch (error) {
@@ -39,9 +47,16 @@ const MenuUsuario: React.FC<MenuUsuarioProps> = ({ setMenuUsuarioAtivado }) => {
   return (
     <div
       style={{
+        position: "fixed",
         display: "flex",
+        height: "100%",
+        backgroundColor: "var(--cinzaEscuro)",
+        backdropFilter: "blur(5px)",
+        width: "100%",
+        alignItems: "center",
         justifyContent: "center",
-        position: "relative",
+        top: 0,
+        zIndex: "100",
       }}
     >
       {usuarioSecao && (
@@ -56,7 +71,7 @@ const MenuUsuario: React.FC<MenuUsuarioProps> = ({ setMenuUsuarioAtivado }) => {
             maxWidth: "250px",
             width: "50%",
             textAlign: "center",
-            marginTop: "90px",
+            top: "100px",
             alignItems: "center",
             boxShadow: "0px 0px 10px var(--cinza)",
             height: "100%",
@@ -66,50 +81,78 @@ const MenuUsuario: React.FC<MenuUsuarioProps> = ({ setMenuUsuarioAtivado }) => {
           {showUsuarios ? (
             <div
               style={{
+                height: "100%",
                 display: "flex",
-                flexDirection: "column",
-                gap: "20px",
+                alignItems: "center",
+                justifyContent: "center",
               }}
             >
-              <p
-                onClick={() => {
-                  setShowUsuarios(!showUsuarios);
-                }}
+              <div
                 style={{
-                  color: "gray",
-                  position: "absolute",
-                  right: 5,
-                  top: -3,
-                  cursor: "pointer",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "20px",
+                  overflowY: "scroll",
+                  height: "80%",
                 }}
               >
-                x
-              </p>
-              {usuarios.map((u) => (
+                <p
+                  onClick={() => {
+                    setShowUsuarios(!showUsuarios);
+                  }}
+                  style={{
+                    color: "gray",
+                    position: "absolute",
+                    right: 5,
+                    top: -3,
+                    cursor: "pointer",
+                  }}
+                >
+                  x
+                </p>
                 <div
-                  key={u.usuarioId}
                   style={{
                     display: "flex",
-                    flexDirection: "column",
+                    flexWrap: "wrap",
                     alignItems: "center",
+                    justifyContent: "center",
                     gap: "10px",
                   }}
                 >
-                  <div
-                    style={{
-                      width: "30px",
-                      height: "30px",
-                      overflow: "hidden",
-                      alignItems: "center",
-                      display: "flex",
-                      borderRadius: "20px",
-                    }}
-                  >
-                    <img src={u.foto} style={{ width: "100%" }} />
-                  </div>
-                  <p>{u.nome}</p>
+                  {usuarios.map((u) => (
+                    <div
+                      key={u.usuarioId}
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        gap: "10px",
+                        width: "100px",
+                        height: "100px",
+                        backgroundColor: "var(--cinza)",
+                        borderRadius: "10px",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <div
+                        style={{
+                          width: "50px",
+                          height: "50px",
+                          overflow: "hidden",
+                          alignItems: "center",
+                          display: "flex",
+                          borderRadius: "50px",
+                          justifyContent: "center",
+                          backgroundColor: "white",
+                        }}
+                      >
+                        <img src={u.foto} style={{ height: "100%" }} />
+                      </div>
+                      <p style={{ fontSize: "9px" }}>{u.nome}</p>
+                    </div>
+                  ))}
                 </div>
-              ))}
+              </div>
             </div>
           ) : (
             <>
@@ -210,6 +253,7 @@ const MenuUsuario: React.FC<MenuUsuarioProps> = ({ setMenuUsuarioAtivado }) => {
                     width: "100%",
                     alignItems: "start",
                     borderBottom: "1px solid var(--cinza)",
+                    height: "30px",
                   }}
                 >
                   <div
@@ -223,6 +267,7 @@ const MenuUsuario: React.FC<MenuUsuarioProps> = ({ setMenuUsuarioAtivado }) => {
                   >
                     <BiUser />
                     <p
+                      className="MenuUserOpcao"
                       style={{
                         display: "flex",
                         justifyContent: "center",
@@ -230,6 +275,7 @@ const MenuUsuario: React.FC<MenuUsuarioProps> = ({ setMenuUsuarioAtivado }) => {
                         gap: "10px",
                         fontSize: "10px",
                         marginLeft: "30px",
+                        cursor: "pointer",
                       }}
                     >
                       Minha Conta
@@ -243,6 +289,7 @@ const MenuUsuario: React.FC<MenuUsuarioProps> = ({ setMenuUsuarioAtivado }) => {
                     gap: "10px",
                     flexDirection: "column",
                     width: "100%",
+                    height: "30px",
                     alignItems: "start",
                     borderBottom: "1px solid var(--cinza)",
                   }}
@@ -258,6 +305,7 @@ const MenuUsuario: React.FC<MenuUsuarioProps> = ({ setMenuUsuarioAtivado }) => {
                   >
                     <BiGroup />
                     <p
+                      className="MenuUserOpcao"
                       style={{
                         display: "flex",
                         justifyContent: "center",
@@ -276,13 +324,15 @@ const MenuUsuario: React.FC<MenuUsuarioProps> = ({ setMenuUsuarioAtivado }) => {
                   </div>
                 </div>
                 {/*btn opcao menu usuario*/}
+                {/*Desativado*/}
                 <div
                   style={{
-                    display: "flex",
+                    display: "none",
                     gap: "10px",
                     flexDirection: "column",
                     width: "100%",
                     alignItems: "start",
+                    height: "30px",
                     borderBottom: "1px solid var(--cinza)",
                   }}
                 >
@@ -297,6 +347,7 @@ const MenuUsuario: React.FC<MenuUsuarioProps> = ({ setMenuUsuarioAtivado }) => {
                   >
                     <BiCart />
                     <p
+                      className="MenuUserOpcao"
                       style={{
                         display: "flex",
                         justifyContent: "center",
@@ -311,12 +362,14 @@ const MenuUsuario: React.FC<MenuUsuarioProps> = ({ setMenuUsuarioAtivado }) => {
                   </div>
                 </div>
                 {/*btn opcao menu usuario*/}
+                {/*Desativado*/}
                 <div
                   style={{
-                    display: "flex",
+                    display: "none",
                     gap: "10px",
                     flexDirection: "column",
                     width: "100%",
+                    height: "30px",
                     alignItems: "start",
                     borderBottom: "1px solid var(--cinza)",
                   }}
@@ -333,6 +386,7 @@ const MenuUsuario: React.FC<MenuUsuarioProps> = ({ setMenuUsuarioAtivado }) => {
                     <BsHeart />
 
                     <p
+                      className="MenuUserOpcao"
                       style={{
                         display: "flex",
                         justifyContent: "center",

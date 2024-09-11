@@ -57,6 +57,8 @@ function LojaSection() {
             {usuarioSecao?.user?.role == "admin" && <CriarProduto />}
             <Produto />
             <Produto />
+            <Produto />
+            <Produto />
           </div>
         </div>
       </div>

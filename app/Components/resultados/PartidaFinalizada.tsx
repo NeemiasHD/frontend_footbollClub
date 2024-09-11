@@ -149,6 +149,7 @@ const PartidaFinalizada: React.FC<ResultadoPartidaProps> = ({
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${usuarioSecao?.token}`,
           },
           body: JSON.stringify(updateData),
         }
@@ -195,6 +196,7 @@ const PartidaFinalizada: React.FC<ResultadoPartidaProps> = ({
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${usuarioSecao?.token}`,
           },
           body: JSON.stringify(updateData),
         }
@@ -238,13 +240,14 @@ const PartidaFinalizada: React.FC<ResultadoPartidaProps> = ({
           <p className="DataPartidaFinalizada">{data}</p>
         </div>
       </div>
-      {usuarioSecao?.token === "admin" && ( //Apenas ADM tem Acesso a criar
+      {usuarioSecao?.user.role == "admin" && (
         <div
           style={{
             width: "100%",
             alignItems: "center",
             display: "flex",
             justifyContent: "center",
+            cursor: "pointer",
           }}
         >
           <GrReturn

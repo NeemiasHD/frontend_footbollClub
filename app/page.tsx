@@ -15,9 +15,9 @@ function page() {
     <div className="Main">
       <Welcomebanner />
       <News />
-      {/*<LojaSection />*/}
       <Calendario />
       <ResultadosSection />
+      <LojaSection />
       <JogadoresSecao />
       <FotosSection />
     </div>

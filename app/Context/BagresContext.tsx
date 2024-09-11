@@ -241,7 +241,7 @@ export async function UploadImagemToClound(Imagem: File) {
   return r.secure_url;
 }
 
-export async function RenderLogo(logo: string) {
+export async function RenderImagemParaCanvas(logo: string) {
   //renderiza logos de url para local assim permitindo o canvas trabalhar
   try {
     const response = await fetch(logo);

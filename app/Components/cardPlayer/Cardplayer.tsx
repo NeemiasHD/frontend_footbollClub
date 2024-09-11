@@ -3,7 +3,7 @@ import html2canvas from "html2canvas";
 import React, { useEffect, useState } from "react";
 import { BiDownload, BiEdit } from "react-icons/bi";
 import AdmEditarCardPlayer from "./AdmEditarCardPlayer";
-import { RenderLogo, UseBagresContext } from "@/app/Context/BagresContext";
+import { RenderImagemParaCanvas, UseBagresContext } from "@/app/Context/BagresContext";
 import { PiArrowUpFill } from "react-icons/pi";
 import { BsArrowDown, BsArrowUp } from "react-icons/bs";
 interface CardProp {
@@ -58,7 +58,7 @@ const Cardplayer: React.FC<CardProp> = ({
   };
   useEffect(() => {
     const fetchImage = async () => {
-      const FOTO = await RenderLogo(foto);
+      const FOTO = await RenderImagemParaCanvas(foto);
       if (FOTO) {
         SetFOTO(FOTO);
       }

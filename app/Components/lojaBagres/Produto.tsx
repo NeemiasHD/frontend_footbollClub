@@ -22,7 +22,7 @@ function Produto() {
       >
         <div>
           <p style={{ fontSize: "14px", fontWeight: "200" }}>
-            CAMISA BAGRES Nº 1
+            CAMISA BAGRES 
           </p>
 
           <Rating readonly={true} size={20} initialValue={5} />
@@ -39,7 +39,7 @@ function Produto() {
             <BiCart />
             <BsHeart color="red" />
           </div>
-          <p style={{ fontSize: "20px", fontWeight: "200" }}>99,90 R$</p>
+          <p style={{ fontSize: "20px", fontWeight: "200" }}>49,90 R$</p>
         </div>
       </div>
     </div>

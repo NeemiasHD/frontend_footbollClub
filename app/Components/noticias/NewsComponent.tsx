@@ -12,20 +12,10 @@ const NewsComponent: React.FC<Props> = ({ imagem }) => {
         flexDirection: "column",
         position: "relative",
         textAlign: "center",
-
+        width: "100%",
       }}
     >
-      <div
-        style={{
-          justifyContent: "center",
-          display: "flex",
-          alignItems: "center",
-          flexDirection: "column",
-          width: "100%",
-        }}
-      >
-        <img className="imgNews" src={imagem} />
-      </div>
+      <img className="imgNews" src={imagem} />
     </div>
   );
 };

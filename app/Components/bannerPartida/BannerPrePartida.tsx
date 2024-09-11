@@ -1,5 +1,5 @@
 "use client";
-import { RenderLogo } from "@/app/Context/BagresContext";
+import { RenderImagemParaCanvas } from "@/app/Context/BagresContext";
 import React, { useEffect, useState } from "react";
 
 interface PartidaProps {
@@ -30,9 +30,9 @@ const BannerPrePartida: React.FC<PartidaProps> = ({
 
   useEffect(() => {
     const fetchImage = async () => {
-      const logo = await RenderLogo(logoT1);
-      const logo2 = await RenderLogo(logoT2);
-      const logo3 = await RenderLogo(
+      const logo = await RenderImagemParaCanvas(logoT1);
+      const logo2 = await RenderImagemParaCanvas(logoT2);
+      const logo3 = await RenderImagemParaCanvas(
         "https://res.cloudinary.com/dtpsqmz73/image/upload/v1724644921/vkjxb2cwyq5rudnx4xuu.png"
       );
       if (logo) {
@@ -55,7 +55,6 @@ const BannerPrePartida: React.FC<PartidaProps> = ({
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: "var(--corazul)",
         height: "2560px",
       }}
     >
@@ -66,7 +65,7 @@ const BannerPrePartida: React.FC<PartidaProps> = ({
         }}
       >
         <img
-          src={imgt3}
+          src="./img/FundoPrePartida.png"
           style={{
             height: "2560px",
             zIndex: "21",
