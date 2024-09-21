@@ -516,10 +516,14 @@
   .NewsContainer {
     padding-bottom: 20px;
   }
+  .Estatisticas {
+    margin-top: 50px;
+  }
 }
 @media (max-width: 1089px) {
   .glowBagreDeOuro {
     width: 700px;
+ 
   }
 }
 

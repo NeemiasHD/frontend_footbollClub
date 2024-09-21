@@ -73,6 +73,8 @@ function AdmCriarPartidas() {
             <option value="">Tipo de Confronto</option>
             <option value="Amistoso">Amistoso</option>
             <option value="Fase de Grupo">Fase de Grupo</option>
+            <option value="Classificação - IDA">Classificação - IDA</option>
+            <option value="Classificação - VOLTA">Classificação - VOLTA</option>
             <option value="Mata-Mata - IDA">Mata-Mata - IDA</option>
             <option value="Mata-Mata - VOLTA">Mata-Mata - VOLTA</option>
             <option value="Final">Final</option>

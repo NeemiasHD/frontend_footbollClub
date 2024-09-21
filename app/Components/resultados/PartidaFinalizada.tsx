@@ -93,6 +93,7 @@ const PartidaFinalizada: React.FC<ResultadoPartidaProps> = ({
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${usuarioSecao?.token}`,
           },
           body: JSON.stringify(updateData),
         }

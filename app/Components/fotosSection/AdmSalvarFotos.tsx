@@ -73,6 +73,7 @@ function AdmSalvarFotos() {
       <input
         type="date"
         className="InputNoticia"
+        style={{ width: "100%" }}
         id="inputMensagem"
         onChange={(e) => setData(e.target.value)}
       />

@@ -9,14 +9,16 @@ import ResultadosSection from "./Components/resultados/ResultadosSection";
 import JogadoresSecao from "./Components/jogadoresSecao/JogadoresSecao";
 import FotosSection from "./Components/fotosSection/FotosSection";
 import LojaSection from "./Components/lojaBagres/LojaSection";
+import BackToTopBtn from "./Components/backToTopBtn/BackToTopBtn";
 
 function page() {
   return (
     <div className="Main">
+      <ResultadosSection />
+      <BackToTopBtn />
       <Welcomebanner />
       <News />
       <Calendario />
-      <ResultadosSection />
       <LojaSection />
       <JogadoresSecao />
       <FotosSection />

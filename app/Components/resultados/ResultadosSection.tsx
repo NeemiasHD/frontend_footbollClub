@@ -1,11 +1,11 @@
 "use client";
 import React from "react";
 import HeaderSection from "../headerSection/HeaderSection";
-import { BarChart } from "@mui/x-charts";
+import { BarChart, PieChart } from "@mui/x-charts";
 import { UseBagresContext } from "@/app/Context/BagresContext";
 import PartidaFinalizada from "./PartidaFinalizada";
 function ResultadosSection() {
-  const { Partidas, Times } = UseBagresContext();
+  const { Partidas, Times, jogadores } = UseBagresContext();
   const formatData = (data: string) => {
     const [ano, mes, dia] = data.split("-");
     return `${dia}/${mes}/${ano}`;
@@ -49,28 +49,139 @@ function ResultadosSection() {
         </div>
         <div className="Estatisticas">
           {Times[1] && (
-            <BarChart
-              xAxis={[
-                {
-                  scaleType: "band",
-                  data: ["Vitoria/Derrota", "Gols feitos/sofrido"],
-                },
-              ]}
-              series={[
-                {
-                  data: [Times[0].vitorias, Times[0].golsFeitos],
-                  color: "var(--corazul)",
-                },
-                {
-                  data: [Times[0].derrotas, Times[0].golsSofridos],
-                  color: "red",
-                },
-              ]}
-              width={600}
-              height={600}
-              className="grafico"
-            />
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                flexDirection: "column",
+              }}
+            >
+              <PieChart
+                series={[
+                  {
+                    data: [
+                      {
+                        id: 1,
+                        value: Times[0].vitorias,
+                        label: "Vitórias",
+                        color: "#62ff00",
+                      },
+                      {
+                        id: 2,
+                        value: Times[0].derrotas,
+                        label: "Derrotas",
+                        color: "red",
+                      },
+                      {
+                        id: 0,
+                        value: Times[0].empates,
+                        label: "Empates",
+                        color: "#c2c2c2",
+                      },
+                    ],
+                  },
+                ]}
+                width={450}
+                height={300}
+                className="grafico"
+              />
+              <BarChart
+                xAxis={[
+                  {
+                    scaleType: "band",
+                    data: ["Gols feitos / Gols sofrido / Partidas Jogadas"],
+                  },
+                ]}
+                series={[
+                  {
+                    data: [Times[0].golsFeitos],
+                    color: "var(--corazul)",
+                  },
+                  {
+                    data: [Times[0].golsSofridos],
+                    color: "red",
+                  },
+                  {
+                    data: [
+                      Times[0].derrotas + Times[0].empates + Times[0].vitorias,
+                    ],
+                    color: "#c2c2c2",
+                  },
+                ]}
+                width={450}
+                height={300}
+                className="grafico"
+              />
+            </div>
           )}
+        </div>
+      </div>
+      <div
+        className="Statusjogadores"
+        style={{
+          display: "flex",
+          width: "100%",
+          justifyContent: "center",
+          alignItems: "center",
+          gap: "10px",
+        }}
+      >
+        <div
+          style={{
+            maxWidth: "250px",
+            width: "100%",
+            gap: "1px",
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          <p>Artilharia</p>
+          {jogadores
+            .sort((a, b) => b.gols - a.gols) // Ordena em ordem decrescente de gols
+            .map((jogador) => (
+              <div
+                key={jogador.nome}
+                style={{
+                  width: "100%",
+                  border: "1px solid black",
+                  justifyContent: "space-between",
+                  display: "flex",
+                }}
+              >
+                <img src={jogador.foto} style={{ height: "30px" }} />
+                <p>{jogador.nome}</p>
+                <p>Gols: {jogador.gols}</p>
+              </div>
+            ))}
+        </div>
+        <div
+          style={{
+            maxWidth: "250px",
+            width: "100%",
+            gap: "1px",
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          <p>Assist</p>
+          {jogadores
+            .sort((a, b) => b.assistencias - a.assistencias) // Ordena em ordem decrescente de gols
+            .map((jogador) => (
+              <div
+                key={jogador.nome}
+                style={{
+                  width: "100%",
+                  border: "1px solid black",
+                  justifyContent: "space-between",
+                  display: "flex",
+                }}
+              >
+                <img src={jogador.foto} style={{ height: "30px" }} />
+                <p>{jogador.nome}</p>
+                <p>Assist: {jogador.assistencias}</p>
+              </div>
+            ))}
         </div>
       </div>
     </div>
