@@ -1,86 +1,43 @@
-import { UseBagresContext } from "@/app/Context/BagresContext";
+import { PartidaType, UseBagresContext } from "@/app/Context/BagresContext";
 import React from "react";
 import { GrReturn } from "react-icons/gr";
 
 interface ResultadoPartidaProps {
-  tipoConfronto: string;
-  data: string;
-  nomeT1: string;
-  nomeT2: string;
-  logoT1: string;
-  logoT2: string;
-  PlacarT1: number;
-  PlacarT2: number;
-  id: number; //partida
-
+  Partida: PartidaType;
   //dados para voltar a partida para não finalizada:
-  T1_empates: number;
-  T2_empates: number;
-  T1_vitorias: number;
-  T2_vitorias: number;
-  T1_derrotas: number;
-  T2_derrotas: number;
-  T1_golsFeitos: number;
-  T2_golsFeitos: number;
-  T1_golsSofridos: number;
-  T2_golsSofridos: number;
-  T1_id: number;
-  T2_id: number;
 }
 
-const PartidaFinalizada: React.FC<ResultadoPartidaProps> = ({
-  tipoConfronto,
-  data,
-  logoT1,
-  logoT2,
-  nomeT1,
-  nomeT2,
-  PlacarT1,
-  PlacarT2,
-  id, //partida
-  T1_empates,
-  T2_empates,
-  T1_vitorias,
-  T2_vitorias,
-  T1_derrotas,
-  T2_derrotas,
-  T1_golsFeitos,
-  T2_golsFeitos,
-  T1_golsSofridos,
-  T2_golsSofridos,
-  T1_id,
-  T2_id,
-}) => {
+const PartidaFinalizada: React.FC<ResultadoPartidaProps> = ({ Partida }) => {
   const handleChangestatusTeam1 = async () => {
     //mudar time1
     const updateData = [
-      PlacarT1 === PlacarT2
+      Partida.time1Placar === Partida.time2Placar
         ? {
             path: "/empates",
             op: "replace",
-            value: (T1_empates -= 1),
+            value: (Partida.time1.empates -= 1),
           }
-        : PlacarT1 > PlacarT2
+        : Partida.time1Placar > Partida.time2Placar
         ? {
             path: "/vitorias",
             op: "replace",
-            value: (T1_vitorias -= 1),
+            value: (Partida.time1.vitorias -= 1),
           }
         : {
             path: "/derrotas",
             op: "replace",
-            value: (T1_derrotas -= 1),
+            value: (Partida.time1.derrotas -= 1),
           },
 
       {
         path: "/golsFeitos",
         op: "replace",
-        value: (T1_golsFeitos -= PlacarT1),
+        value: (Partida.time1.golsFeitos -= Partida.time1Placar),
       },
       {
         path: "/golsSofridos",
         op: "replace",
-        value: (T1_golsSofridos -= PlacarT2),
+        value: (Partida.time1.golsSofridos -= Partida.time2Placar),
       },
     ];
     console.log(updateData);
@@ -88,7 +45,7 @@ const PartidaFinalizada: React.FC<ResultadoPartidaProps> = ({
 
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_BAGRES}time/${T1_id}`,
+        `${process.env.NEXT_PUBLIC_API_BAGRES}time/${Partida.time1.timeId}`,
         {
           method: "PATCH",
           headers: {
@@ -111,41 +68,43 @@ const PartidaFinalizada: React.FC<ResultadoPartidaProps> = ({
     }
   };
   const handleChangestatusTeam2 = async () => {
-    //mudar time1
+    //mudar time2
     const updateData = [
-      PlacarT1 === PlacarT2
+      Partida.time1Placar === Partida.time2Placar
         ? {
             path: "/empates",
             op: "replace",
-            value: (T2_empates -= 1),
+            value: (Partida.time2.empates -= 1),
           }
-        : PlacarT2 > PlacarT1
+        : Partida.time1Placar > Partida.time2Placar
         ? {
             path: "/vitorias",
             op: "replace",
-            value: (T2_vitorias -= 1),
+            value: (Partida.time2.vitorias -= 1),
           }
         : {
             path: "/derrotas",
             op: "replace",
-            value: (T2_derrotas -= 1),
+            value: (Partida.time2.derrotas -= 1),
           },
 
       {
         path: "/golsFeitos",
         op: "replace",
-        value: (T2_golsFeitos -= PlacarT2),
+        value: (Partida.time2.golsFeitos -= Partida.time2Placar),
       },
       {
         path: "/golsSofridos",
         op: "replace",
-        value: (T2_golsSofridos -= PlacarT1),
+        value: (Partida.time2.golsSofridos -= Partida.time1Placar),
       },
     ];
     console.log(updateData);
+    //finaliza a partida retirando a mesma do calendario e enviado para o resultados
+
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_BAGRES}time/${T2_id}`,
+        `${process.env.NEXT_PUBLIC_API_BAGRES}time/${Partida.time2.timeId}`,
         {
           method: "PATCH",
           headers: {
@@ -192,7 +151,7 @@ const PartidaFinalizada: React.FC<ResultadoPartidaProps> = ({
     ];
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_BAGRES}partida/${id}`,
+        `${process.env.NEXT_PUBLIC_API_BAGRES}partida/${Partida.partidaId}`,
         {
           method: "PATCH",
           headers: {
@@ -220,25 +179,37 @@ const PartidaFinalizada: React.FC<ResultadoPartidaProps> = ({
 
   return (
     <div className="mainPartidaFinalizada">
-      <p className="TipoPartidaFinalizada">{tipoConfronto}</p>
-      <div className="ContainerInfoPartidaFinalizada">
+      <p className="TipoPartidaFinalizada">{Partida.tipo}</p>
+      <div
+        className="ContainerInfoPartidaFinalizada"
+        onClick={() => {
+          Partida.urlFotoFimPartida &&
+            window.open(Partida.urlFotoFimPartida, "_blank");
+        }}
+      >
         <div className="TimesPartidaFinalizada">
           <div className="TimePartidaFinalizada">
-            <img src={logoT1} className="ImagemTimePartidaFinalizada" />
-            <p className="NomeTimePartidaFinalizada">{nomeT1}</p>
+            <img
+              src={Partida.time1.escudo}
+              className="ImagemTimePartidaFinalizada"
+            />
+            <p className="NomeTimePartidaFinalizada">{Partida.time1.nome}</p>
           </div>
           <div className="TimePartidaFinalizada">
-            <img src={logoT2} className="ImagemTimePartidaFinalizada" />
-            <p className="NomeTimePartidaFinalizada">{nomeT2}</p>
+            <img
+              src={Partida.time2.escudo}
+              className="ImagemTimePartidaFinalizada"
+            />
+            <p className="NomeTimePartidaFinalizada">{Partida.time2.nome}</p>
           </div>
         </div>
         <div className="PlacarPartidasFinalizada">
-          <p>{PlacarT1}</p>
-          <p>{PlacarT2}</p>
+          <p>{Partida.time1Placar}</p>
+          <p>{Partida.time2Placar}</p>
         </div>
         <div className="DataPartidaFinalizada">
           <p className="FimPartida">FIM</p>
-          <p className="DataPartidaFinalizada">{data}</p>
+          <p className="DataPartidaFinalizada">{Partida.data}</p>
         </div>
       </div>
       {usuarioSecao?.user.role == "admin" && (

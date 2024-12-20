@@ -1,6 +1,8 @@
 "use client";
 import React from "react";
 import InputProdutoImg from "./InputProdutoImg";
+import { useForm } from "react-hook-form";
+
 
 
 function CriarProduto() {

@@ -100,6 +100,7 @@
   align-items: center;
   justify-content: center;
   width: 300px;
+  height: 400px;
   position: relative;
   transition: all 0.3s;
   cursor: pointer;
@@ -363,6 +364,7 @@
   justify-content: space-around;
   border: 1px solid black;
   border-radius: 10px;
+  cursor: pointer;
 }
 .TimePartidaFinalizada {
   display: flex;
@@ -406,6 +408,11 @@
 .DataPartidaFinalizada {
   font-size: 10px;
 }
+/* Resultados */
+.jogadoresList:not(:last-child) {
+  border-bottom: 1px solid black;
+}
+
 /*JogadoresSecao*/
 .JogadoresSecaoMain {
   display: flex;
@@ -496,6 +503,19 @@
   gap: 50px;
   margin: 20px;
 }
+.PosterBagresLoja {
+  height: 620px;
+}
+
+/*GolsPartida*/
+.InserirGolsDaPartida {
+  position: absolute;
+  left: -320px;
+  display: flex;
+  flex-direction: column;
+  transform: scale(2.5);
+  gap: 10px;
+}
 
 @media (max-width: 1550px) {
   .glowBagreDeOuro {
@@ -523,7 +543,6 @@
 @media (max-width: 1089px) {
   .glowBagreDeOuro {
     width: 700px;
- 
   }
 }
 
@@ -567,7 +586,16 @@
   .bagredeourocard {
     zoom: 1.6;
   }
-
+  .ProdutosContainer {
+    transform: scale(0.5);
+    width: 100px;
+  }
+  .PosterBagresLoja {
+    height: 400px;
+  }
+  .backgroundLoja {
+    height: 500px;
+  }
   .barraPesquisa {
     width: 300px;
     padding: 10px;
@@ -634,6 +662,14 @@
   }
   .grafico {
     zoom: 0.5;
+  }
+  .InserirGolsDaPartida {
+    left: 20px;
+    bottom: 50px;
+    transform: scale(1);
+    background-color: rgba(0, 0, 0, 0.204);
+    padding: 10px;
+    z-index: 500;
   }
 }
 

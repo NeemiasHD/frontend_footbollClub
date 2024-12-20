@@ -4,58 +4,33 @@ import InputImagemJogador from "./InputImagemJogador";
 import AtributoPlayer from "./AtributoPlayer";
 import {
   HandleFetchDelete,
+  jogador,
   UploadImagemToClound,
   UseBagresContext,
 } from "@/app/Context/BagresContext";
 import { GridLoader } from "react-spinners";
 
 interface CardProp {
-  jogadorId: number;
-  fotoEDIT?: string;
-  posicaoEDIT: string;
-  nomeEDIT: string;
-  pacEDIT?: number;
-  shoEDIT?: number;
-  pasEDIT?: number;
-  driEDIT?: number;
-  defEDIT?: number;
-  phyEDIT?: number;
-  golsEDIT: number;
-  assistenciasEDIT: number;
-  bagreDaPartida: number;
-  numCamisa: number;
+  jogador: jogador;
   setAlterarPlayerIsOn: (value: boolean) => void; // Correção aqui
 }
 const AdmEditarCardPlayer: React.FC<CardProp> = ({
-  posicaoEDIT,
-  fotoEDIT,
-  nomeEDIT,
-  pacEDIT,
-  shoEDIT,
-  pasEDIT,
-  driEDIT,
-  defEDIT,
-  phyEDIT,
-  jogadorId,
-  golsEDIT,
-  assistenciasEDIT,
-  bagreDaPartida,
-  numCamisa,
+  jogador,
   setAlterarPlayerIsOn,
 }) => {
-  const [pac, setpac] = useState(pacEDIT);
-  const [sho, setsho] = useState(shoEDIT);
-  const [pas, setpas] = useState(pasEDIT);
-  const [dri, setdri] = useState(driEDIT);
-  const [def, setdef] = useState(defEDIT);
-  const [phy, setphy] = useState(phyEDIT);
-  const [nome, setNome] = useState(nomeEDIT);
-  const [gols, setGols] = useState(golsEDIT);
-  const [assistencias, setAssistencias] = useState(assistenciasEDIT);
+  const [pac, setpac] = useState(jogador.pac);
+  const [sho, setsho] = useState(jogador.sho);
+  const [pas, setpas] = useState(jogador.pas);
+  const [dri, setdri] = useState(jogador.dri);
+  const [def, setdef] = useState(jogador.def);
+  const [phy, setphy] = useState(jogador.phy);
+  const [nome, setNome] = useState(jogador.nome);
+  const [gols, setGols] = useState(jogador.gols);
+  const [assistencias, setAssistencias] = useState(jogador.assistencias);
 
-  const [NumeroCamisa, setNumeroCamisa] = useState(numCamisa);
+  const [NumeroCamisa, setNumeroCamisa] = useState(jogador.numCamisa);
 
-  const [posicao, setposicao] = useState<string | null>(posicaoEDIT);
+  const [posicao, setposicao] = useState<string | null>(jogador.posicao);
   const { Atualizarjogadores, SetAtualizarJogadores, usuarioSecao } =
     UseBagresContext();
   const [IsLoading, setIsLoading] = useState(false);
@@ -65,8 +40,8 @@ const AdmEditarCardPlayer: React.FC<CardProp> = ({
     //let r;
     //if (ImagemUpload) r = await UploadImagemToClound(ImagemUpload);
 
-    const jogador = {
-      jogadorId: jogadorId,
+    const jogadorEdit = {
+      jogadorId: jogador.jogadorId,
       nome: nome,
       posicao: posicao,
       pac: pac,
@@ -75,24 +50,23 @@ const AdmEditarCardPlayer: React.FC<CardProp> = ({
       dri: dri,
       def: def,
       phy: phy,
-      foto: fotoEDIT,
+      foto: jogador.foto,
       gols: gols,
       assistencias: assistencias,
-      bagreDaPartida: bagreDaPartida,
+      bagreDaPartida: jogador.bagreDaPartida,
       numCamisa: NumeroCamisa,
     };
-    console.log(jogador);
 
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_BAGRES}jogador/${jogadorId}`,
+        `${process.env.NEXT_PUBLIC_API_BAGRES}jogador/${jogador.jogadorId}`,
         {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${usuarioSecao?.token}`,
           },
-          body: JSON.stringify(jogador),
+          body: JSON.stringify(jogadorEdit),
         }
       );
 
@@ -153,7 +127,7 @@ const AdmEditarCardPlayer: React.FC<CardProp> = ({
                 }}
                 onChange={(e) => setposicao(e.target.value)}
               >
-                <option value={posicaoEDIT}>{posicaoEDIT}</option>
+                <option value={jogador.posicao}>{jogador.posicao}</option>
                 <option value="">Posição</option>
                 <option value="X">LESÃO</option>
                 <option value="PIV">PIV</option>
@@ -172,7 +146,7 @@ const AdmEditarCardPlayer: React.FC<CardProp> = ({
                   fontSize: "17px",
                   border: "2px solid var(--cinza)",
                 }}
-                defaultValue={numCamisa}
+                defaultValue={jogador.numCamisa}
                 onChange={(e) => setNumeroCamisa(parseInt(e.target.value))}
                 placeholder="Nº"
               />
@@ -186,7 +160,7 @@ const AdmEditarCardPlayer: React.FC<CardProp> = ({
                 justifyContent: "center",
               }}
             >
-              <img src={fotoEDIT} style={{ height: "100%" }} />
+              <img src={jogador.foto} style={{ height: "100%" }} />
             </div>
           </div>
           <input
@@ -195,7 +169,7 @@ const AdmEditarCardPlayer: React.FC<CardProp> = ({
             placeholder="Nome Jogador"
             style={{ textAlign: "center", height: "30px", width: "250px" }}
             onChange={(e) => setNome(e.target.value)}
-            defaultValue={nomeEDIT}
+            defaultValue={jogador.nome}
           />
           <div
             style={{
@@ -210,42 +184,42 @@ const AdmEditarCardPlayer: React.FC<CardProp> = ({
             <AtributoPlayer
               AtributeName="PAC"
               SetAtributeNumber={setpac}
-              defaultvalue={pacEDIT}
+              defaultvalue={jogador.pac}
             />
             <AtributoPlayer
               AtributeName="SHO"
               SetAtributeNumber={setsho}
-              defaultvalue={shoEDIT}
+              defaultvalue={jogador.sho}
             />
             <AtributoPlayer
               AtributeName="PAS"
               SetAtributeNumber={setpas}
-              defaultvalue={pasEDIT}
+              defaultvalue={jogador.pas}
             />
             <AtributoPlayer
               AtributeName="DRI"
               SetAtributeNumber={setdri}
-              defaultvalue={driEDIT}
+              defaultvalue={jogador.dri}
             />
             <AtributoPlayer
               AtributeName="DEF"
               SetAtributeNumber={setdef}
-              defaultvalue={defEDIT}
+              defaultvalue={jogador.def}
             />
             <AtributoPlayer
               AtributeName="PHY"
               SetAtributeNumber={setphy}
-              defaultvalue={phyEDIT}
+              defaultvalue={jogador.phy}
             />
             <AtributoPlayer
               AtributeName="Gols"
               SetAtributeNumber={setGols}
-              defaultvalue={golsEDIT}
+              defaultvalue={jogador.gols}
             />
             <AtributoPlayer
               AtributeName="Assists"
               SetAtributeNumber={setAssistencias}
-              defaultvalue={assistenciasEDIT}
+              defaultvalue={jogador.assistencias}
             />
           </div>
 
@@ -290,7 +264,7 @@ const AdmEditarCardPlayer: React.FC<CardProp> = ({
                 usuarioSecao?.token &&
                   HandleFetchDelete(
                     "jogador",
-                    jogadorId,
+                    jogador.jogadorId,
                     SetAtualizarJogadores,
                     Atualizarjogadores,
                     usuarioSecao?.token

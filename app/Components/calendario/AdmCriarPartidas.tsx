@@ -1,8 +1,8 @@
-"use client";
-import React, { useState } from "react";
-import InputLogoCriarTime from "./inputLogoCriarTime";
-import { UseBagresContext } from "@/app/Context/BagresContext";
-import { GridLoader } from "react-spinners";
+'use client';
+import React, { useState } from 'react';
+import InputLogoCriarTime from './inputLogoCriarTime';
+import { UseBagresContext } from '@/app/Context/BagresContext';
+import { GridLoader } from 'react-spinners';
 
 function AdmCriarPartidas() {
   const { Times, AtualizarPartidas, SetAtualizarPartidas, usuarioSecao } =
@@ -34,9 +34,9 @@ function AdmCriarPartidas() {
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_API_BAGRES}partida`,
         {
-          method: "POST",
+          method: 'POST',
           headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
             Authorization: `Bearer ${usuarioSecao?.token}`,
           },
           body: JSON.stringify(partida),
@@ -48,44 +48,45 @@ function AdmCriarPartidas() {
         console.log(response);
       } else {
         // Erro ao criar notícia
-        alert("Erro ao criar notícia");
+        alert('Erro ao criar notícia');
       }
     } catch (error) {
-      console.error("Erro na requisição:", error);
+      console.error('Erro na requisição:', error);
     }
     SetAtualizarPartidas(AtualizarPartidas + 1);
     SetIsLoading(false);
   };
 
   return (
-    <div className="Confronto">
+    <div className='Confronto'>
       {IsLoading ? (
-        <GridLoader color="#00d2ff" />
+        <GridLoader color='#00d2ff' />
       ) : (
         <>
           <select
-            className="Combobox tipoConfronto"
+            className='Combobox tipoConfronto'
             onChange={(e) => {
               setTipo(e.target.value);
             }}
-            id="combobox"
+            id='combobox'
           >
-            <option value="">Tipo de Confronto</option>
-            <option value="Amistoso">Amistoso</option>
-            <option value="Fase de Grupo">Fase de Grupo</option>
-            <option value="Classificação - IDA">Classificação - IDA</option>
-            <option value="Classificação - VOLTA">Classificação - VOLTA</option>
-            <option value="Mata-Mata - IDA">Mata-Mata - IDA</option>
-            <option value="Mata-Mata - VOLTA">Mata-Mata - VOLTA</option>
-            <option value="Final">Final</option>
+            <option value=''>Tipo de Confronto</option>
+            <option value='Amistoso'>Amistoso</option>
+            <option value='Fase de Grupo'>Fase de Grupo</option>
+            <option value='Classificação - IDA'>Classificação - IDA</option>
+            <option value='Classificação - VOLTA'>Classificação - VOLTA</option>
+            <option value='Mata-Mata - IDA'>Mata-Mata - IDA</option>
+            <option value='Mata-Mata - VOLTA'>Mata-Mata - VOLTA</option>
+            <option value='Final'>Final</option>
+            <option value='Treino'>Treino</option>
           </select>
-          <div className="LogoDosTime">
+          <div className='LogoDosTime'>
             <select
-              className="Combobox EscolherTime"
+              className='Combobox EscolherTime'
               onChange={(e) => {
                 setTime1_id(Number(e.target.value));
               }}
-              id="comboboxEscolherTime1"
+              id='comboboxEscolherTime1'
             >
               <option>Time 1</option>
 
@@ -97,11 +98,11 @@ function AdmCriarPartidas() {
             </select>
             <p>X</p>
             <select
-              className="Combobox EscolherTime"
+              className='Combobox EscolherTime'
               onChange={(e) => {
                 setTime2_id(Number(e.target.value));
               }}
-              id="comboboxEscolherTime2"
+              id='comboboxEscolherTime2'
             >
               <option>Time 2</option>
 
@@ -113,36 +114,36 @@ function AdmCriarPartidas() {
             </select>
           </div>
           <input
-            type="date"
+            type='date'
             onChange={(e) => {
               setData(e.target.value);
             }}
-            className="Combobox DataConfronto"
+            className='Combobox DataConfronto'
           />
           <input
-            type="Time"
+            type='Time'
             onChange={(e) => {
               setHorario(e.target.value);
             }}
-            className="Combobox tempoConfronto"
+            className='Combobox tempoConfronto'
           />
           <input
-            type="text"
+            type='text'
             onChange={(e) => {
               setLocal(e.target.value);
             }}
-            className="Combobox LocalConfronto"
-            placeholder="Local Confronto"
+            className='Combobox LocalConfronto'
+            placeholder='Local Confronto'
           />
-          <div className="BotoesCriarTime">
+          <div className='BotoesCriarTime'>
             <p
-              className="CriarTime"
-              style={{ cursor: "pointer" }}
+              className='CriarTime'
+              style={{ cursor: 'pointer' }}
               onClick={HandleCriarPartida}
             >
               Salvar
             </p>
-            <p className="LimparTime">Limpar</p>
+            <p className='LimparTime'>Limpar</p>
           </div>
         </>
       )}

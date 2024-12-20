@@ -104,20 +104,14 @@ const BannerFimPartida: React.FC<PartidaProps> = ({
     };
     fetchImage();
   }, [logoT1]);
+  useEffect(() => {
+    console.log(JogadoresGols);
+  }, [JogadoresGols]);
 
   return (
     <>
       {placarT1 && !resetListGols && (
-        <div
-          style={{
-            position: "absolute",
-            left: -320,
-            display: "flex",
-            flexDirection: "column",
-            transform: "scale(2.5)",
-            gap: "10px",
-          }}
-        >
+        <div className="InserirGolsDaPartida" style={{}}>
           {Array.from({ length: placarT1 }).map((_, index) => (
             <>
               <label style={{ color: "white" }}> Gol {index + 1}</label>
@@ -133,11 +127,10 @@ const BannerFimPartida: React.FC<PartidaProps> = ({
                 onChange={(e) => {
                   const novoJogador: JogadorParticipacao = {
                     nomeJogador: jogadores[Number(e.target.value)].nome,
-                    id: 6, // ou algum valor gerado dinamicamente
+                    id: jogadores[Number(e.target.value)].jogadorId, // ou algum valor gerado dinamicamente
                     gols: 1,
                     assistencia: 0,
                   };
-
                   adicionarOuAtualizarJogador(novoJogador, index);
                 }}
               >

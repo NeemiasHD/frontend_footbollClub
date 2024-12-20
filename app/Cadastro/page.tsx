@@ -10,22 +10,28 @@ import {
 import { GridLoader } from "react-spinners";
 import { useRouter } from "next/navigation";
 import { setCookie } from "cookies-next";
+import { useForm } from "react-hook-form";
+
+type conta = {
+  nome: string;
+  email: string;
+  senha: string;
+  confirmarSenha: string;
+};
 
 export default function Page() {
   const [IsLoading, SetIsLoading] = useState(false);
-
   const { ImagemUpload, setUsuarioSecao } = UseBagresContext();
-
-  const [nome, setNome] = useState<string | null>(null);
-  const [email, setEmail] = useState<string | null>(null);
-  const [senha, setSenha] = useState<string | null>(null);
   const router = useRouter();
-  const HandleCriarConta = async () => {
+  const { register, handleSubmit } = useForm<conta>();
+
+  const HandleCriarConta = async (data: conta) => {
+    console.log(data);
     //criando conta
     SetIsLoading(true);
     let r;
 
-    if (nome && email && senha) {
+    if (data.nome && data.email && data.senha === data.confirmarSenha) {
       //tratamento de erro:
 
       if (ImagemUpload) {
@@ -42,9 +48,9 @@ export default function Page() {
     }
 
     const usuario = {
-      nome: nome,
-      email: email,
-      senha: senha,
+      nome: data.nome,
+      email: data.email,
+      senha: data.senha,
       Role: "",
       foto: r,
     };
@@ -62,7 +68,7 @@ export default function Page() {
       );
 
       if (response.ok) {
-        HandleEntrarNaConta();
+        HandleEntrarNaConta(data);
 
         // usuario criada com sucesso
       } else {
@@ -78,13 +84,13 @@ export default function Page() {
 
   /*LOGAR */
 
-  const HandleEntrarNaConta = async () => {
+  const HandleEntrarNaConta = async (data: conta) => {
     //cookies
     try {
       const response = await fetch(
         `${
           process.env.NEXT_PUBLIC_API_BAGRES
-        }Usuario/login?email=${email?.toLowerCase()}&senha=${senha}`,
+        }Usuario/login?email=${data.email?.toLowerCase()}&senha=${data.senha}`,
         {
           method: "POST",
           headers: {
@@ -160,9 +166,7 @@ export default function Page() {
                 height: "40px",
                 padding: "10px",
               }}
-              onChange={(e) => {
-                setNome(e.target.value);
-              }}
+              {...register("nome", { required: true })}
             />
             <input
               type="text"
@@ -173,9 +177,7 @@ export default function Page() {
                 height: "40px",
                 padding: "10px",
               }}
-              onChange={(e) => {
-                setEmail(e.target.value);
-              }}
+              {...register("email", { required: true })}
             />
             <input
               type="password"
@@ -186,9 +188,7 @@ export default function Page() {
                 height: "40px",
                 padding: "10px",
               }}
-              onChange={(e) => {
-                setSenha(e.target.value);
-              }}
+              {...register("senha", { required: true })}
             />
             <input
               type="password"
@@ -199,9 +199,10 @@ export default function Page() {
                 height: "40px",
                 padding: "10px",
               }}
+              {...register("confirmarSenha", { required: true })}
             />
             <p
-              onClick={HandleCriarConta}
+              onClick={() => handleSubmit(HandleCriarConta)()}
               style={{
                 width: "300px",
                 height: "40px",

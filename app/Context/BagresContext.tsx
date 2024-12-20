@@ -20,8 +20,8 @@ interface BagresContextType {
   SetTimes: React.Dispatch<React.SetStateAction<time[]>>;
   AtualizarTimes: number;
   SetAtualizarTimes: React.Dispatch<React.SetStateAction<number>>;
-  Partidas: Partidas[];
-  SetPartidas: React.Dispatch<React.SetStateAction<Partidas[]>>;
+  Partidas: PartidaType[];
+  SetPartidas: React.Dispatch<React.SetStateAction<PartidaType[]>>;
   AtualizarPartidas: number;
   SetAtualizarPartidas: React.Dispatch<React.SetStateAction<number>>;
   jogadores: jogador[];
@@ -39,7 +39,7 @@ interface BagresContextType {
   setAtualizarFotos: React.Dispatch<React.SetStateAction<number>>;
   AtualizarFotos: number;
 }
-type jogador = {
+export type jogador = {
   jogadorId: number;
   nome: string;
   foto: string;
@@ -84,7 +84,7 @@ type foto = {
   descricao: string;
 };
 
-type Partidas = {
+export type PartidaType = {
   partidaId: number;
   tipo: string;
   local: string;
@@ -97,6 +97,7 @@ type Partidas = {
   time2Placar: number;
   time1: time;
   time2: time;
+  urlFotoFimPartida: string;
 };
 
 const BagresContext = createContext<BagresContextType | undefined>(undefined);
@@ -107,7 +108,7 @@ export function ProvedorBagres({ children }: ContextoBagresProps) {
   const [ImagemUpload, SetImagemUpload] = useState<File | null>(null);
   const [Times, SetTimes] = useState<time[]>([]);
   const [AtualizarTimes, SetAtualizarTimes] = useState(0);
-  const [Partidas, SetPartidas] = useState<Partidas[]>([]);
+  const [Partidas, SetPartidas] = useState<PartidaType[]>([]);
   const [AtualizarPartidas, SetAtualizarPartidas] = useState(0);
 
   const [jogadores, setjogadores] = useState<jogador[]>([]);

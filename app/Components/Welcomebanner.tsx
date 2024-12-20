@@ -1,8 +1,11 @@
-"use client";
-import React, { useEffect, useState } from "react";
-import "./Components.css";
+'use client';
+import React, { useEffect, useState } from 'react';
+import './Components.css';
+interface BannerProp {
+  imgBanner: string;
+}
 
-function Welcomebanner() {
+const Welcomebanner: React.FC<BannerProp> = ({ imgBanner }) => {
   const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
@@ -11,20 +14,20 @@ function Welcomebanner() {
     };
 
     // Adiciona o listener de scroll quando o componente é montado
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll);
 
     // Remove o listener de scroll quando o componente é desmontado
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
   return (
-    <div className="welcomeMain">
-      <div className="imgcontainer">
+    <div className='welcomeMain'>
+      <div className='imgcontainer'>
         <img
-          className="imgWelcome"
-          src="./img/imgbanner.png"
+          className='imgWelcome'
+          src={imgBanner}
           style={
             scrollY < 11
               ? {
@@ -32,19 +35,19 @@ function Welcomebanner() {
                     100 - scrollY * 3
                   }%)`,
                 }
-              : { display: "none" }
+              : { display: 'none' }
           }
         />
-        <div className="msgcontainer" style={{ maxWidth: "1500px" }}>
+        <div className='msgcontainer' style={{ maxWidth: '1500px' }}>
           <img
-            className="mensageWelcome"
-            src="./img/bemvindo.png"
-            style={{ width: "100%" }}
+            className='mensageWelcome'
+            src='./img/bemvindo.png'
+            style={{ width: '100%' }}
           />
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default Welcomebanner;

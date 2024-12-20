@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BiCheck, BiDownload, BiTrash, BiXCircle } from "react-icons/bi";
 import { BsDownload } from "react-icons/bs";
 import InputImagem from "../inputimage/InputImagem";
@@ -12,56 +12,15 @@ import { GridLoader } from "react-spinners";
 
 import {
   HandleFetchDelete,
+  PartidaType,
+  UploadImagemToClound,
   UseBagresContext,
 } from "@/app/Context/BagresContext";
 interface PartidaProps {
-  tipoConfronto: string;
-  data: string;
-  horario: string;
-  time1Logo: string;
-  time1Nome: string;
-  time2Logo: string;
-  time2Nome: string;
-  local: string;
-  id: number;
-  //dados a serem mudados no time apos termino de partida
-  //Time 1
-  T1_id: number;
-  T1_vitorias: number;
-  T1_derrotas: number;
-  T1_empates: number;
-  T1_golsFeitos: number;
-  T1_golsSofridos: number;
-  //Time 2
-  T2_id: number;
-  T2_vitorias: number;
-  T2_derrotas: number;
-  T2_empates: number;
-  T2_golsFeitos: number;
-  T2_golsSofridos: number;
+  partida: PartidaType;
 }
 const Partida: React.FC<PartidaProps> = ({
-  tipoConfronto,
-  data,
-  horario,
-  time1Logo,
-  time1Nome,
-  time2Logo,
-  time2Nome,
-  local,
-  id,
-  T1_id,
-  T1_vitorias,
-  T1_derrotas,
-  T1_empates,
-  T1_golsFeitos,
-  T1_golsSofridos,
-  T2_id,
-  T2_vitorias,
-  T2_derrotas,
-  T2_empates,
-  T2_golsFeitos,
-  T2_golsSofridos,
+  partida,
 
   //dados a serem mudados no time
 }) => {
@@ -72,29 +31,29 @@ const Partida: React.FC<PartidaProps> = ({
         ? {
             path: "/empates",
             op: "replace",
-            value: (T1_empates += 1),
+            value: (partida.time1.empates += 1),
           }
         : placartime1 > placartime2
         ? {
             path: "/vitorias",
             op: "replace",
-            value: (T1_vitorias += 1),
+            value: (partida.time1.vitorias += 1),
           }
         : {
             path: "/derrotas",
             op: "replace",
-            value: (T1_derrotas += 1),
+            value: (partida.time1.derrotas += 1),
           },
 
       {
         path: "/golsFeitos",
         op: "replace",
-        value: (T1_golsFeitos += placartime1),
+        value: (partida.time1.golsFeitos += placartime1),
       },
       {
         path: "/golsSofridos",
         op: "replace",
-        value: (T1_golsSofridos += placartime2),
+        value: (partida.time1.golsSofridos += placartime2),
       },
     ];
     console.log(updateData);
@@ -102,7 +61,7 @@ const Partida: React.FC<PartidaProps> = ({
 
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_BAGRES}time/${T1_id}`,
+        `${process.env.NEXT_PUBLIC_API_BAGRES}time/${partida.time1.timeId}`,
         {
           method: "PATCH",
           headers: {
@@ -132,29 +91,29 @@ const Partida: React.FC<PartidaProps> = ({
             path: "/empates",
             op: "replace",
 
-            value: (T2_empates += 1),
+            value: (partida.time2.empates += 1),
           }
         : placartime2 > placartime1
         ? {
             path: "/vitorias",
             op: "replace",
-            value: (T2_vitorias += 1),
+            value: (partida.time2.vitorias += 1),
           }
         : {
             path: "/derrotas",
             op: "replace",
-            value: (T2_derrotas += 1),
+            value: (partida.time2.derrotas += 1),
           },
 
       {
         path: "/golsFeitos",
         op: "replace",
-        value: (T2_golsFeitos += placartime2),
+        value: (partida.time2.golsFeitos += placartime2),
       },
       {
         path: "/golsSofridos",
         op: "replace",
-        value: (T2_golsSofridos += placartime1),
+        value: (partida.time2.golsSofridos += placartime1),
       },
     ];
 
@@ -162,7 +121,7 @@ const Partida: React.FC<PartidaProps> = ({
 
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_BAGRES}time/${T2_id}`,
+        `${process.env.NEXT_PUBLIC_API_BAGRES}time/${partida.time2.timeId}`,
         {
           method: "PATCH",
           headers: {
@@ -185,7 +144,7 @@ const Partida: React.FC<PartidaProps> = ({
     }
   };
 
-  const handleSetFinalizarPartida = async () => {
+  const handleSetFinalizarPartida = async (urlFotoFimPartida: string) => {
     //PATCH para mudar o status da partida
     const updateData = [
       {
@@ -203,12 +162,17 @@ const Partida: React.FC<PartidaProps> = ({
         op: "replace",
         value: placartime2,
       },
+      {
+        path: "/urlFotoFimPartida",
+        op: "replace",
+        value: urlFotoFimPartida,
+      },
     ];
     //finaliza a partida retirando a mesma do calendario e enviado para o resultados
 
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_BAGRES}partida/${id}`,
+        `${process.env.NEXT_PUBLIC_API_BAGRES}partida/${partida.partidaId}`,
         {
           method: "PATCH",
           headers: {
@@ -253,10 +217,55 @@ const Partida: React.FC<PartidaProps> = ({
   };
 
   const handleSaveBannerFimPartida = async () => {
-    //faz a renderizacao da imagem
+    // Faz a renderização da imagem
     setZoomForView(1);
     const bannerElement = document.getElementById(
-      `BannerPartidaFinalizada${id}`
+      `BannerPartidaFinalizada${partida.partidaId}`
+    );
+    if (bannerElement) {
+      await new Promise((resolve) => setTimeout(resolve, 500)); // Adiciona um atraso de 500ms
+      html2canvas(bannerElement, { backgroundColor: null }).then(
+        async (canvas) => {
+          // Converte o canvas para um arquivo Blob de PNG
+          canvas.toBlob(async (blob) => {
+            if (blob) {
+              // Converte o Blob para File
+              const file = new File(
+                [blob],
+                `BannerPartidaFinalizada${partida.partidaId}.png`,
+                {
+                  type: "image/png",
+                  lastModified: new Date().getTime(),
+                }
+              );
+
+              // Envia o arquivo File diretamente para o cloud
+              const imagem = await UploadImagemToClound(file);
+
+              handleSetFinalizarPartida(imagem); // Chama a função para finalizar a partida
+
+              // Se desejar baixar a imagem localmente também, pode manter o seguinte trecho
+              const link = document.createElement("a");
+              link.href = URL.createObjectURL(file);
+              setZoomForView(0.22);
+              link.download = `BannerPartidaFinalizada${partida.partidaId}.png`;
+              link.click();
+            }
+          }, "image/png");
+        }
+      );
+    }
+  };
+
+  const handleImagemBannerPrePartida = () => {
+    //mostrando ou nao banner fim partida
+    setBannerPrePartida(!BannerdePrePartidaIsOn);
+  };
+  const handleSaveBannerPrePartida = async () => {
+    setZoomForView(1);
+    //faz a renderizacao da imagem
+    const bannerElement = document.getElementById(
+      `BannerPrePartida${partida.partidaId}`
     );
     if (bannerElement) {
       await new Promise((resolve) => setTimeout(resolve, 500)); // Adiciona um atraso de 500ms
@@ -265,29 +274,8 @@ const Partida: React.FC<PartidaProps> = ({
         const link = document.createElement("a");
         link.href = imgData;
         setZoomForView(0.22);
-        link.download = `BannerPartidaFinalizada${id}.png`;
-        link.click();
-      });
-    }
-    handleSetFinalizarPartida();
-  };
-  const handleImagemBannerPrePartida = () => {
-    //mostrando ou nao banner fim partida
-    setBannerPrePartida(!BannerdePrePartidaIsOn);
-  };
-  const handleSaveBannerPrePartida = async () => {
-    setZoomForView(1);
-    //faz a renderizacao da imagem
-    const bannerElement = document.getElementById(`BannerPrePartida${id}`);
-    if (bannerElement) {
-      await new Promise((resolve) => setTimeout(resolve, 500)); // Adiciona um atraso de 500ms
-      html2canvas(bannerElement, { backgroundColor: null }).then((canvas) => {
-        const imgData = canvas.toDataURL("image/png");
-        const link = document.createElement("a");
-        link.href = imgData;
-        setZoomForView(0.22);
 
-        link.download = `BannerPrePartida${id}.png`;
+        link.download = `BannerPrePartida${partida.partidaId}.png`;
         link.click();
       });
     }
@@ -346,15 +334,15 @@ const Partida: React.FC<PartidaProps> = ({
             }}
           >
             <BannerPrePartida
-              tipoConfronto={tipoConfronto}
-              nomeT1={time1Nome}
-              logoT1={time1Logo}
-              nomeT2={time2Nome}
-              logoT2={time2Logo}
-              Horario={horario}
-              data={formatData(data)}
-              id={id}
-              local={local}
+              tipoConfronto={partida.tipo}
+              nomeT1={partida.time1.nome}
+              logoT1={partida.time1.escudo}
+              nomeT2={partida.time2.nome}
+              logoT2={partida.time2.escudo}
+              Horario={partida.horario}
+              data={formatData(partida.data)}
+              id={partida.partidaId}
+              local={partida.local}
             />
             {/*banner criado antes da partida comecar*/}
           </div>
@@ -438,16 +426,16 @@ const Partida: React.FC<PartidaProps> = ({
             }}
           >
             <BannerFimPartida
-              tipoConfronto={tipoConfronto}
-              nomeT1={time1Nome}
-              logoT1={time1Logo}
+              tipoConfronto={partida.tipo}
+              nomeT1={partida.time1.nome}
+              logoT1={partida.time1.escudo}
+              nomeT2={partida.time2.nome}
+              logoT2={partida.time2.escudo}
+              data={formatData(partida.data)}
+              id={partida.partidaId}
               placarT1={placartime1}
-              nomeT2={time2Nome}
-              logoT2={time2Logo}
               placarT2={placartime2}
-              data={formatData(data)}
               imagemfimPartida={imagemfimPartida}
-              id={id}
             />
             {/*banner*/}
           </div>
@@ -503,9 +491,11 @@ const Partida: React.FC<PartidaProps> = ({
             onClick={handleImagemBannerPrePartida}
           >
             <p className="TipoConfronto">
-              {tipoConfronto}
-              <span style={{ fontSize: "12px" }}>{formatData(data)}</span>
-              <span style={{ fontSize: "12px" }}>{horario}</span>
+              {partida.tipo}
+              <span style={{ fontSize: "12px" }}>
+                {formatData(partida.data)}
+              </span>
+              <span style={{ fontSize: "12px" }}>{partida.horario}</span>
             </p>
             <div className="LogoDosTime">
               <div
@@ -516,7 +506,10 @@ const Partida: React.FC<PartidaProps> = ({
                 }}
               >
                 <div className="LogotimePartidaContainer">
-                  <img className="logoTimeConfronto" src={time1Logo} />
+                  <img
+                    className="logoTimeConfronto"
+                    src={partida.time1.escudo}
+                  />
                 </div>
                 <p
                   style={{
@@ -525,7 +518,7 @@ const Partida: React.FC<PartidaProps> = ({
                     textAlign: "center",
                   }}
                 >
-                  {time1Nome}
+                  {partida.time1.nome}
                 </p>
               </div>
               <p style={{ fontSize: "30px" }}>X</p>
@@ -537,7 +530,10 @@ const Partida: React.FC<PartidaProps> = ({
                 }}
               >
                 <div className="LogotimePartidaContainer">
-                  <img className="logoTimeConfronto" src={time2Logo} />
+                  <img
+                    className="logoTimeConfronto"
+                    src={partida.time2.escudo}
+                  />
                 </div>
                 <p
                   style={{
@@ -546,7 +542,7 @@ const Partida: React.FC<PartidaProps> = ({
                     textAlign: "center",
                   }}
                 >
-                  {time2Nome}
+                  {partida.time2.nome}
                 </p>
               </div>
             </div>
@@ -571,7 +567,7 @@ const Partida: React.FC<PartidaProps> = ({
                   textAlign: "center",
                 }}
               >
-                {local}
+                {partida.local}
               </p>
             </div>
           </div>
@@ -594,7 +590,7 @@ const Partida: React.FC<PartidaProps> = ({
             >
               <div style={{ border: "3px dotted var(--cinza)" }}>
                 <InputfotoPartida
-                  id={`fimconfronto${data}`}
+                  id={`fimconfronto${partida.data}`}
                   setImagemInput={setImagemfimPartida}
                 />
               </div>
@@ -611,8 +607,8 @@ const Partida: React.FC<PartidaProps> = ({
                 <div
                   style={{ display: "flex", gap: "20px", marginBottom: "10px" }}
                 >
-                  <img src={time1Logo} style={{ height: "50px" }} />
-                  <img src={time2Logo} style={{ height: "50px" }} />
+                  <img src={partida.time1.escudo} style={{ height: "50px" }} />
+                  <img src={partida.time2.escudo} style={{ height: "50px" }} />
                 </div>
                 <div
                   style={{
@@ -700,7 +696,7 @@ const Partida: React.FC<PartidaProps> = ({
                 HandleFetchDelete(
                   //funcao que esta no context para excluir partidas
                   "partida",
-                  id,
+                  partida.partidaId,
                   SetAtualizarPartidas,
                   AtualizarPartidas,
                   usuarioSecao?.token

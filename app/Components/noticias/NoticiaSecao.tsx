@@ -6,6 +6,7 @@ import NewsComponent from "./NewsComponent";
 import AdmCriarNoticia from "./AdmCriarNoticia";
 import {
   HandleFetchDelete,
+  jogador,
   UseBagresContext,
 } from "@/app/Context/BagresContext";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -20,22 +21,6 @@ type Noticia = {
   noticiaId: number;
   // Adicione outros campos aqui conforme necessário
 };
-type Jogador = {
-  jogadorId: number;
-  nome: string;
-  foto: string;
-  posicao: string;
-  pac: number;
-  sho: number;
-  pas: number;
-  dri: number;
-  def: number;
-  phy: number;
-  gols: number;
-  assistencias: number;
-  bagreDaPartida: number;
-  numCamisa: number;
-};
 function NoticiaSecao() {
   const [ultimobagreouro, setultimobagreouro] = useState(0);
   const [noticias, setNoticias] = useState<Noticia[]>([]);
@@ -47,7 +32,7 @@ function NoticiaSecao() {
     setBagreOuroAtual,
     usuarioSecao,
   } = UseBagresContext();
-  const [JogadorSelecionado, SetJogadorSelecionado] = useState<Jogador | null>(
+  const [JogadorSelecionado, SetJogadorSelecionado] = useState<jogador | null>(
     null
   );
 
@@ -235,24 +220,7 @@ function NoticiaSecao() {
 
             <div className="bagredeourocard">
               {JogadorSelecionado ? (
-                <Cardplayer
-                  nome={JogadorSelecionado.nome}
-                  posicao={JogadorSelecionado.posicao}
-                  pac={JogadorSelecionado.pac}
-                  sho={JogadorSelecionado.sho}
-                  pas={JogadorSelecionado.pas}
-                  dri={JogadorSelecionado.dri}
-                  def={JogadorSelecionado.def}
-                  phy={JogadorSelecionado.phy}
-                  foto={JogadorSelecionado.foto}
-                  numCamisa={JogadorSelecionado.numCamisa}
-                  gols={JogadorSelecionado.gols}
-                  assistencias={JogadorSelecionado.assistencias}
-                  bagreDaPartida={JogadorSelecionado.bagreDaPartida}
-                  isBagredeOuro={1}
-                  jogadorId={JogadorSelecionado.jogadorId}
-                  cardBanner="./img/carddourado.png"
-                />
+                <Cardplayer jogador={JogadorSelecionado} isBagredeOuro={1} />
               ) : (
                 <GridLoader color="#ff9d00" />
               )}

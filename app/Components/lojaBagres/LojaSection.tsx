@@ -22,11 +22,12 @@ function LojaSection() {
       }}
     >
       <div
+        className="backgroundLoja"
         style={{
           display: "flex",
           backgroundImage: "url(./img/texturafundobagres.png)",
           backgroundSize: "100%",
-
+          justifyContent: "center",
           backgroundColor: "var(--corazul)",
           padding: "30px",
           width: "100%",
@@ -40,22 +41,32 @@ function LojaSection() {
             display: "flex",
             gap: "10px",
             justifyContent: "center",
+            alignItems: "center",
           }}
         >
-          <img src="./img/bagresstoreposter.png" style={{ height: "620px" }} />
+          <img className="PosterBagresLoja" src="./img/bagresstoreposter.png" />
           <div
+            className="ProdutosContainer"
             style={{
               display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-between",
               flexWrap: "wrap",
-              maxHeight: "620px",
               gap: "10px",
+              alignItems: "center",
+              justifyContent: "center",
             }}
           >
             {/*produto*/}
-            {/*usuarioSecao?.user?.role == "admin" && <CriarProduto />*/}
-            {/*<Produto />*/}
+            {usuarioSecao?.user?.role == "admin" && <CriarProduto />}
+            <Produto
+              nome="camisa bagres 1"
+              imagemUrl="/img/testeimgloja.png"
+              valor="79,90"
+            />
+            <Produto
+              nome="camisa bagres 2"
+              imagemUrl="/img/testeimg2loja.png"
+              valor="79,90"
+            />
           </div>
         </div>
       </div>

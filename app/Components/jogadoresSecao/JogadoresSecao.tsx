@@ -30,24 +30,7 @@ function JogadoresSecao() {
           <AdmCriarCardPlayer />
         )}
         {jogadores.map((jogador) => (
-          <Cardplayer
-            key={jogador.jogadorId}
-            cardBanner="./img/cardcinza.png"
-            nome={jogador.nome}
-            posicao={jogador.posicao}
-            pac={jogador.pac}
-            sho={jogador.sho}
-            pas={jogador.pas}
-            dri={jogador.dri}
-            def={jogador.def}
-            phy={jogador.phy}
-            foto={jogador.foto}
-            jogadorId={jogador.jogadorId}
-            numCamisa={jogador.numCamisa}
-            assistencias={jogador.assistencias}
-            gols={jogador.gols}
-            bagreDaPartida={jogador.bagreDaPartida}
-          />
+          <Cardplayer key={jogador.jogadorId} jogador={jogador} />
         ))}
       </div>
     </div>
