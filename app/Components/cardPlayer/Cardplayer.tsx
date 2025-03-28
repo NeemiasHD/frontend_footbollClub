@@ -19,7 +19,7 @@ interface CardProp {
 
 const Cardplayer: React.FC<CardProp> = ({ isBagredeOuro, jogador }) => {
   const [alterarPlayerIsOn, setAlterarPlayerIsOn] = useState(false); //controla a alteracao do jogador
-  const { usuarioSecao } = UseBagresContext();
+  const { usuarioSecao, popupNoticia } = UseBagresContext();
   const [Foto, SetFOTO] = useState<string>('');
   const [numeroCamisaAtivo, setNumeroCamisaAtivo] = useState(false);
 
@@ -71,7 +71,7 @@ const Cardplayer: React.FC<CardProp> = ({ isBagredeOuro, jogador }) => {
   ) : (
     <>
       <div
-        className='MainCard'
+        className='MainCard w-[300px] h-[400px] flex items-center justify-center relative cursor-pointer'
         title={
           jogador.posicao === 'X'
             ? 'Lesionado'
@@ -97,34 +97,23 @@ const Cardplayer: React.FC<CardProp> = ({ isBagredeOuro, jogador }) => {
               zoom: 1,
             }}
           >
-            <div
-              style={{
-                position: 'absolute',
-                width: '240px',
-                height: '50px',
-                top: '165px',
-                zIndex: '2',
-                backgroundImage: isBagredeOuro
-                  ? 'linear-gradient(to top, var(--douradocarta), transparent)'
-                  : 'linear-gradient(to top, var(--cinzacarta), transparent)',
-              }}
-            ></div>
+
             <img
               className='cardImg'
               src={
                 jogador.posicao === 'X' && !isBagredeOuro
                   ? './img/cardcinzalesao.png'
                   : jogador.posicao === 'X' && isBagredeOuro
-                  ? './img/bagredeourolesionado.png'
-                  : !isBagredeOuro
-                  ? './img/cardcinza.png'
-                  : './img/carddourado.png'
+                    ? './img/bagredeourolesionado.png'
+                    : !isBagredeOuro
+                      ? './img/cardcinza.png'
+                      : './img/carddourado.png'
               }
             />
             <div className='atributo picContainer'>
               <img className='playerpic' src={Foto} />
             </div>
-            <p className='atributo overall'>
+            <p className='atributo overall '>
               {Math.round(
                 (jogador.pac +
                   jogador.sho +
@@ -132,7 +121,7 @@ const Cardplayer: React.FC<CardProp> = ({ isBagredeOuro, jogador }) => {
                   jogador.dri +
                   jogador.def +
                   jogador.phy) /
-                  6
+                6
               )}
               <div
                 style={{
@@ -221,10 +210,10 @@ const Cardplayer: React.FC<CardProp> = ({ isBagredeOuro, jogador }) => {
         </ReactCardFlip>
         {usuarioSecao?.user?.role === 'admin' && (
           <div
+            className={`${popupNoticia && 'text-white'}`}
             style={{
               position: 'absolute',
-              bottom: '-25px',
-              marginLeft: '50px',
+              bottom: '-20px',
               fontSize: '20px',
             }}
             onClick={() => setAlterarPlayerIsOn(!alterarPlayerIsOn)}
@@ -232,7 +221,8 @@ const Cardplayer: React.FC<CardProp> = ({ isBagredeOuro, jogador }) => {
             <BiEdit />
           </div>
         )}
-        <div
+        {/* <div
+          className={`${popupNoticia && 'text-white'}`}
           style={{
             position: 'absolute',
             bottom: '-25px',
@@ -241,7 +231,7 @@ const Cardplayer: React.FC<CardProp> = ({ isBagredeOuro, jogador }) => {
           onClick={handleSaveCard}
         >
           {!numeroCamisaAtivo && <BiDownload />}
-        </div>
+        </div> */}
       </div>
     </>
   );

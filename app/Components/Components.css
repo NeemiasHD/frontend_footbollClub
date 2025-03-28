@@ -4,6 +4,7 @@
   align-items: center;
   justify-content: center;
 }
+
 .imgcontainer {
   width: 100%;
   max-width: 1920px;
@@ -13,20 +14,23 @@
   align-items: center;
   display: flex;
   overflow: hidden;
-  height: 500px;
+  height: 445px;
 }
+
 .imgWelcome {
   position: fixed;
   max-width: 1920px;
   height: 100%;
   z-index: -1;
 }
+
 .msgcontainer {
   position: absolute;
   justify-content: center;
   align-items: center;
   display: flex;
 }
+
 .mensageWelcome {
   z-index: 2;
   width: 1400px;
@@ -41,13 +45,15 @@
   gap: 20px;
   z-index: 2;
   position: relative;
-  background-color: white;
 }
+
 .Adm {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  width: 300px;
 }
+
 .BtnEdit {
   display: flex;
   align-items: center;
@@ -55,6 +61,7 @@
   width: 100%;
   gap: 10px;
 }
+
 .BtnEdit p {
   width: 100%;
   text-align: center;
@@ -67,14 +74,17 @@
   justify-content: center;
   color: rgb(119, 119, 119);
 }
+
 .InputNoticia {
   font-size: 10px;
   padding: 10px;
   height: 10px;
 }
+
 .InputNoticia:focus {
   outline: none;
 }
+
 /*NewsComponente*/
 
 .imgNews {
@@ -96,14 +106,7 @@
 /*PlayerCard*/
 
 .MainCard {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 300px;
-  height: 400px;
-  position: relative;
   transition: all 0.3s;
-  cursor: pointer;
   background-color: transparent;
   zoom: 1;
 }
@@ -116,6 +119,7 @@
   position: absolute;
   font-size: 25px;
 }
+
 .overall {
   left: 22%;
   top: 16%;
@@ -127,6 +131,7 @@
   justify-content: center;
   width: 40px;
 }
+
 .posicao {
   left: 20%;
   top: 24%;
@@ -137,6 +142,7 @@
   justify-content: center;
   width: 50px;
 }
+
 .picContainer {
   height: 40%;
   top: 13.5%;
@@ -146,9 +152,11 @@
   width: 150px;
   justify-content: center;
 }
+
 .playerpic {
   height: 100%;
 }
+
 .nomeJogador {
   bottom: 36%;
   font-weight: 300;
@@ -160,30 +168,35 @@
   width: 50px;
   text-align: end;
 }
+
 .sho {
   bottom: 19%;
   left: 14%;
   width: 50px;
   text-align: end;
 }
+
 .pas {
   left: 14%;
   width: 50px;
   text-align: end;
   bottom: 12%;
 }
+
 .dri {
   right: 33%;
   bottom: 26%;
   width: 50px;
   text-align: end;
 }
+
 .def {
   right: 33%;
   bottom: 19%;
   width: 50px;
   text-align: end;
 }
+
 .phy {
   right: 33%;
   bottom: 12%;
@@ -194,14 +207,14 @@
 /*Calendario*/
 
 .MainCalendario {
-  background-color: rgb(245, 245, 245);
+  background-color: #f5f5f5;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding-bottom: 70px;
   gap: 20px;
 }
+
 .ConfrontoContainer {
   display: flex;
   align-items: center;
@@ -209,6 +222,7 @@
   gap: 25px;
   flex-wrap: wrap;
 }
+
 /*Banner*/
 .BannerSave {
   position: absolute;
@@ -235,6 +249,7 @@
   gap: 5px;
   transition: all 0.3s;
 }
+
 .Confronto:hover {
   background-color: rgb(237, 237, 237);
   transform: scale(1.01);
@@ -256,6 +271,7 @@
   gap: 10px;
   width: 250px;
 }
+
 .LogotimePartidaContainer {
   width: 120px;
   height: 150px;
@@ -263,6 +279,7 @@
   align-items: center;
   justify-content: center;
 }
+
 .logoTimeConfronto {
   width: 100%;
 }
@@ -279,6 +296,15 @@
   font-size: 23px;
   font-weight: 400;
 }
+
+.imagemUserHeader {
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  overflow: hidden;
+
+}
+
 .HeaderSectionMain {
   width: 100%;
   max-width: 950px;
@@ -288,6 +314,7 @@
   justify-content: space-between;
   margin: 0;
 }
+
 .VermaisBtn {
   background-color: var(--corazul);
   color: white;
@@ -306,18 +333,22 @@
   height: 40px;
   padding: 10px;
 }
+
 .Combobox.EscolherTime {
   width: 100%;
 }
+
 .Combobox:focus {
   outline: none;
 }
+
 /*AdmCriartime*/
 .BotoesCriarTime {
   display: flex;
   width: 250px;
   gap: 10px;
 }
+
 .BotoesCriarTime p {
   width: 100%;
   display: flex;
@@ -337,12 +368,14 @@
   padding-top: 20px;
   gap: 30px;
 }
+
 .ContainerPartidasEstatisticas {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
 }
+
 .PartidasFinalizadas {
   display: flex;
   flex-wrap: wrap;
@@ -356,6 +389,7 @@
 .mainPartidaFinalizada {
   width: 300px;
 }
+
 .ContainerInfoPartidaFinalizada {
   width: 100%;
   height: 120px;
@@ -366,24 +400,29 @@
   border-radius: 10px;
   cursor: pointer;
 }
+
 .TimePartidaFinalizada {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 5px;
 }
+
 .TimesPartidaFinalizada {
   display: flex;
   flex-direction: column;
   gap: 5px;
 }
+
 .NomeTimePartidaFinalizada {
   width: 100px;
   font-size: 10px;
 }
+
 .ImagemTimePartidaFinalizada {
   width: 40px;
 }
+
 .PlacarPartidasFinalizada {
   display: flex;
   flex-direction: column;
@@ -391,6 +430,7 @@
   position: relative;
   font-size: 10px;
 }
+
 .PlacarPartidasFinalizada::after {
   content: "";
   height: 100%;
@@ -399,15 +439,18 @@
   background-color: black;
   right: -20px;
 }
+
 .DataPartidaFinalizada {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
+
 .DataPartidaFinalizada {
   font-size: 10px;
 }
+
 /* Resultados */
 .jogadoresList:not(:last-child) {
   border-bottom: 1px solid black;
@@ -421,16 +464,18 @@
   flex-direction: column;
   gap: 50px;
 }
+
 .navbarJogadores {
   display: flex;
   gap: 10px;
 }
+
 .filtroporposicao {
   width: 150px;
   padding: 10px;
 }
+
 .barraPesquisa {
-  width: 500px;
   padding: 10px;
   height: 50px;
 }
@@ -440,6 +485,7 @@
 .BotaoPesquisarJogador:focus {
   outline: none;
 }
+
 .BotaoPesquisarJogador {
   width: 50px;
   background-color: var(--corazul);
@@ -449,6 +495,7 @@
   color: white;
   cursor: pointer;
 }
+
 .ListarJogadores {
   display: flex;
   flex-wrap: wrap;
@@ -457,6 +504,7 @@
   max-width: 1000px;
   gap: 20px;
 }
+
 .glowBagreDeOuro {
   width: 800px;
 }
@@ -469,17 +517,21 @@
   display: flex;
   align-items: center;
 }
+
 .newsSwipe:hover .imgNews {
   transform: scale(1.05);
 }
+
 .noticiaSombra {
   height: 400px;
   background-image: linear-gradient(to top, #000000ac, transparent);
   transition: all 0.5s;
 }
+
 .newsSwipe:hover .noticiaSombra {
   background-image: linear-gradient(to top, rgba(0, 0, 0, 0.826), transparent);
 }
+
 .swipeee {
   position: relative;
   height: 400px;
@@ -490,19 +542,22 @@
   overflow: hidden;
 }
 
-.fotosDaSecaoDeFotos {
-  height: 500px;
+.subNoticias{
+  display: flex;
 }
 .grafico {
   zoom: 1;
 }
+
 .bagredeourocard {
   zoom: 1;
 }
+
 .NewsComponents {
   gap: 50px;
   margin: 20px;
 }
+
 .PosterBagresLoja {
   height: 620px;
 }
@@ -510,7 +565,7 @@
 /*GolsPartida*/
 .InserirGolsDaPartida {
   position: absolute;
-  left: -320px;
+  left: -340px;
   display: flex;
   flex-direction: column;
   transform: scale(2.5);
@@ -522,27 +577,35 @@
     width: 500px;
   }
 }
+
 @media (max-width: 1550px) {
   .glowBagreDeOuro {
     width: 400px;
   }
 }
+
 @media (max-width: 1214px) {
   .glowBagreDeOuro {
     width: 300px;
   }
 }
+
 @media (max-width: 1149px) {
   .NewsContainer {
     padding-bottom: 20px;
   }
+
   .Estatisticas {
     margin-top: 50px;
   }
 }
+
 @media (max-width: 1089px) {
   .glowBagreDeOuro {
     width: 700px;
+  }
+  .subNoticias{
+    display: none;
   }
 }
 
@@ -551,31 +614,48 @@
     pointer-events: none;
   }
 }
+
 @media (max-width: 850px) {
   .glowBagreDeOuro {
     width: 600px;
   }
+
   .NoticiaMensagem {
     font-size: 12px;
   }
+
   .newsSwipe {
     width: 500px;
     height: 100%;
   }
+
   .swipeee {
     height: 280px;
   }
+
   .noticiaSombra {
     opacity: 80%;
   }
-  .fotosDaSecaoDeFotos {
-    height: 400px;
-  }
+
   .grafico {
     zoom: 0.7;
   }
+
   .imgNews {
     transform: scale(1);
+  }
+}
+
+
+@media (max-width: 700px) {
+
+  .imagemUserHeader {
+    height: 20px;
+    width: 20px;
+  }
+
+  .logoBagresHeader {
+    width: 20px;
   }
 }
 
@@ -583,58 +663,74 @@
   .glowBagreDeOuro {
     width: 500px;
   }
+
   .bagredeourocard {
     zoom: 1.6;
   }
+
   .ProdutosContainer {
-    transform: scale(0.5);
+    zoom: 0.4;
     width: 100px;
+    margin-left: 20px;
   }
+
   .PosterBagresLoja {
     height: 400px;
   }
+
   .backgroundLoja {
     height: 500px;
   }
-  .barraPesquisa {
-    width: 300px;
-    padding: 10px;
-    height: 30px;
-    font-size: 10px;
-  }
+
+
   .MainCard {
     zoom: 0.6;
   }
-  .fotosDaSecaoDeFotos {
-    height: 300px;
-  }
+
   .NomeSecao {
     font-size: 16px;
   }
+
   .HeaderSectionMain {
     height: 50px;
     justify-content: space-around;
   }
+
   .VermaisBtn {
     width: 100px;
     height: 30px;
     font-size: 12px;
     border-radius: 5px;
   }
+
   .imgcontainer {
     height: 300px;
   }
 }
+
+
+
+@media (max-width: 600px) {
+  .jogadoresList {
+    transform: scale(.7);
+  }
+
+
+}
+
 @media (max-width: 520px) {
   .glowBagreDeOuro {
     width: 400px;
   }
+
   .bagredeourocard {
     zoom: 2;
   }
+
   .NoticiaMensagem {
     font-size: 10px;
   }
+
   .MainCard {
     zoom: 0.4;
   }
@@ -643,26 +739,27 @@
     width: 100vw;
     height: 100%;
   }
+
   .NewsComponents {
     gap: 10px;
     margin: 0;
   }
+
   .swipeee {
     width: 100vw;
     height: 100%;
   }
+
   .noticiaSombra {
     height: 100%;
   }
-  .fotosDaSecaoDeFotos {
-    height: 200px;
-  }
-  .barraPesquisa {
-    width: 200px;
-  }
+
+
+
   .grafico {
     zoom: 0.5;
   }
+
   .InserirGolsDaPartida {
     left: 20px;
     bottom: 50px;
@@ -677,14 +774,17 @@
   .glowBagreDeOuro {
     width: 380px;
   }
+
   .imgcontainer {
     height: 200px;
   }
 }
+
 @media (max-width: 380px) {
   .bagredeourocard {
     zoom: 1.5;
   }
+
   .glowBagreDeOuro {
     width: 300px;
   }

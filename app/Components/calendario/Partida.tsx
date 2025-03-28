@@ -300,7 +300,7 @@ const Partida: React.FC<PartidaProps> = ({
             zIndex: "100",
           }}
         >
-          {zoomForView === 0.22 ? (
+          {zoomForView <= 0.22 ? (
             <></>
           ) : (
             <div
@@ -346,13 +346,11 @@ const Partida: React.FC<PartidaProps> = ({
             />
             {/*banner criado antes da partida comecar*/}
           </div>
-          <div className="BannerSave">
+          <div className="BannerSave gap-1">
             <div
               style={{
                 color: "white",
                 fontSize: "25px",
-                height: "30px",
-                width: "30px",
                 textAlign: "center",
                 cursor: "pointer",
               }}
@@ -364,8 +362,6 @@ const Partida: React.FC<PartidaProps> = ({
               style={{
                 color: "white",
                 fontSize: "25px",
-                height: "30px",
-                width: "30px",
                 textAlign: "center",
                 cursor: "pointer",
               }}
@@ -439,13 +435,11 @@ const Partida: React.FC<PartidaProps> = ({
             />
             {/*banner*/}
           </div>
-          <div className="BannerSave">
+          <div className="BannerSave gap-1">
             <div
               style={{
                 color: "white",
                 fontSize: "25px",
-                height: "30px",
-                width: "30px",
                 textAlign: "center",
                 cursor: "pointer",
               }}
@@ -457,8 +451,6 @@ const Partida: React.FC<PartidaProps> = ({
               style={{
                 color: "white",
                 fontSize: "25px",
-                height: "30px",
-                width: "30px",
                 textAlign: "center",
                 cursor: "pointer",
               }}

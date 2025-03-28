@@ -38,6 +38,8 @@ interface BagresContextType {
   setFotos: React.Dispatch<React.SetStateAction<foto[]>>;
   setAtualizarFotos: React.Dispatch<React.SetStateAction<number>>;
   AtualizarFotos: number;
+  popupNoticia: boolean,
+  setPopUpNoticia: React.Dispatch<React.SetStateAction<boolean>>;
 }
 export type jogador = {
   jogadorId: number;
@@ -119,6 +121,8 @@ export function ProvedorBagres({ children }: ContextoBagresProps) {
   ); //usuario logado na secao
   const [fotos, setFotos] = useState<foto[]>([]); //usuario logado na secao
   const [AtualizarFotos, setAtualizarFotos] = useState(0);
+  const [popupNoticia, setPopUpNoticia] = useState(false)
+
 
   const getItens = async (
     path: string,
@@ -209,6 +213,9 @@ export function ProvedorBagres({ children }: ContextoBagresProps) {
         setFotos,
         AtualizarFotos,
         setAtualizarFotos,
+        popupNoticia,
+        setPopUpNoticia
+
       }}
     >
       {children}
@@ -241,6 +248,17 @@ export async function UploadImagemToClound(Imagem: File) {
   );
   const r = await data.json();
   return r.secure_url;
+}
+export function Desativar_ou_ativar_ScrollGlobal() {
+
+  if (document.body.style.overflow == "hidden") {
+    document.body.style.overflow = ""
+
+  } else {
+    document.body.style.overflow = "hidden"
+
+  }
+
 }
 
 export async function RenderImagemParaCanvas(logo: string) {

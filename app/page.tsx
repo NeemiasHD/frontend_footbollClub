@@ -1,4 +1,5 @@
-import React from 'react';
+"use client"
+import React, { useEffect } from 'react';
 
 import Cardplayer from './Components/cardPlayer/Cardplayer';
 import Calendario from './Components/calendario/CalendarioSecao';
@@ -10,19 +11,42 @@ import JogadoresSecao from './Components/jogadoresSecao/JogadoresSecao';
 import FotosSection from './Components/fotosSection/FotosSection';
 import LojaSection from './Components/lojaBagres/LojaSection';
 import BackToTopBtn from './Components/backToTopBtn/BackToTopBtn';
+import HeaderSection from './Components/headerSection/HeaderSection';
+import { UseBagresContext } from './Context/BagresContext';
 
 function page() {
+  const { jogadores } = UseBagresContext();
+
   return (
     <div className='Main'>
-      <BackToTopBtn />
-    
+
       <Welcomebanner imgBanner='./img/imgbanner.png' />
-      <News />
-      <Calendario />
-      <LojaSection />
-      <ResultadosSection />
-      <JogadoresSecao />
-      <FotosSection />
+      {jogadores.length > 0 ?
+        <>
+          <News />
+         
+          <div className='bg-[#F5F5F5]'>
+
+            <HeaderSection NomeSecao={"Calendario"} URL="Calendario" />
+          </div>
+
+          <Calendario />
+
+          <LojaSection />
+
+          <HeaderSection NomeSecao={'Resultados'} URL='Resultados' />
+          <ResultadosSection />
+
+          <HeaderSection NomeSecao={"Jogadores"} URL='Jogadores' />
+          <JogadoresSecao />
+
+          <HeaderSection NomeSecao={"Fotos"} URL='Fotos' />
+
+          <FotosSection />
+        </> :
+        <div className='h-[100vh] w-full bg-white'></div>
+      }
+
     </div>
   );
 }

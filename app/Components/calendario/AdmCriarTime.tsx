@@ -58,7 +58,7 @@ function AdmCriarTime() {
           <p style={{ width: `250px`, fontSize: `12px` }}> Criar Time</p>
           <input
             type="text"
-            className="Combobox LocalConfronto"
+            className="border-2 p-1 outline-none w-[250px]"
             placeholder="Nome Time"
             onChange={(e) => {
               SetNomeTime(e.target.value);
@@ -67,13 +67,12 @@ function AdmCriarTime() {
           <InputLogoCriarTime id="1" />
           <div className="BotoesCriarTime">
             <p
-              className="CriarTime"
+              className="text-white"
               onClick={handleCriarTime}
               style={{ cursor: "pointer" }}
             >
               Salvar
             </p>
-            <p className="LimparTime">Limpar</p>
           </div>
         </>
       )}

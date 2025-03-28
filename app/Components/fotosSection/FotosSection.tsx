@@ -8,58 +8,66 @@ import {
 } from "@/app/Context/BagresContext";
 import { BiTrash } from "react-icons/bi";
 
-function FotosSection() {
+interface Props {
+  tipo?: boolean; //verifica se é renderizar a sessão de 2 formas
+}
+const FotosSection: React.FC<Props> = ({ tipo }) => {
   const { fotos, usuarioSecao, setAtualizarFotos, AtualizarFotos } =
     UseBagresContext();
+
   return (
     <>
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          paddingTop: "40px",
-          backgroundColor: "white",
-          flexDirection: "column",
-          padding: "50px",
-        }}
-      >
-        <HeaderSection NomeSecao={"Fotos"} />
-        <div
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            alignItems: "center",
-            justifyContent: "center",
-            maxWidth: "1150px",
-            gap: "10px",
-            marginTop: "40px",
-          }}
-        >
-         {usuarioSecao?.user?.role == "admin" && (  //Apenas ADM tem Acesso a Editar
-            <AdmSalvarFotos />
-          )}
-          {fotos.map((foto) => (
+      <div className="flex flex-col items-center justify-center bg-white ">
+        {/* Grid container para fotos */}
+        <div className="columns-1 sm:columns-2 lg:columns-3 max-w-[955px] [column-gap:0] items-center">
+          {/* Condição para exibir o componente de administração */}
+          {usuarioSecao?.user?.role === "admin" && <AdmSalvarFotos />}
+
+          {/* Renderização das fotos */}
+          {!tipo ? fotos.slice(0, 7).map((foto) => (
             <div
               key={foto.id}
-              className="fotosDaSecaoDeFotos"
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                position: "relative",
-              }}
-              title={foto.descricao + " " + foto.data}
+              className="relative break-inside-avoid p-1  "
+
+              title={`${foto.descricao} ${foto.data}`}
             >
-              <img src={foto.fotoUrl} style={{ height: "100%" }} />
-              {usuarioSecao?.user?.role == "admin" && (  //Apenas ADM tem Acesso a Editar
+              <img
+                src={foto.fotoUrl}
+                className="w-full object-cover rounded-lg"
+                alt={foto.descricao}
+              />
+              {usuarioSecao?.user?.role === "admin" && (
                 <div
-                  style={{
-                    position: "absolute",
-                    color: "white",
-                    right: "5px",
-                    bottom: "0",
-                    cursor: "pointer",
+                  className="absolute top-2 right-2 bg-black/70 text-white p-2 rounded-full cursor-pointer"
+                  onClick={() => {
+                    HandleFetchDelete(
+                      "foto",
+                      foto.id,
+                      setAtualizarFotos,
+                      AtualizarFotos,
+                      usuarioSecao.token
+                    );
                   }}
+                >
+                  <BiTrash />
+                </div>
+              )}
+            </div>
+          )) : fotos.map((foto) => (
+            <div
+              key={foto.id}
+              className="relative break-inside-avoid p-1  "
+
+              title={`${foto.descricao} ${foto.data}`}
+            >
+              <img
+                src={foto.fotoUrl}
+                className="w-full object-cover rounded-lg"
+                alt={foto.descricao}
+              />
+              {usuarioSecao?.user?.role === "admin" && (
+                <div
+                  className="absolute top-2 right-2 bg-black/70 text-white p-2 rounded-full cursor-pointer"
                   onClick={() => {
                     HandleFetchDelete(
                       "foto",

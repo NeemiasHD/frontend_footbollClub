@@ -64,7 +64,7 @@ function AdmCriarPartidas() {
       ) : (
         <>
           <select
-            className='Combobox tipoConfronto'
+            className='Combobox tipoConfronto border-2'
             onChange={(e) => {
               setTipo(e.target.value);
             }}
@@ -82,7 +82,7 @@ function AdmCriarPartidas() {
           </select>
           <div className='LogoDosTime'>
             <select
-              className='Combobox EscolherTime'
+              className='Combobox EscolherTime border-2'
               onChange={(e) => {
                 setTime1_id(Number(e.target.value));
               }}
@@ -98,7 +98,7 @@ function AdmCriarPartidas() {
             </select>
             <p>X</p>
             <select
-              className='Combobox EscolherTime'
+              className='Combobox EscolherTime border-2'
               onChange={(e) => {
                 setTime2_id(Number(e.target.value));
               }}
@@ -118,32 +118,31 @@ function AdmCriarPartidas() {
             onChange={(e) => {
               setData(e.target.value);
             }}
-            className='Combobox DataConfronto'
+            className='Combobox DataConfronto border-2'
           />
           <input
             type='Time'
             onChange={(e) => {
               setHorario(e.target.value);
             }}
-            className='Combobox tempoConfronto'
+            className='Combobox tempoConfronto border-2'
           />
           <input
             type='text'
             onChange={(e) => {
               setLocal(e.target.value);
             }}
-            className='Combobox LocalConfronto'
+            className='Combobox LocalConfronto border-2'
             placeholder='Local Confronto'
           />
           <div className='BotoesCriarTime'>
             <p
-              className='CriarTime'
+              className='CriarTime text-white '
               style={{ cursor: 'pointer' }}
               onClick={HandleCriarPartida}
             >
               Salvar
             </p>
-            <p className='LimparTime'>Limpar</p>
           </div>
         </>
       )}

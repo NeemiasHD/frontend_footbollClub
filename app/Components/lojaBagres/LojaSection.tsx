@@ -9,10 +9,14 @@ import Produto from "./Produto";
 import CriarProduto from "./CriarProduto";
 import { UseBagresContext } from "@/app/Context/BagresContext";
 
-function LojaSection() {
+interface Props {
+  tipo?: boolean; //verifica se é renderizar a sessão de 2 formas
+}
+const LojaSection: React.FC<Props> = ({ tipo }) => {
   const { usuarioSecao } = UseBagresContext();
   return (
     <div
+      className="bg-white"
       style={{
         display: "flex",
         alignItems: "center",
@@ -22,13 +26,12 @@ function LojaSection() {
       }}
     >
       <div
-        className="backgroundLoja"
+        className={`backgroundLoja ${tipo ? "bg-[#c1c1c1]" : "bg-[var(--corazul)]"}`}
         style={{
           display: "flex",
           backgroundImage: "url(./img/texturafundobagres.png)",
           backgroundSize: "100%",
           justifyContent: "center",
-          backgroundColor: "var(--corazul)",
           padding: "30px",
           width: "100%",
           flexDirection: "column",
@@ -56,7 +59,7 @@ function LojaSection() {
             }}
           >
             {/*produto*/}
-            {usuarioSecao?.user?.role == "admin" && <CriarProduto />}
+            {/*usuarioSecao?.user?.role == "admin" && <CriarProduto />*/}
             <Produto
               nome="camisa bagres 1"
               imagemUrl="/img/testeimgloja.png"

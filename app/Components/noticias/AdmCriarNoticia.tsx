@@ -73,7 +73,7 @@ function AdmCriarNoticia() {
 
       <input
         type="text"
-        className="InputNoticia"
+        className="border-2 p-1 outline-none"
         id="inputMensagem"
         placeholder="Mensagem"
         onChange={(e) => setmensagem(e.target.value)}
@@ -83,7 +83,7 @@ function AdmCriarNoticia() {
           className="Btn Salvar"
           style={{
             backgroundColor: "var(--corazul)",
-            color: "black",
+            color: "white",
             border: "none",
           }}
           onClick={handleCreateNoticias}

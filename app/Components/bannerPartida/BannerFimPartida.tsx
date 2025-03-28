@@ -163,12 +163,13 @@ const BannerFimPartida: React.FC<PartidaProps> = ({
       )}
       <div
         id={`BannerPartidaFinalizada${id}`}
+        className="w-[1380px]"
+
         style={{
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
           backgroundColor: "var(--corazul)",
-          height: "2560px",
         }}
       >
         <div
@@ -180,16 +181,16 @@ const BannerFimPartida: React.FC<PartidaProps> = ({
           <img
             src={imagemfimPartida}
             style={{
-              width: "1700px",
+              width: "1380px",
               position: "absolute",
-              right: "-100px",
               zIndex: "20",
+              zoom: "2"
             }}
           />
           <img
-            src="./img/FundoFimPartida.png"
+            src="./img/FundoFimPartida2.png"
             style={{
-              height: "2560px",
+              width: "1380px",
               zIndex: "21",
               position: "relative",
               top: "1px",
@@ -200,7 +201,7 @@ const BannerFimPartida: React.FC<PartidaProps> = ({
           style={{
             position: "absolute",
             zIndex: 21,
-            bottom: 500,
+            bottom: 400,
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
@@ -215,6 +216,8 @@ const BannerFimPartida: React.FC<PartidaProps> = ({
             }}
           >
             <h1
+              className="mb-7"
+
               style={{
                 fontSize: "100px",
                 color: "white",
@@ -258,6 +261,7 @@ const BannerFimPartida: React.FC<PartidaProps> = ({
             }}
           >
             <h1
+              className="mb-7"
               style={{
                 fontSize: "100px",
                 color: "white",

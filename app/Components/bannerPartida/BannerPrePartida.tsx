@@ -50,12 +50,12 @@ const BannerPrePartida: React.FC<PartidaProps> = ({
 
   return (
     <div
+      className="w-[1920px]"
       id={`BannerPrePartida${id}`}
       style={{
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        height: "2560px",
       }}
     >
       <div
@@ -65,9 +65,9 @@ const BannerPrePartida: React.FC<PartidaProps> = ({
         }}
       >
         <img
-          src="./img/FundoPrePartida.png"
+          src="./img/FundoPrePartida2.png"
           style={{
-            height: "2560px",
+            width: "1380px",
             zIndex: "21",
             position: "relative",
             top: "1px",

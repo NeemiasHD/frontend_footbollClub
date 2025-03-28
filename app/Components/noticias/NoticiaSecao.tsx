@@ -21,7 +21,11 @@ type Noticia = {
   noticiaId: number;
   // Adicione outros campos aqui conforme necessário
 };
-function NoticiaSecao() {
+interface Props {
+  tipo?: boolean; //verifica se é renderizar a sessão de 2 formas
+}
+const NoticiaSecao: React.FC<Props> = ({ tipo }) => {
+
   const [ultimobagreouro, setultimobagreouro] = useState(0);
   const [noticias, setNoticias] = useState<Noticia[]>([]);
   const {
@@ -30,7 +34,7 @@ function NoticiaSecao() {
     setAtualizarNoticias,
     bagreouroatual,
     setBagreOuroAtual,
-    usuarioSecao,
+    usuarioSecao, popupNoticia
   } = UseBagresContext();
   const [JogadorSelecionado, SetJogadorSelecionado] = useState<jogador | null>(
     null
@@ -100,8 +104,8 @@ function NoticiaSecao() {
     }
   };
 
-  return (
-    <div className="NewsContainer">
+  return (<>
+    <div className={`NewsContainer ${tipo ? "mt-10" : "bg-white"}`}>
       <div
         className="NewsComponents"
         style={{
@@ -120,6 +124,8 @@ function NoticiaSecao() {
               slidesPerView={1}
               loop={true}
               autoplay={{ delay: 3000, disableOnInteraction: false }}
+
+
             >
               {noticias.map((noticia) => (
                 <SwiperSlide key={noticia.noticiaId} className="swipeee">
@@ -152,10 +158,11 @@ function NoticiaSecao() {
                   <NewsComponent imagem={noticia.imagem} />
                   {usuarioSecao?.user?.role == "admin" && ( //Apenas ADM tem Acesso a criar
                     <div
+                      className=" bg-black/70 text-white p-2 rounded-full"
                       style={{
                         position: "absolute",
-                        top: "0",
-                        right: "0px",
+                        top: "5px",
+                        right: "5px",
                         cursor: "pointer",
                         color: "white",
                         width: "40px",
@@ -236,7 +243,7 @@ function NoticiaSecao() {
               }}
             >
               <select
-                className="input"
+                className={`Input outline-none ${popupNoticia && 'text-gray-400 '}`}
                 style={{
                   height: "40px",
                   padding: "10px",
@@ -250,24 +257,41 @@ function NoticiaSecao() {
                   if (idBagreDeOuro) setBagreOuroAtual(parseInt(idBagreDeOuro));
                 }}
               >
-                <option value="">Selecionar Jogador</option>
+                <option value=""  >Selecionar Jogador</option>
                 {jogadores.map((jogador) => (
                   <option key={jogador.jogadorId} value={jogador.jogadorId}>
                     {jogador.nome}
                   </option>
                 ))}
               </select>
-              <div style={{ cursor: "pointer" }}>
+              <div
+                className={`${popupNoticia && 'text-white  '}`}
+                style={{ cursor: "pointer" }}>
                 <BiSave onClick={HandleNovobagreDeOuro} />
               </div>
             </div>
           )}
         </div>
-        {usuarioSecao?.user?.role == "admin" && ( //Apenas ADM tem Acesso a Criar
+        {usuarioSecao?.user?.role == "admin" && !tipo && ( //Apenas ADM tem Acesso a Criar
           <AdmCriarNoticia />
         )}
       </div>
     </div>
+    <div className={`subNoticias pt-4 gap-4 flex-wrap ${tipo ? "" : "bg-white"}  justify-center items-center`}>
+      {noticias.slice(0, 3).map((noticia) => (
+
+
+        <div className=' w-[339px]'>
+
+          <div className=' overflow-hidden'>
+            <img className='w-full hover:brightness-75 transition-all' src={noticia.imagem} />
+          </div>
+          <p className={`text-[12px] h-[70px] ${tipo ? "text-white" : "text-black"}`}>{noticia.mensagem}</p>
+        </div>
+      ))}
+
+    </div>
+  </>
   );
 }
 

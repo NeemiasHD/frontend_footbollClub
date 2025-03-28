@@ -53,15 +53,14 @@ function AdmSalvarFotos() {
     setIsLoading(false);
   };
   return (
-    <div className="Adm">
+    <div className="Adm w-6 p-1">
       <div
         style={{
-          width: 350,
-          height: 196,
           border: "3px dotted var(--cinza)",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
+
         }}
       >
         {IsLoading ? (
@@ -79,7 +78,7 @@ function AdmSalvarFotos() {
       />
       <input
         type="text"
-        className="InputNoticia"
+        className="InputNoticia "
         id="inputMensagem"
         placeholder="Descrição da foto"
         onChange={(e) => setDescricao(e.target.value)}

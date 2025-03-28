@@ -1,5 +1,5 @@
 'use client';
-import { UseBagresContext } from '@/app/Context/BagresContext';
+import { Desativar_ou_ativar_ScrollGlobal, UseBagresContext } from '@/app/Context/BagresContext';
 import { deleteCookie, getCookie, setCookie } from 'cookies-next';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
@@ -10,7 +10,7 @@ import { IoCloseCircle } from 'react-icons/io5';
 import { CiWarning } from 'react-icons/ci';
 
 function Header() {
-  const { usuarioSecao, setUsuarioSecao } = UseBagresContext();
+  const { usuarioSecao, setPopUpNoticia } = UseBagresContext();
   const [menuUsuarioAtivado, setMenuUsuarioAtivado] = useState(false);
   const [cookieSiteAviso, SetcookieSiteAviso] = useState(false);
 
@@ -114,47 +114,44 @@ function Header() {
         </Link>
 
         <div className='HeaderNav' id='HeaderNav'>
+          <Link
+
+            className='NavBtn'
+            href={"/"}>Home</Link>
           <p
             className='NavBtn'
             onClick={() => {
-              handleScroll(400);
+              setPopUpNoticia(true)
             }}
           >
             Notícias
           </p>
-          <p
+          <Link
+            href={"/Calendario"}
             className='NavBtn'
-            onClick={() => {
-              handleScroll(1400);
-            }}
+
           >
             Calendário
-          </p>
-          <p className='NavBtn'>Loja</p>
-          <p
+          </Link>
+          <Link href={"/Loja"} className='NavBtn'>Loja</Link>
+          <Link
+            href={"/Resultados"}
             className='NavBtn'
-            onClick={() => {
-              handleScroll(2250);
-            }}
+
           >
             Estatísticas
-          </p>
-          <p
+          </Link>
+          <Link
+            href={"/Jogadores"}
             className='NavBtn'
-            onClick={() => {
-              handleScroll(3700);
-            }}
           >
             Jogadores
-          </p>
-          <p
+          </Link>
+          <Link href={'/Fotos'}
             className='NavBtn'
-            onClick={() => {
-              handleScroll(6800);
-            }}
           >
             Fotos
-          </p>
+          </Link>
           <Link href={'/Bagrescup'} className='NavBtn'>
             Bagres CUP
           </Link>
@@ -162,16 +159,14 @@ function Header() {
           {usuarioSecao?.user?.foto ? (
             <>
               <div
-                style={{
-                  width: '40px',
-                  height: '40px',
-                  borderRadius: '20px',
-                  overflow: 'hidden',
-                }}
+              className='imagemUserHeader'
+               
               >
                 <img
                   onClick={() => {
                     setMenuUsuarioAtivado(!menuUsuarioAtivado);
+                    Desativar_ou_ativar_ScrollGlobal()
+
                   }}
                   src={usuarioSecao.user.foto}
                   style={{ height: '100%', cursor: 'pointer' }}

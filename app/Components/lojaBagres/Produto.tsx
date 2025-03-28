@@ -14,7 +14,6 @@ const Produto: React.FC<produtoProps> = ({ imagemUrl, valor, nome }) => {
     <div
       style={{
         width: '250px',
-        height: '305px',
         backgroundColor: 'white',
         boxShadow: '0px 0px 30px var(--cinzaEscuro)',
         cursor: 'pointer',
@@ -28,22 +27,24 @@ const Produto: React.FC<produtoProps> = ({ imagemUrl, valor, nome }) => {
     >
       <img src={imagemUrl} width={250} />
       <div
+        className='p-1'
         style={{
           display: 'flex',
           justifyContent: 'space-around',
+          width: "250px"
         }}
       >
-        <div>
-          <p style={{ fontSize: '14px', fontWeight: '200' }}>
+        <div className=''>
+          <p className='Nome_Produto' >
             {nome.toUpperCase()}
           </p>
           <div
             style={{ display: 'flex', alignItems: 'center' }}
-            className='flex '
+            className='stars flex '
           >
-           
+
             <Rating
-             emptyStyle={{ display: 'flex' }}
+              emptyStyle={{ display: 'flex' }}
               readonly={true}
               size={20}
               initialValue={5}
@@ -52,10 +53,11 @@ const Produto: React.FC<produtoProps> = ({ imagemUrl, valor, nome }) => {
             />
           </div>
         </div>
-        <div>
+        <div className='flex items-center justify-center'>
           <div
+            className='pt-1'
             style={{
-              display: 'flex',
+              display: 'none',
               alignItems: 'center',
               justifyContent: 'center',
               gap: '10px',
@@ -64,7 +66,7 @@ const Produto: React.FC<produtoProps> = ({ imagemUrl, valor, nome }) => {
             <BiCart />
             <BsHeart color='red' />
           </div>
-          <p style={{ fontSize: '20px', fontWeight: '200' }}>{valor} R$</p>
+          <p className='Preco_Produto' >{valor} R$</p>
         </div>
       </div>
     </div>

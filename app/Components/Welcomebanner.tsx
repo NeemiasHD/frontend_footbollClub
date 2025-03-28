@@ -29,12 +29,11 @@ const Welcomebanner: React.FC<BannerProp> = ({ imgBanner }) => {
           className='imgWelcome'
           src={imgBanner}
           style={
-            scrollY < 11
+            scrollY < 10
               ? {
-                  filter: `blur(${scrollY}px) brightness(${
-                    100 - scrollY * 3
+                filter: `blur(${scrollY}px) brightness(${100 - scrollY * 3
                   }%)`,
-                }
+              }
               : { display: 'none' }
           }
         />

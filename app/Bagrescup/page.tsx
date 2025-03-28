@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { jogador, UseBagresContext } from '../Context/BagresContext';
 import Welcomebanner from '../Components/Welcomebanner';
 import InputProdutoImg from '../Components/lojaBagres/InputProdutoImg';
+import FotosSection from '../Components/fotosSection/FotosSection';
 
 function Page() {
   const { jogadores } = UseBagresContext();
@@ -32,12 +33,13 @@ function Page() {
         flexDirection: 'column',
       }}
     >
+
       <img
         src='./img/BannerBagresCup.png'
         className='max-w-maxWidthBanner w-full'
         alt='Banner Bagres Cup'
       />
-      <div className='flex w-full flex justify-center items-center'>
+      {/*<div className='flex w-full flex justify-center items-center'>
         <div
           id='Controle'
           className='justify-center items-center gap-3 flex flex-col'
@@ -90,7 +92,7 @@ function Page() {
           ))}
         </div>
       </div>
-      <div>Times</div>
+      <div>Times</div>*/}
     </div>
   );
 }

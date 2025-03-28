@@ -1,5 +1,5 @@
 "use cliente";
-import { UseBagresContext } from "@/app/Context/BagresContext";
+import { Desativar_ou_ativar_ScrollGlobal, UseBagresContext } from "@/app/Context/BagresContext";
 import React, { useEffect, useState } from "react";
 import { BiCart, BiGroup, BiUser } from "react-icons/bi";
 import { deleteCookie } from "cookies-next";
@@ -96,6 +96,7 @@ const MenuUsuario: React.FC<MenuUsuarioProps> = ({ setMenuUsuarioAtivado }) => {
                 <p
                   onClick={() => {
                     setShowUsuarios(!showUsuarios);
+
                   }}
                   style={{
                     color: "gray",
@@ -143,7 +144,7 @@ const MenuUsuario: React.FC<MenuUsuarioProps> = ({ setMenuUsuarioAtivado }) => {
                           backgroundColor: "white",
                         }}
                       >
-                        <img src={u.foto} style={{ height: "100%" }} />
+                        <img src={u.foto} style={{ width: "100%" }} />
                       </div>
                       <p style={{ fontSize: "9px" }}>{u.nome}</p>
                     </div>
@@ -168,6 +169,8 @@ const MenuUsuario: React.FC<MenuUsuarioProps> = ({ setMenuUsuarioAtivado }) => {
                 <p
                   onClick={() => {
                     setMenuUsuarioAtivado(false);
+                    Desativar_ou_ativar_ScrollGlobal()
+
                   }}
                   style={{
                     color: "red",
@@ -271,11 +274,51 @@ const MenuUsuario: React.FC<MenuUsuarioProps> = ({ setMenuUsuarioAtivado }) => {
                         alignItems: "center",
                         gap: "10px",
                         fontSize: "10px",
-                        marginLeft: "30px",
+                        marginLeft: "42px",
                         cursor: "pointer",
+
                       }}
                     >
-                      Minha Conta
+                      indisponivel
+                    </p>
+                  </div>
+                </div>
+                {/*btn opcao menu usuario*/}
+                <div
+                  style={{
+                    display: "flex",
+                    gap: "10px",
+                    flexDirection: "column",
+                    width: "100%",
+                    alignItems: "start",
+                    borderBottom: "1px solid var(--cinza)",
+                    height: "30px",
+                  }}
+                >
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      gap: "10px",
+                      marginLeft: "30px",
+                    }}
+                  >
+                    <BiUser />
+                    <p
+                      className="MenuUserOpcao"
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        gap: "10px",
+                        fontSize: "10px",
+                        marginLeft: "42px",
+                        cursor: "pointer",
+
+                      }}
+                    >
+                      indisponivel
                     </p>
                   </div>
                 </div>
@@ -309,7 +352,7 @@ const MenuUsuario: React.FC<MenuUsuarioProps> = ({ setMenuUsuarioAtivado }) => {
                         alignItems: "center",
                         gap: "10px",
                         fontSize: "10px",
-                        marginLeft: "30px",
+                        marginLeft: "40px",
                         cursor: "pointer",
                       }}
                       onClick={() => {
@@ -407,6 +450,8 @@ const MenuUsuario: React.FC<MenuUsuarioProps> = ({ setMenuUsuarioAtivado }) => {
                     setUsuarioSecao(null);
                     deleteCookie("Usuario");
                     setMenuUsuarioAtivado(false);
+                    Desativar_ou_ativar_ScrollGlobal()
+
                   }}
                   style={{
                     fontSize: "12px",
